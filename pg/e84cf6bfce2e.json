@@ -463,10 +463,10 @@
    }
   }
  },
- "versione": 18,
+ "versione": 19,
  "pe": 0,
  "stato": {
-  "pf_attuali": 3,
+  "pf_attuali": 5,
   "slot_usati": {
    "0": 1,
    "1": 1
@@ -485,8 +485,9 @@
   "campagna": "tela-di-fumoscuro",
   "danni_caratteristiche": {
    "DES": 2
-  }
+  },
+  "danni_non_letali": 0
  },
- "aggiornato": "2026-11-15T23:25",
+ "aggiornato": "2026-11-15T23:39",
  "note_dm": "Bentornata! La scheda ora si aggiorna da sola."
 }
