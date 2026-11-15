@@ -85,7 +85,7 @@ table.t { border-collapse: collapse; width: 100%; font-size: 15px; } .t td, .t t
 <body>
 <header><h1>⚔️ Crea il tuo eroe</h1><div class="chi" id="chi"></div><div class="passi" id="passi"></div></header>
 <main id="main"></main>
-<p style="text-align:center;font:11px sans-serif;color:var(--soft);margin:0 0 90px">versione 15/11 21:49</p>
+<p style="text-align:center;font:11px sans-serif;color:var(--soft);margin:0 0 90px">versione 15/11 22:10</p>
 <div class="nav"><div class="in"><button class="btn sec" id="indietro">← Indietro</button><div class="msg" id="msg"></div>
 <button class="btn" id="avanti">Avanti →</button></div></div>
 <script>
@@ -1177,6 +1177,10 @@ const canale = (codice, tipo) => 'dnd35' + tipo + hex(sha256(utf8(`${codice}|ntf
 let statoCanale = 'collegamento…', fonte = null;
 function ascoltaDM() {
   const p = caricaPG(); const codice = p && ((p.tiro || {}).codice || S.codice); if (!codice || fonte) return;
+  // tiri già fatti (anche da un altro telefono): li leggo dal canale degli esiti, così le vecchie richieste non ricompaiono
+  fetch(`https://ntfy.sh/${canale(codice, 'e')}/json?poll=1&since=12h`).then(r => r.text()).then(tx => { TR.fatti = TR.fatti || {};
+    tx.split('\n').filter(Boolean).forEach(l => { try { const m = JSON.parse(l); if (m.event === 'message') { const e = JSON.parse(m.message); if (e.n && !TR.fatti[e.n]) { TR.fatti[e.n] = e; TR.log = [e, ...(TR.log || []).filter(x => x.n !== e.n)].sort((a, b) => b.n - a.n).slice(0, 50); } } } catch (x) {} });
+    salvaTR(); if (document.querySelector('.tabs')) apriScheda(); }).catch(() => {});
   try {
     fonte = new EventSource(`https://ntfy.sh/${canale(codice, 'r')}/sse?since=12h`);
     fonte.onopen = () => { statoCanale = '🟢 collegato al DM: aspetta la sua richiesta'; if (tabScheda === 'dadi' && document.querySelector('.tabs')) apriScheda(); };
