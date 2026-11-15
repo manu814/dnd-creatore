@@ -459,14 +459,25 @@
    }
   }
  },
- "versione": 3,
+ "versione": 4,
  "pe": 0,
  "stato": {
   "pf_attuali": 9,
   "slot_usati": {
    "0": 1
+  },
+  "preparati": {
+   "0": [
+    "Luce",
+    "Individuazione del magico",
+    "Riparare"
+   ],
+   "1": [
+    "Nascondersi agli animali",
+    "Parlare con gli animali"
+   ]
   }
  },
- "aggiornato": "2026-11-15T21:32",
- "note_dm": "Benvenuta! Scegli il tuo abito gratuito (artigiano, contadino, esploratore, intrattenitore, monaco, studioso o viaggiatore) e dimmelo."
+ "aggiornato": "2026-11-15T21:39",
+ "note_dm": "Preparati oggi — liv. 0: Luce (usata), Individuazione del magico, Riparare · liv. 1: Nascondersi agli animali, Parlare con gli animali"
 }
