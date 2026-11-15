@@ -459,12 +459,13 @@
    }
   }
  },
- "versione": 14,
+ "versione": 15,
  "pe": 0,
  "stato": {
   "pf_attuali": 3,
   "slot_usati": {
-   "0": 1
+   "0": 1,
+   "1": 1
   },
   "preparati": {
    "0": [
@@ -482,6 +483,6 @@
    "DES": 2
   }
  },
- "aggiornato": "2026-11-15T22:42",
+ "aggiornato": "2026-11-15T23:10",
  "note_dm": "Bentornata! La scheda ora si aggiorna da sola."
 }
