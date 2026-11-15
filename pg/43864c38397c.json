@@ -1,0 +1,468 @@
+{
+ "nome": "Wolfetta",
+ "giocatore": "Sara · Salmastro",
+ "classe_livello": "Druido 1",
+ "razza": "Elfo",
+ "allineamento": "Caotico neutrale",
+ "divinita": "",
+ "taglia": "Media",
+ "eta": "170",
+ "sesso": "F",
+ "altezza": "162 cm",
+ "peso": "70 kg",
+ "occhi": "Verdi",
+ "capelli": "Rosa",
+ "pelle": "Chiara",
+ "caratteristiche": {
+  "FOR": 12,
+  "DES": 16,
+  "COS": 13,
+  "INT": 13,
+  "SAG": 17,
+  "CAR": 9
+ },
+ "pf": 9,
+ "velocita": "6 m",
+ "ca": {
+  "armatura": 3,
+  "scudo": 0,
+  "des": 3,
+  "taglia": 0,
+  "naturale": 0,
+  "deviazione": 0,
+  "vari": 0
+ },
+ "iniziativa_vari": 0,
+ "ts": {
+  "tempra": {
+   "base": 2,
+   "vari": 0
+  },
+  "riflessi": {
+   "base": 0,
+   "vari": 0
+  },
+  "volonta": {
+   "base": 2,
+   "vari": 0
+  }
+ },
+ "bab": 0,
+ "lotta": {
+  "taglia": 0,
+  "vari": 0
+ },
+ "modificatori_condizionali": "+2 TS contro incantesimi o effetti di ammaliamento",
+ "attacchi": [
+  {
+   "nome": "Randello",
+   "bonus": "+1",
+   "danni": "1d6+1",
+   "critico": "x2",
+   "gittata": "3 m",
+   "tipo": "C",
+   "note": "Gratis (un bastone di legno); si può lanciare.",
+   "munizioni": ""
+  },
+  {
+   "nome": "Fionda",
+   "bonus": "+3",
+   "danni": "1d4+1",
+   "critico": "x2",
+   "gittata": "15 m",
+   "tipo": "C",
+   "note": "Gratis; aggiungi il bonus di Forza ai danni; ricaricare = azione di mo",
+   "munizioni": ""
+  },
+  {
+   "nome": "Spada lunga",
+   "bonus": "+1",
+   "danni": "1d8+1",
+   "critico": "19-20/x2",
+   "gittata": "",
+   "tipo": "T",
+   "note": "La classica spada da una mano.",
+   "munizioni": ""
+  }
+ ],
+ "grado_massimo": "4/2",
+ "abilita": [
+  {
+   "nome": "Acrobazia",
+   "spec": "",
+   "gradi": 1,
+   "vari": -3,
+   "classe": false,
+   "car": "DES"
+  },
+  {
+   "nome": "Addestrare Animali",
+   "spec": "",
+   "gradi": 1,
+   "vari": 0,
+   "classe": true,
+   "car": "CAR"
+  },
+  {
+   "nome": "Artista della Fuga",
+   "spec": "",
+   "gradi": 0.5,
+   "vari": -3,
+   "classe": false,
+   "car": "DES"
+  },
+  {
+   "nome": "Ascoltare",
+   "spec": "",
+   "gradi": 0,
+   "vari": 2,
+   "classe": true,
+   "car": "SAG"
+  },
+  {
+   "nome": "Cercare",
+   "spec": "",
+   "gradi": 0,
+   "vari": 2,
+   "classe": false,
+   "car": "INT"
+  },
+  {
+   "nome": "Conoscenze",
+   "spec": "arcane",
+   "gradi": 0.5,
+   "vari": 0,
+   "classe": false,
+   "car": "INT"
+  },
+  {
+   "nome": "Conoscenze",
+   "spec": "natura",
+   "gradi": 2,
+   "vari": 2,
+   "classe": true,
+   "car": "INT"
+  },
+  {
+   "nome": "Equilibrio",
+   "spec": "",
+   "gradi": 0,
+   "vari": -3,
+   "classe": false,
+   "car": "DES"
+  },
+  {
+   "nome": "Guarire",
+   "spec": "",
+   "gradi": 1,
+   "vari": 0,
+   "classe": true,
+   "car": "SAG"
+  },
+  {
+   "nome": "Intrattenere",
+   "spec": "Raccontastorie",
+   "gradi": 1,
+   "vari": 0,
+   "classe": false,
+   "car": "CAR"
+  },
+  {
+   "nome": "Muoversi Silenziosamente",
+   "spec": "",
+   "gradi": 0,
+   "vari": -3,
+   "classe": false,
+   "car": "DES"
+  },
+  {
+   "nome": "Nascondersi",
+   "spec": "",
+   "gradi": 0,
+   "vari": -3,
+   "classe": false,
+   "car": "DES"
+  },
+  {
+   "nome": "Nuotare",
+   "spec": "",
+   "gradi": 0,
+   "vari": -6,
+   "classe": true,
+   "car": "FOR"
+  },
+  {
+   "nome": "Osservare",
+   "spec": "",
+   "gradi": 0,
+   "vari": 2,
+   "classe": true,
+   "car": "SAG"
+  },
+  {
+   "nome": "Raccogliere Informazioni",
+   "spec": "",
+   "gradi": 1,
+   "vari": 0,
+   "classe": false,
+   "car": "CAR"
+  },
+  {
+   "nome": "Raggirare",
+   "spec": "",
+   "gradi": 2,
+   "vari": 0,
+   "classe": false,
+   "car": "CAR"
+  },
+  {
+   "nome": "Rapidità di Mano",
+   "spec": "",
+   "gradi": 0.5,
+   "vari": -3,
+   "classe": false,
+   "car": "DES"
+  },
+  {
+   "nome": "Saltare",
+   "spec": "",
+   "gradi": 0,
+   "vari": -3,
+   "classe": false,
+   "car": "FOR"
+  },
+  {
+   "nome": "Sapienza Magica",
+   "spec": "",
+   "gradi": 1,
+   "vari": 0,
+   "classe": true,
+   "car": "INT"
+  },
+  {
+   "nome": "Scalare",
+   "spec": "",
+   "gradi": 0,
+   "vari": -3,
+   "classe": false,
+   "car": "FOR"
+  },
+  {
+   "nome": "Sopravvivenza",
+   "spec": "",
+   "gradi": 0,
+   "vari": 2,
+   "classe": true,
+   "car": "SAG"
+  },
+  {
+   "nome": "Parlare Linguaggi",
+   "spec": "",
+   "gradi": 1,
+   "vari": 0,
+   "classe": false,
+   "car": "—"
+  }
+ ],
+ "classe_abilita": [
+  "Addestrare Animali",
+  "Artigianato",
+  "Ascoltare",
+  "Cavalcare",
+  "Concentrazione",
+  "Conoscenze",
+  "Diplomazia",
+  "Guarire",
+  "Nuotare",
+  "Osservare",
+  "Professione",
+  "Sapienza Magica",
+  "Sopravvivenza"
+ ],
+ "punti_esperienza": "0",
+ "armatura": {
+  "nome": "Pelle",
+  "tipo": "media",
+  "bonus_ca": "+3",
+  "des_max": "+4",
+  "penalita": "-3",
+  "fallimento": "20%",
+  "velocita": "6 m",
+  "peso": "12,5 kg"
+ },
+ "scudo": {},
+ "oggetti": [
+  {
+   "nome": "Randello",
+   "peso": 1.5
+  },
+  {
+   "nome": "Fionda",
+   "peso": 0
+  },
+  {
+   "nome": "Zaino",
+   "peso": 1
+  },
+  {
+   "nome": "Otre",
+   "peso": 2
+  },
+  {
+   "nome": "Razioni da viaggio (1 giorno)",
+   "peso": 0.5
+  },
+  {
+   "nome": "Giaciglio",
+   "peso": 2.5
+  },
+  {
+   "nome": "Sacco",
+   "peso": 0.25
+  },
+  {
+   "nome": "Acciarino e pietra focaia",
+   "peso": 0
+  },
+  {
+   "nome": "Astuccio con 10 proiettili per fionda",
+   "peso": 2.5
+  },
+  {
+   "nome": "Agrifoglio e vischio",
+   "peso": 0
+  },
+  {
+   "nome": "3 torce",
+   "peso": 1.5
+  },
+  {
+   "nome": "Spada lunga",
+   "peso": 2
+  }
+ ],
+ "carichi": {
+  "leggero": "21,5 kg",
+  "medio": "43 kg",
+  "pesante": "65 kg",
+  "sopra_testa": "65 kg",
+  "da_terra": "130 kg",
+  "spingere": "325 kg"
+ },
+ "denaro": {
+  "mo": 4,
+  "ma": 0,
+  "mr": 0
+ },
+ "talenti": [
+  {
+   "nome": "Colpo Senz'Armi Migliorato",
+   "pag": 94
+  }
+ ],
+ "capacita_speciali": [
+  "Immunità al sonno e resistenza agli ammaliamenti",
+  "Visione crepuscolare",
+  "Competenza nelle armi",
+  "Sensi acuti",
+  "Compagno animale (Str)",
+  "Senso della natura (Str)",
+  "Empatia selvatica (Str)",
+  "Linguaggi",
+  "Compagno animale: lupo"
+ ],
+ "linguaggi": [
+  "Comune",
+  "Elfico",
+  "Druidico",
+  "Orchesco",
+  "Goblin"
+ ],
+ "incantesimi": {
+  "per_livello": {
+   "1": [
+    "Zanna magica",
+    "Bacche benefiche"
+   ]
+  },
+  "tabella": {
+   "0": {
+    "conosciuti": "",
+    "cd": 13,
+    "giorno": 3
+   },
+   "1": {
+    "conosciuti": "",
+    "cd": 14,
+    "giorno": 1,
+    "bonus": 1
+   }
+  },
+  "fallimento_arcano": ""
+ },
+ "descrizione": "Viene da una famiglia povera e ha deciso di rubare ai ricchi per dare ai poveri Obiettivo: Trovare un tesoro perduto Pregio e difetto: Onesta ma solitaria",
+ "spiegazioni_extra": [
+  "Compagno animale (Str): Inizia con un animale fedele scelto dalla lista, più forte di un animale normale: lo comanda con un'azione gratuita (Legame) e può condividere con lui gli incantesimi su se stesso.",
+  "Senso della natura (Str): +2 alle prove di Conoscenze (natura) e Sopravvivenza.",
+  "Empatia selvatica (Str): Migliora l'atteggiamento di un animale come una prova di Diplomazia: 1d20 + livello da druido + mod Car (entro 9 m, circa 1 minuto). Con bestie magiche di Int 1-2 a -4.",
+  "Linguaggi: Conosce gratis il Druidico (lingua segreta dei druidi); può scegliere il Silvano come linguaggio bonus.",
+  "Compagno animale: lupo"
+ ],
+ "tiro": {
+  "serie": 0,
+  "punteggi_tirati": [
+   9,
+   15,
+   14,
+   12,
+   13,
+   17
+  ],
+  "assegnazione": {
+   "SAG": 17,
+   "COS": 15,
+   "DES": 14,
+   "INT": 13,
+   "FOR": 12,
+   "CAR": 9
+  },
+  "monete": {
+   "modo": "kit",
+   "kit": 0,
+   "dadi": [
+    4
+   ]
+  },
+  "creato": "2026-11-15T19:18:03.493Z",
+  "chiuso": "2026-11-15T19:17:58.421Z"
+ },
+ "scelte": {
+  "idea": {
+   "rissa": "magia",
+   "fuori": "parla",
+   "testo": "Se la cava da solo nella natura ma quando è in citta riesce a ottenere cio che vuole anche con l inganno"
+  },
+  "magia": {
+   "compagno": "lupo",
+   "preferiti": [
+    "zanna_magica",
+    "bacche_benefiche"
+   ]
+  },
+  "equip": {
+   "comprati": {
+    "Spada lunga": 1
+   },
+   "tolti": {
+    "Scimitarra": 1,
+    "Scudo pesante di legno": 1
+   }
+  }
+ },
+ "pe": 0,
+ "versione": 1,
+ "stato": {
+  "pf_attuali": 9
+ },
+ "aggiornato": "2026-11-16T00:41"
+}
