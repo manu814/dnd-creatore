@@ -85,7 +85,7 @@ table.t { border-collapse: collapse; width: 100%; font-size: 15px; } .t td, .t t
 <body>
 <header><h1>⚔️ Crea il tuo eroe</h1><div class="chi" id="chi"></div><div class="passi" id="passi"></div></header>
 <main id="main"></main>
-<p style="text-align:center;font:11px sans-serif;color:var(--soft);margin:0 0 90px">versione 15/11 20:36</p>
+<p style="text-align:center;font:11px sans-serif;color:var(--soft);margin:0 0 90px">versione 15/11 20:39</p>
 <div class="nav"><div class="in"><button class="btn sec" id="indietro">← Indietro</button><div class="msg" id="msg"></div>
 <button class="btn" id="avanti">Avanti →</button></div></div>
 <script>
@@ -1052,7 +1052,7 @@ const salvaTR = () => { try { localStorage.setItem(CH_TR, JSON.stringify(TR)); }
 let tabScheda = 'dadi';
 function m10(v) { return Math.floor((v - 10) / 2); }
 function apriScheda() {
-  let p = caricaPG(); if (!p) return; ascoltaDM();
+  let p = caricaPG(); if (!p) return; ascoltaDM(); const p0 = p;
   document.querySelector('.nav').style.display = 'none'; $('#passi').innerHTML = '';
   $('#chi').textContent = `${p.razza} ${p.classe_livello} · giocatore ${p.giocatore}`;
   document.querySelector('header h1').textContent = '⚔️ ' + (p.nome || 'Il tuo eroe');
@@ -1063,6 +1063,7 @@ function apriScheda() {
   if (!TR.denaro) TR.denaro = { ...p.denaro };
   const tabs = [['dadi', '🎲 Dadi'], ['combatti', '⚔️ Combatti'], ['abilita', '🎯 Abilità'], ...(Object.keys(p.incantesimi.tabella || {}).length ? [['magia', '✨ Magia']] : []), ['zaino', '🎒 Zaino'], ['chi', '📜 Chi sono']];
   let h = `<p style="margin:4px 0"><button class="btn sec piccolo" id="modifica2">${S.chiuso || !S.classe ? '← Riepilogo e file' : '← Torna alla creazione'}</button></p><p class="soft" style="margin:4px 0">${esc(statoSync)} <button class="btn sec piccolo" id="sync">↻ Aggiorna</button>${p.pe != null ? ` · PE <b>${p.pe}</b>` : ''}${p.note_dm ? `<br>📣 <b>Dal DM:</b> ${esc(p.note_dm)}` : ''}</p>
+${puoSalire(p) ? `<div class="card" style="text-align:center;border:2px solid var(--ok)"><b>🎉 Hai abbastanza punti esperienza!</b><br><button class="btn" id="sali" style="margin-top:8px">⬆️ Sali al livello ${livelloDi(p) + 1}</button></div>` : ''}
 ${TT.nomi.length ? `<div class="spiega"><b>Effetti attivi:</b> ${TT.nomi.map(esc).join(' · ')}<br><span class="soft">I numeri qui sotto sono già aggiornati.</span>${TT.condizionali.length ? '<br>' + TT.condizionali.map(esc).join('<br>') : ''}${TT.note.length ? '<br>' + TT.note.map(esc).join('<br>') : ''}</div>` : ''}
 <div class="tabs">${tabs.map(([k, n]) => `<button class="${tabScheda === k ? 'on' : ''}" data-tab="${k}">${n}</button>`).join('')}</div>`;
   if (tabScheda === 'combatti') {
@@ -1111,7 +1112,12 @@ ${p.incantesimi.domini ? `<p class="soft">${esc(p.incantesimi.domini)}</p>` : ''
 <label class="campo"><span>Appunti (bottino, cose trovate, nomi…)</span><textarea id="note" style="min-height:160px">${esc(TR.note)}</textarea></label></div>`;
   }
   if (tabScheda === 'chi') {
-    h += `<div class="card"><h2>${esc(p.nome)}</h2><p>${esc(p.razza)} ${esc(p.classe_livello)} · ${esc(p.allineamento)}${p.divinita ? ' · ' + esc(p.divinita) : ''}</p><p>${esc(p.descrizione)}</p>
+    const ritr = (() => { try { return localStorage.getItem(CHIAVE + '-ritratto'); } catch (e) { return null; } })();
+    h += `<div class="card"><h2>🖼️ Ritratto</h2>${ritr ? `<img src="${ritr}" alt="ritratto" style="width:100%;border-radius:12px">` : ''}
+<p class="soft">Per un ritratto fantasy col tuo viso: 1) copia la descrizione; 2) apri ChatGPT o Gemini (gratis); 3) carica un tuo selfie e incolla la descrizione; 4) salva l'immagine e caricala qui. Il ritratto resta solo su questo telefono.</p>
+<p><button class="btn sec piccolo" id="copiaPrompt">📋 Copia la descrizione</button> <label class="btn sec piccolo" style="display:inline-block">📷 Carica il ritratto<input type="file" id="ritrattoFile" accept="image/*" style="display:none"></label></p>
+<textarea id="promptTxt" readonly style="min-height:110px;font-size:13px">${esc(promptRitratto(p))}</textarea></div>
+<div class="card"><h2>${esc(p.nome)}</h2><p>${esc(p.razza)} ${esc(p.classe_livello)} · ${esc(p.allineamento)}${p.divinita ? ' · ' + esc(p.divinita) : ''}</p><p>${esc(p.descrizione)}</p>
 <h3>Talenti</h3><ul>${p.talenti.map(t => { const x = TAL.find(z => t.nome.startsWith(z.nome)); return `<li><b>${esc(t.nome)}</b>${x ? ' — ' + esc(x.beneficio) : ''}</li>`; }).join('')}</ul>
 <h3>Capacità</h3><ul>${p.spiegazioni_extra.map(s => `<li>${esc(s)}</li>`).join('')}</ul><p>Linguaggi: ${esc(p.linguaggi.join(', '))}</p></div>
 <div class="card"><p>${S.chiuso ? '' : '<button class="btn sec piccolo" id="modifica">✏️ Torna alla creazione</button> '}<button class="btn sec piccolo" id="esporta">📤 Invia di nuovo il file al DM</button></p>
@@ -1121,13 +1127,25 @@ ${p.incantesimi.domini ? `<p class="soft">${esc(p.incantesimi.domini)}</p>` : ''
   document.querySelectorAll('[data-tab]').forEach(b => b.onclick = () => { tabScheda = b.dataset.tab; apriScheda(); scrollTo(0, 0); });
   const on = (id, f) => { const e = $('#' + id); if (e) e.onclick = f; };
   document.querySelectorAll('[data-esegui]').forEach(b => b.onclick = () => esegui(p, +b.dataset.esegui));
+  on('sali', () => { iniziaSalita(p0); apriSalita(p0); });
   on('sync', () => { statoSync = 'controllo…'; apriScheda(); sincronizza().then(apriScheda); });
   const n = $('#note'); if (n) n.oninput = () => { TR.note = n.value; salvaTR(); };
   on('modifica2', () => { if (!S.classe) return; document.querySelector('.nav').style.display = ''; document.querySelector('header h1').textContent = '⚔️ Crea il tuo eroe'; S.passo = attivi().length - 1; disegna(); });
   on('modifica', () => { document.querySelector('.nav').style.display = ''; document.querySelector('header h1').textContent = '⚔️ Crea il tuo eroe'; disegna(); });
   on('esporta', () => inviaFile(p));
+  on('copiaPrompt', () => { const tx = $('#promptTxt'); tx.select(); (navigator.clipboard ? navigator.clipboard.writeText(tx.value) : Promise.reject()).then(() => { $('#copiaPrompt').textContent = '✅ Copiata'; }).catch(() => { document.execCommand('copy'); $('#copiaPrompt').textContent = '✅ Copiata'; }); });
+  const rf = $('#ritrattoFile'); if (rf) rf.onchange = () => { const f = rf.files[0]; if (!f) return; const img = new Image(); img.onload = () => {
+    const k = Math.min(1, 640 / Math.max(img.width, img.height)), c = document.createElement('canvas'); c.width = img.width * k; c.height = img.height * k; c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+    try { localStorage.setItem(CHIAVE + '-ritratto', c.toDataURL('image/jpeg', 0.8)); } catch (e) {} apriScheda(); }; img.src = URL.createObjectURL(f); };
   const imp = $('#importa'); if (imp) imp.onchange = () => { const f = imp.files[0]; if (!f) return; f.text().then(t => { try { const q = JSON.parse(t); if (!q.caratteristiche || !q.tiro) throw 0; salvaPG(q); TR = {}; salvaTR(); apriScheda(); } catch (e) { alert('File non valido'); } }); };
 }
+function promptRitratto(p) {
+  const raz = { Umano: 'human', Nano: 'dwarf', Elfo: 'elf', Gnomo: 'gnome', Mezzelfo: 'half-elf', Mezzorco: 'half-orc', Halfling: 'halfling' }[p.razza] || p.razza;
+  const cls = { Barbaro: 'barbarian', Bardo: 'bard', Chierico: 'cleric', Druido: 'druid', Guerriero: 'fighter', Ladro: 'rogue', Mago: 'wizard', Monaco: 'monk', Paladino: 'paladin', Ranger: 'ranger', Stregone: 'sorcerer' }[String(p.classe_livello).replace(/\s*\d+$/, '')] || '';
+  const gear = [p.armatura && p.armatura.nome, ...(p.attacchi || []).map(a => a.nome)].filter(Boolean).join(', ');
+  return `Using the face in the attached photo as the likeness (keep the person's real facial features recognizable), create a fantasy character portrait: a ${p.sesso === 'F' ? 'female' : 'male'} ${raz} ${cls}, ${p.eta ? p.eta + ' years old (as the race ages), ' : ''}${p.capelli ? 'hair: ' + p.capelli + ', ' : ''}${p.occhi ? 'eyes: ' + p.occhi + ', ' : ''}${p.pelle ? 'skin: ' + p.pelle + ', ' : ''}equipment (Italian names): ${gear}. Classic high-fantasy oil painting, warm dramatic lighting, detailed, head and shoulders, plain dark background. Original character, not based on any existing franchise.`;
+}
+
 // ===== tiri richiesti dal DM (canale ntfy.sh) =====
 // Il DM pubblica {n, sale, testo, dadi:"1d20", mod, critMin?} sul canale segreto del giocatore; il risultato è fissato da "<CODICE>|gioco|<n>|<sale>" (il sale arriva solo con la richiesta)
 // (stesso seme di codici.py gioco), quindi ripremere non cambia niente. L'esito torna al DM sul canale esiti.
@@ -1154,6 +1172,125 @@ function esegui(p, n) {
   TR.fatti = TR.fatti || {}; TR.fatti[n] = res; TR.log = [res, ...(TR.log || []).filter(x => x.n !== n)].slice(0, 50); salvaTR();
   fetch(`https://ntfy.sh/${canale(codice, 'e')}`, { method: 'POST', body: JSON.stringify({ ...res, nome: p.nome }) }).catch(() => {});
   apriScheda(); scrollTo(0, 0);
+}
+
+// ===== passaggio di livello (stessa classe) =====
+// Regole: MdG Tabella 3-2 (PE, gradi massimi, talenti ai livelli 3/6/9…, +1 caratteristica ai livelli 4/8/…), tabelle di classe (BAB, TS,
+// capacità, incantesimi al giorno), Tabella 1-1 (incantesimi bonus). PF: dado vita tirato col seme "<CODICE>|pf|<livello>" (fisso, un solo tiro).
+const LV = D.livelli;
+const rigaPE = n => LV.tabella_3_2_esperienza.righe.find(r => r.livello === n);
+const classeId = p => norma(String(p.classe_livello).replace(/\s*\d+$/, ''));
+const livelloDi = p => parseInt(String(p.classe_livello).split(' ').pop()) || 1;
+const rigaClasse = (cid, n) => ((LV.classi[cid] || {}).livelli || []).find(r => r.livello === n);
+function bonusIncantesimi(punteggio, liv) { const m = Math.floor((punteggio - 10) / 2); if (liv < 1 || punteggio < 10 + liv || m < liv) return 0; return Math.floor((m - liv) / 4) + 1; }
+let SL = null;   // stato del passaggio in corso
+function puoSalire(p) { const n = livelloDi(p) + 1, r = rigaPE(n); return n <= 20 && r && (p.pe || 0) >= r.pe; }
+function iniziaSalita(p) { SL = { da: livelloDi(p), a: livelloDi(p) + 1, aumento: '', ranghi: {}, talenti: [], incantesimi: '', scelte: '', pfTirato: false }; }
+function talentiPosseduti(p) { return (p.talenti || []).map(t => (TAL.find(x => t.nome.startsWith(x.nome)) || {}).id).filter(Boolean); }
+function carDopo(p) { const c = { ...p.caratteristiche }; if (SL && SL.aumento) c[SL.aumento]++; return c; }
+function puntiSalita(p) { const cid = classeId(p), b = (D.abilita.regole_generali.punti_abilita_per_livello.base_per_classe || {})[cid] || 0;
+  return Math.max(1, b + Math.floor((carDopo(p).INT - 10) / 2)) + (/umano/i.test(p.razza) ? 1 : 0); }
+const diClasseP = (p, nome) => (p.classe_abilita || []).includes(nome.startsWith('Conoscenze') ? 'Conoscenze' : nome);
+function gradiAttuali(p, a) { const nome = a.nome.startsWith('Conoscenze') ? 'Conoscenze' : a.nome; const x = (p.abilita || []).find(y => y.nome === nome && (nome !== 'Conoscenze' || a.nome.includes(y.spec))); return x ? x.gradi : 0; }
+function talentiNuovi(p) {   // [{fonte, filtro?}]
+  const out = [], n = SL.a; if (LV.tabella_3_2_esperienza.talenti_ai_livelli.includes(n)) out.push({ fonte: `Talento del ${n}° livello` });
+  const r = rigaClasse(classeId(p), n); (r ? r.speciale : []).forEach(s => { if (s.dati && s.dati.talenti_bonus) out.push({ fonte: s.nome, filtro: s.dati.filtro, lista: s.dati.scelta || s.dati.lista }); });
+  return out;
+}
+function motivoNoP(p, t, filtro, lista) {
+  const c = carDopo(p), r = rigaClasse(classeId(p), SL.a), bab = r ? r.bab : 0, pr = t.prerequisiti || {}, have = [...talentiPosseduti(p), ...SL.talenti];
+  if (filtro === 'talento_guerriero' && !t.talento_guerriero) return 'non è un talento da guerriero';
+  if (filtro && /metamagia|creazione/.test(filtro) && !/metamagia|creazione/.test(t.tipo)) return 'deve essere di metamagia o creazione oggetto';
+  if (lista && ![].concat(lista).some(n => norma(n) === norma(t.nome))) return 'non è nella lista della classe';
+  for (const [k, v] of Object.entries(pr.caratteristiche || {})) if (c[k] < v) return `serve ${k} ${v}`;
+  if (pr.bab && bab < pr.bab) return `serve BAB +${pr.bab}`;
+  for (const id of pr.talenti || []) if (!have.includes(id)) return `serve ${(TAL.find(x => x.id === id) || {}).nome || id}`;
+  for (const [ab, g] of Object.entries(pr.gradi_abilita || {})) { const a = AB.find(x => x.nome === ab); if (!a || gradiAttuali(p, a) + (SL.ranghi[a.id] || 0) * (diClasseP(p, a.nome) ? 1 : .5) < g) return `servono ${g} gradi in ${ab}`; }
+  const lInc = { mago: SL.a, stregone: SL.a, chierico: SL.a, druido: SL.a, bardo: SL.a, paladino: SL.a >= 4 ? Math.floor(SL.a / 2) : 0, ranger: SL.a >= 4 ? Math.floor(SL.a / 2) : 0 }[classeId(p)] || 0;
+  if (pr.livello_incantatore && lInc < pr.livello_incantatore) return `serve livello da incantatore ${pr.livello_incantatore}`;
+  for (const [cl, lv] of Object.entries(pr.livello_classe || {})) if (classeId(p) !== cl || SL.a < lv) return `serve ${cl} di ${lv}° livello`;
+  if (pr.livello_personaggio && SL.a < pr.livello_personaggio) return 'serve un livello più alto';
+  if (!t.piu_volte && have.includes(t.id)) return 'già preso';
+  return '';
+}
+function htmlSalita(p) {
+  const cid = classeId(p), n = SL.a, r = rigaClasse(cid, n), dv = parseInt(String((LV.classi[cid] || {}).dado_vita || 'd8').slice(1));
+  const cod = (p.tiro || {}).codice || S.codice, dado = dadiDaSeme(`${cod}|pf|${n}`, 1, dv)[0], cosM = Math.floor((carDopo(p).COS - 10) / 2);
+  const pti = puntiSalita(p), spesi = Object.entries(SL.ranghi).reduce((s, [, v]) => s + v, 0), maxC = n + 3;
+  const tn = talentiNuovi(p);
+  let h = `<div class="card"><h2>⬆️ Livello ${n}</h2><p class="soft">${esc(p.nome)} passa da ${p.classe_livello} a ${String(p.classe_livello).replace(/\d+$/, n)}. Le scelte si fanno una volta sola: alla fine mandi il file al DM.</p>
+<h3>Punti ferita</h3>${SL.pfTirato ? `<p>Dado vita d${dv}: <b>${dado}</b> ${cosM ? (cosM > 0 ? '+ ' : '− ') + Math.abs(cosM) + ' (Costituzione)' : ''} = <b>+${Math.max(1, dado + cosM)} PF</b></p>` : `<p><button class="btn" id="slPf">🎲 Tira il dado vita (d${dv})</button></p>`}`;
+  if (LV.tabella_3_2_esperienza.aumenti_caratteristica_ai_livelli.includes(n))
+    h += `<h3>+1 a una caratteristica</h3><select id="slAum"><option value="">— scegli —</option>${CAR.map(k => `<option value="${k}" ${SL.aumento === k ? 'selected' : ''}>${CAR_NOMI[k]} ${p.caratteristiche[k]} → ${p.caratteristiche[k] + 1}</option>`).join('')}</select>`;
+  h += `<h3>Abilità <span class="pill ${spesi === pti ? 'ok' : ''}">${spesi} / ${pti} punti</span></h3><p class="soft">Di classe ⭐: 1 punto = 1 grado, massimo ${maxC}. Incrociate: 1 punto = ½ grado, massimo ${maxC / 2}.</p><table class="t">
+${AB.filter(a => a.caratteristica_chiave || a.id === 'parlare_linguaggi').map(a => { const c = diClasseP(p, a.nome), g0 = gradiAttuali(p, a), pt = SL.ranghi[a.id] || 0, g = g0 + (c ? pt : pt / 2);
+  return `<tr class="${pt ? 'riga-sel' : ''}"><td>${c ? '⭐ ' : ''}${esc(a.nome)}</td><td class="num"><button class="btn sec piccolo" data-sm="${a.id}" ${pt ? '' : 'disabled'}>−</button> ${g} <button class="btn sec piccolo" data-sp="${a.id}" ${spesi >= pti || g + (c ? 1 : .5) > (c ? maxC : maxC / 2) ? 'disabled' : ''}>+</button></td></tr>`; }).join('')}</table>`;
+  if (tn.length) {
+    h += `<h3>Talenti <span class="pill">${SL.talenti.length} / ${tn.length}</span></h3><p class="soft">${tn.map(x => esc(x.fonte)).join(' · ')}</p>
+${SL.talenti.map((id, i) => { const t = TAL.find(x => x.id === id) || {}; return `<p><span class="pill">${esc(t.nome)} <a href="#" data-st="${i}">✕</a></span>${t.richiede_scelta ? ` <input type="text" data-sc="${i}" placeholder="quale ${esc(t.richiede_scelta.tipo.replace(/_/g, ' '))}?" value="${esc((SL.sceltaTal || {})[i] || '')}" style="width:auto">` : ''}</p>`; }).join('')}
+<select id="slTal"><option value="">— aggiungi un talento —</option>${TAL.filter(t => { const slot = tn[SL.talenti.length]; return slot && !motivoNoP(p, t, slot.filtro, slot.lista); }).map(t => `<option value="${t.id}">${esc(t.nome)} — ${esc(t.beneficio)}</option>`).join('')}</select>`;
+  }
+  if (r && r.speciale && r.speciale.length) h += `<h3>Nuove capacità</h3><ul>${r.speciale.map(s => `<li><b>${esc(s.nome)}</b> — ${esc(s.effetto || '')}</li>`).join('')}</ul>`;
+  const nuoviInc = ['mago', 'stregone', 'bardo'].includes(cid);
+  if (nuoviInc) { const cn = r.incantesimi_conosciuti, prev = (rigaClasse(cid, n - 1) || {}).incantesimi_conosciuti;
+    const quanti = cid === 'mago' ? `${r.incantesimi_aggiunti_al_libro || 2} incantesimi nuovi da aggiungere al libro (di livelli che sai lanciare)` : Object.keys(cn || {}).filter(k => cn[k] && cn[k] !== (prev || {})[k]).map(k => `${(cn[k] || 0) - ((prev || {})[k] || 0)} di livello ${k}`).join(', ') || 'nessuno nuovo';
+    h += `<h3>Incantesimi nuovi</h3><p class="soft">${quanti}. Scrivi i nomi (il DM li controlla sul manuale).</p><textarea id="slInc">${esc(SL.incantesimi)}</textarea>`; }
+  h += `<h3>Altre scelte</h3><p class="soft">Se una capacità nuova chiede una scelta (es. nemico prescelto, capacità speciale del ladro), scrivila qui.</p><textarea id="slScelte">${esc(SL.scelte)}</textarea>
+<p style="text-align:center;margin-top:16px"><button class="btn sec" id="slAnnulla">Annulla</button> <button class="btn" id="slFine">✅ Conferma e invia al DM</button></p><p class="bad" id="slErr" style="text-align:center"></p></div>`;
+  return h;
+}
+function erroreSalita(p) {
+  if (!SL.pfTirato) return 'Tira il dado vita';
+  if (LV.tabella_3_2_esperienza.aumenti_caratteristica_ai_livelli.includes(SL.a) && !SL.aumento) return 'Scegli la caratteristica da aumentare';
+  const s = Object.values(SL.ranghi).reduce((a, v) => a + v, 0), pt = puntiSalita(p); if (s !== pt) return `Spendi tutti i punti abilità (${s}/${pt})`;
+  if (SL.talenti.length < talentiNuovi(p).length) return 'Scegli i talenti';
+  if (SL.talenti.some((id, i) => (TAL.find(x => x.id === id) || {}).richiede_scelta && !((SL.sceltaTal || {})[i] || '').trim())) return 'Scrivi la scelta del talento (es. quale arma o abilità)';
+  return '';
+}
+function costruisciLivello(p) {   // nuovo file del personaggio al livello SL.a
+  const q = JSON.parse(JSON.stringify(p)), cid = classeId(p), n = SL.a, r = rigaClasse(cid, n), r0 = rigaClasse(cid, n - 1);
+  const m = v => Math.floor((v - 10) / 2), M0 = Object.fromEntries(CAR.map(k => [k, m(p.caratteristiche[k])]));
+  q.caratteristiche = carDopo(p); const M1 = Object.fromEntries(CAR.map(k => [k, m(q.caratteristiche[k])])), dM = k => M1[k] - M0[k];
+  const dv = parseInt(String(LV.classi[cid].dado_vita).slice(1)), cod = (p.tiro || {}).codice || S.codice, dado = dadiDaSeme(`${cod}|pf|${n}`, 1, dv)[0];
+  const guad = Math.max(1, dado + M1.COS) + dM('COS') * (n - 1); q.pf = p.pf + guad; q.stato = { ...(q.stato || {}) }; q.stato.pf_attuali = ((p.stato || {}).pf_attuali ?? p.pf) + guad;
+  q.classe_livello = String(p.classe_livello).replace(/\d+$/, n); q.bab = r.bab; q.bab_attacchi = r.attacchi;
+  for (const t of ['tempra', 'riflessi', 'volonta']) q.ts[t].base = r.ts[t];
+  const ARMI = EQ.armi.lista;
+  q.attacchi = p.attacchi.map(a => { const w = ARMI.find(x => x.nome === a.nome) || {}, dist = w.tipo === 'a distanza';
+    const b = parseInt(a.bonus) + (r.bab - (r0 ? r0.bab : p.bab)) + (dist ? dM('DES') : dM('FOR')); return { ...a, bonus: (b >= 0 ? '+' : '') + b }; });
+  if (dM('DES')) { const dmax = q.armatura && q.armatura.des_max ? parseInt(q.armatura.des_max) : 99; q.ca.des = Math.min(M1.DES, dmax); }
+  for (const [id, pt] of Object.entries(SL.ranghi)) { if (!pt) continue; const a = AB.find(x => x.id === id), nome = a.nome.startsWith('Conoscenze') ? 'Conoscenze' : a.nome, spec = a.nome.startsWith('Conoscenze') ? a.nome.replace(/^Conoscenze \(?/, '').replace(/\)$/, '') : '';
+    const g = diClasseP(p, a.nome) ? pt : pt / 2; const x = q.abilita.find(y => y.nome === nome && (nome !== 'Conoscenze' || y.spec === spec));
+    if (x) x.gradi += g; else q.abilita.push({ nome, spec, gradi: g, vari: 0, classe: diClasseP(p, a.nome), car: a.caratteristica_chiave ? CAR_LUNGA[a.caratteristica_chiave.toLowerCase()] : '—' }); }
+  q.grado_massimo = `${n + 3}/${(n + 3) / 2}`.replace('.', ',');
+  SL.talenti.forEach((id, i) => { const t = TAL.find(x => x.id === id), sc = ((SL.sceltaTal || {})[i] || '').trim(); q.talenti.push({ nome: t.nome + (sc ? ` (${sc})` : ''), pag: t.pagina_pdf }); });
+  for (const s of (r.speciale || [])) { q.capacita_speciali.push(s.nome); q.spiegazioni_extra.push(`${s.nome}: ${s.effetto || ''}`); }
+  if (r.incantesimi_al_giorno) { const ck = { mago: 'INT', stregone: 'CAR', bardo: 'CAR', chierico: 'SAG', druido: 'SAG', paladino: 'SAG', ranger: 'SAG' }[cid], sc = q.caratteristiche[ck];
+    const spec = /Specialista/.test((p.incantesimi || {}).domini || ''), tab = {};
+    for (const [lv, g] of Object.entries(r.incantesimi_al_giorno)) { if (g == null) continue; const L = +lv; const puo = sc >= 10 + L;
+      tab[lv] = { conosciuti: (r.incantesimi_conosciuti || {})[lv] ?? '', cd: 10 + L + M1[ck], giorno: puo ? g + (spec ? 1 : 0) + (cid === 'chierico' && L > 0 && (r.incantesimi_di_dominio_al_giorno || {})[lv] ? 1 : 0) : 0, bonus: puo ? bonusIncantesimi(sc, L) : 0 }; }
+    q.incantesimi = { ...q.incantesimi, tabella: tab }; }
+  if (SL.incantesimi.trim()) { q.incantesimi.per_livello = { ...(q.incantesimi.per_livello || {}) }; q.incantesimi.per_livello['nuovi (liv. ' + n + ')'] = SL.incantesimi.split(/[,\n]/).map(x => x.trim()).filter(Boolean); }
+  if (SL.scelte.trim()) q.spiegazioni_extra.push(`Scelte del ${n}° livello: ${SL.scelte.trim()}`);
+  q.tiro = { ...q.tiro, livelli: [...((p.tiro || {}).livelli || []), { livello: n, dado_pf: dado, pf_guadagnati: guad, aumento: SL.aumento || null, ranghi: SL.ranghi, talenti: SL.talenti, data: new Date().toISOString() }] };
+  return q;
+}
+function apriSalita(p) {
+  $('#main').innerHTML = htmlSalita(p); scrollTo(0, 0);
+  const on = (id, f) => { const e = $('#' + id); if (e) e.onclick = f; };
+  on('slPf', () => { SL.pfTirato = true; apriSalita(p); });
+  const au = $('#slAum'); if (au) au.onchange = () => { SL.aumento = au.value; SL.talenti = []; apriSalita(p); };
+  document.querySelectorAll('[data-sp]').forEach(b => b.onclick = () => { SL.ranghi[b.dataset.sp] = (SL.ranghi[b.dataset.sp] || 0) + 1; apriSalita(p); });
+  document.querySelectorAll('[data-sm]').forEach(b => b.onclick = () => { SL.ranghi[b.dataset.sm]--; apriSalita(p); });
+  const tl = $('#slTal'); if (tl) tl.onchange = () => { if (tl.value) SL.talenti.push(tl.value); apriSalita(p); };
+  document.querySelectorAll('[data-st]').forEach(a => a.onclick = e => { e.preventDefault(); SL.talenti.splice(+a.dataset.st, 1); SL.sceltaTal = {}; apriSalita(p); });
+  document.querySelectorAll('[data-sc]').forEach(i => i.oninput = () => { SL.sceltaTal = SL.sceltaTal || {}; SL.sceltaTal[i.dataset.sc] = i.value; });
+  const ti = $('#slInc'); if (ti) ti.oninput = () => SL.incantesimi = ti.value;
+  const ts = $('#slScelte'); if (ts) ts.oninput = () => SL.scelte = ts.value;
+  on('slAnnulla', () => { SL = null; apriScheda(); });
+  on('slFine', () => { const e = erroreSalita(p); if (e) { $('#slErr').textContent = e; return; }
+    const q = costruisciLivello(p); try { localStorage.setItem(CHIAVE + '-livello-' + SL.a, JSON.stringify(q)); } catch (x) {}
+    inviaFile(q); SL = null; statoSync = `⏳ livello ${q.classe_livello.split(' ').pop()} inviato: il DM lo controlla e lo pubblica`; apriScheda(); });
 }
 
 // avvio: se c'è già un personaggio finito su questo telefono apri la scheda, altrimenti la creazione
