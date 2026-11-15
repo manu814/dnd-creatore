@@ -339,6 +339,10 @@
   {
    "nome": "Spada lunga",
    "peso": 2
+  },
+  {
+   "nome": "Pergamena in druidico (mappa delle Sette Madri)",
+   "peso": 0
   }
  ],
  "carichi": {
@@ -459,7 +463,7 @@
    }
   }
  },
- "versione": 15,
+ "versione": 16,
  "pe": 0,
  "stato": {
   "pf_attuali": 3,
@@ -483,6 +487,6 @@
    "DES": 2
   }
  },
- "aggiornato": "2026-11-15T23:10",
+ "aggiornato": "2026-11-15T23:19",
  "note_dm": "Bentornata! La scheda ora si aggiorna da sola."
 }
