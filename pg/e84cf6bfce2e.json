@@ -459,7 +459,7 @@
    }
   }
  },
- "versione": 6,
+ "versione": 7,
  "pe": 0,
  "stato": {
   "pf_attuali": 9,
@@ -479,6 +479,6 @@
   },
   "campagna": "tela-di-fumoscuro"
  },
- "aggiornato": "2026-11-15T21:50",
- "note_dm": "Ora gli aggiornamenti del DM arrivano subito sul telefono."
+ "aggiornato": "2026-11-15T22:01",
+ "note_dm": "Gli aggiornamenti del DM ora arrivano subito sul telefono."
 }
