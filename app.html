@@ -85,7 +85,7 @@ table.t { border-collapse: collapse; width: 100%; font-size: 15px; } .t td, .t t
 <body>
 <header><h1>⚔️ Crea il tuo eroe</h1><div class="chi" id="chi"></div><div class="passi" id="passi"></div></header>
 <main id="main"></main>
-<p style="text-align:center;font:11px sans-serif;color:var(--soft);margin:0 0 90px">versione 15/11 20:14</p>
+<p style="text-align:center;font:11px sans-serif;color:var(--soft);margin:0 0 90px">versione 15/11 20:19</p>
 <div class="nav"><div class="in"><button class="btn sec" id="indietro">← Indietro</button><div class="msg" id="msg"></div>
 <button class="btn" id="avanti">Avanti →</button></div></div>
 <script>
@@ -830,8 +830,8 @@ function calcola() {
     const armP = a.penalita_armatura === 'si' ? penTot : a.penalita_armatura === 'doppia' ? 2 * penTot : 0;
     const bc = c.capacita_1_livello.filter(x => x.dati && x.dati.abilita && typeof x.dati.bonus === 'number' && !/nemico/i.test(x.nome) && x.dati.abilita.includes(a.nome)).reduce((s, x) => s + x.dati.bonus, 0);
     const v = bonusRazzaAb(a.nome) + fe + armP + bc;
-    if (a.id !== 'parlare_linguaggi' && (g || (a.senza_addestramento && v))) { const nm = a.nome.startsWith('Conoscenze') ? 'Conoscenze' : a.nome;
-      abilita.push({ nome: nm, spec: a.nome.startsWith('Conoscenze') ? a.nome.replace(/^Conoscenze \(?/, '').replace(/\)$/, '') : S.spec[a.id] || '', gradi: Math.floor(g) === g ? g : g, vari: v, classe: diClasse(a.id), car: carAb(a) }); } }
+    if (g || (a.id !== 'parlare_linguaggi' && a.senza_addestramento && v)) { const nm = a.nome.startsWith('Conoscenze') ? 'Conoscenze' : a.nome;
+      abilita.push({ nome: nm, spec: a.nome.startsWith('Conoscenze') ? a.nome.replace(/^Conoscenze \(?/, '').replace(/\)$/, '') : S.spec[a.id] || '', gradi: Math.floor(g) === g ? g : g, vari: v, classe: diClasse(a.id), car: carAb(a) || '—' }); } }
   const vel = r.velocita_base_m, nanoTenace = r.tratti.some(t => t.dati.non_ridotta_da_armatura_o_carico), lenta = !nanoTenace && ((arm && arm.categoria !== 'leggera') || car !== EQ.carico.effetti.tabella[0]);
   const talenti = [...(TAL_FISSI[S.classe] || []).map(id => ({ nome: talById(id).nome + ' (classe)', pag: talById(id).pagina_pdf })),
     ...[...S.talBonus, ...S.talenti].map(t => ({ nome: talById(t.id).nome + (t.scelta ? ` (${t.scelta})` : ''), pag: talById(t.id).pagina_pdf }))];
