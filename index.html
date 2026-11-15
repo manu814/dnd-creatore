@@ -631,9 +631,12 @@ let catEq = 'Armi', filtroEq = '';
 R.equip = () => {
   const e = S.equip, ms = modello();
   let h = `<div class="card"><h2>Equipaggiamento</h2><p>Come preferisci partire? Tutte e due le strade sono quelle del Manuale del Giocatore.</p>
-<div class="scelte"><button class="opz ${e.modo === 'kit' ? 'sel' : ''}" data-modo="kit" ${e.tirato ? 'disabled' : ''}><b>🎒 Kit pronto della classe</b><small>Il "modello iniziale" del manuale: attrezzatura già scelta più qualche moneta. Puoi scambiare pezzi con altri di valore uguale o minore.</small></button>
-<button class="opz ${e.modo === 'compra' ? 'sel' : ''}" data-modo="compra" ${e.tirato ? 'disabled' : ''}><b>🛒 Fai la spesa</b><small>Tiri le monete d'oro della tua classe e compri tutto pezzo per pezzo.</small></button></div>`;
+<div class="scelte"><button class="opz ${e.modo === 'kit' ? 'sel' : ''}" data-modo="kit" ${e.tirato && e.modo !== 'kit' ? 'disabled' : ''}><b>🎒 Kit pronto della classe</b><small>Il "modello iniziale" del manuale: attrezzatura già scelta più qualche moneta. Puoi scambiare pezzi con altri di valore uguale o minore.</small></button>
+<button class="opz ${e.modo === 'compra' ? 'sel' : ''}" data-modo="compra" ${e.tirato && e.modo !== 'compra' ? 'disabled' : ''}><b>🛒 Fai la spesa</b><small>Tiri le monete d'oro della tua classe e compri tutto pezzo per pezzo.</small></button></div>`;
   if (!e.modo) return h + '</div>';
+  if (e.tirato) h += `<div class="spiega">🔒 Hai già tirato le monete, quindi la scelta tra kit e spesa resta questa: altrimenti si potrebbe tirare, vedere il risultato e cambiare strada.
+${e.modo === 'kit' ? 'Puoi togliere pezzi del kit e usarne il valore per comprare altro (fino allo stesso valore).' : ''}
+<br><button class="btn sec piccolo" id="eqReset">↩︎ Rimetti tutto com'era</button></div>`;
   if (e.modo === 'kit' && ms.length > 1) h += `<p>Il manuale propone ${ms.length} kit per la tua classe: <select id="kitIdx" style="width:auto">${ms.map((m, i) => `<option value="${i}" ${(e.kitIdx || 0) === i ? 'selected' : ''}>modello ${esc(m.razza_del_modello)}</option>`).join('')}</select></p>`;
   if (!e.tirato) return h + `<p style="text-align:center;margin:20px 0"><button class="btn" id="tiraOro">🎲 Tira le monete (${esc(e.modo === 'kit' ? (ms[e.kitIdx || 0] || {}).denaro : (EQ.denaro_iniziale.tabella.find(r => norma(r.classe) === norma(nomeClasse(S.classe))) || {}).dadi)})</button></p>
 <p class="soft" style="text-align:center">Dopo il tiro la scelta tra kit e spesa non si cambia più.</p></div>`;
@@ -653,9 +656,11 @@ ${x._arma ? `<span class="pill">${esc(x.categoria)} · ${esc(x.tipo)} · danni $
 };
 R.equip_dopo = () => {
   const e = S.equip; e.comprati = e.comprati || {}; e.tolti = e.tolti || {};
-  document.querySelectorAll('[data-modo]').forEach(b => b.onclick = () => { e.modo = b.dataset.modo; ridisegna(); });
+  document.querySelectorAll('[data-modo]').forEach(b => b.onclick = () => { if (e.tirato) return;
+    e.modo = b.dataset.modo; if (e.modo === 'kit' && e.kitIdx == null) { const i = modello().findIndex(m => norma(m.razza_del_modello) === norma((razza() || {}).id)); e.kitIdx = Math.max(0, i); } ridisegna(); });
   if ($('#kitIdx')) $('#kitIdx').onchange = ev => { e.kitIdx = +ev.target.value; ridisegna(); };
   if ($('#tiraOro')) $('#tiraOro').onclick = () => { e.tirato = true; ridisegna(); };
+  if ($('#eqReset')) $('#eqReset').onclick = () => { e.comprati = {}; e.tolti = {}; ridisegna(); };
   document.querySelectorAll('[data-cat]').forEach(b => b.onclick = () => { catEq = b.dataset.cat; filtroEq = ''; ridisegna(); });
   document.querySelectorAll('[data-buy]').forEach(b => b.onclick = () => { const n = b.dataset.buy; e.comprati[n] = (e.comprati[n] || 0) + 1; ridisegna(); });
   document.querySelectorAll('[data-tog]').forEach(b => b.onclick = () => { const n = b.dataset.tog;
