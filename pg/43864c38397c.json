@@ -460,9 +460,10 @@
   }
  },
  "pe": 0,
- "versione": 1,
+ "versione": 2,
  "stato": {
-  "pf_attuali": 9
+  "pf_attuali": 9,
+  "campagna": "campane-di-salmastro"
  },
  "aggiornato": "2026-11-16T00:41"
 }
