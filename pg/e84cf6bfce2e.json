@@ -343,6 +343,10 @@
   {
    "nome": "Pergamena in druidico (mappa delle Sette Madri)",
    "peso": 0
+  },
+  {
+   "nome": "Cesto di erbe da cura (salvia, achillea, malva) legate con filo d'argento",
+   "peso": 0.5
   }
  ],
  "carichi": {
@@ -463,7 +467,7 @@
    }
   }
  },
- "versione": 16,
+ "versione": 17,
  "pe": 0,
  "stato": {
   "pf_attuali": 3,
@@ -487,6 +491,6 @@
    "DES": 2
   }
  },
- "aggiornato": "2026-11-15T23:19",
+ "aggiornato": "2026-11-15T23:21",
  "note_dm": "Bentornata! La scheda ora si aggiorna da sola."
 }
