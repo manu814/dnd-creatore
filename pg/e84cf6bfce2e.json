@@ -467,11 +467,13 @@
    }
   }
  },
- "versione": 23,
+ "versione": 24,
  "pe": 0,
  "stato": {
   "pf_attuali": 9,
-  "slot_usati": {},
+  "slot_usati": {
+   "1": 1
+  },
   "preparati": {
    "0": [
     "Individuazione del magico",
