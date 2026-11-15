@@ -85,7 +85,7 @@ table.t { border-collapse: collapse; width: 100%; font-size: 15px; } .t td, .t t
 <body>
 <header><h1>⚔️ Crea il tuo eroe</h1><div class="chi" id="chi"></div><div class="passi" id="passi"></div></header>
 <main id="main"></main>
-<p style="text-align:center;font:11px sans-serif;color:var(--soft);margin:0 0 90px">versione 15/11 20:12</p>
+<p style="text-align:center;font:11px sans-serif;color:var(--soft);margin:0 0 90px">versione 15/11 20:14</p>
 <div class="nav"><div class="in"><button class="btn sec" id="indietro">← Indietro</button><div class="msg" id="msg"></div>
 <button class="btn" id="avanti">Avanti →</button></div></div>
 <script>
@@ -894,7 +894,7 @@ R.fine = () => { let p; try { p = calcola(); } catch (err) { return `<div class=
 ${!S.chiuso ? `<div class="card"><h2>Ultimo passo: concludi</h2><p>Controlla bene il riepilogo qui sopra. Quando concludi, il personaggio si <b>blocca</b>: non potrai più tornare indietro a cambiarlo.</p>
 <div id="conferma"><p style="text-align:center"><button class="btn" id="concludi">✅ Concludi e blocca il personaggio</button></p></div></div>` : ''}
 ${S.chiuso ? `<div class="card"><h2>Ultimo passo: manda il file al DM</h2><p>Scarica il file del personaggio e mandalo al DM (WhatsApp, mail…). Lui lo controlla e ti stampa la scheda ufficiale.</p>
-<p style="text-align:center"><button class="btn" id="scarica">⬇️ Scarica il personaggio</button></p>
+<p style="text-align:center"><button class="btn" id="scarica">📤 Invia il personaggio al DM</button></p><p class="soft" style="text-align:center">Si apre il menu Condividi: scegli WhatsApp (o Mail) e mandalo al DM.</p>
 <p class="soft">Personaggio bloccato il ${new Date(S.chiuso).toLocaleString('it')}.</p></div>
 <div class="card"><h2>📱 La tua scheda da gioco</h2><p>Al tavolo usa questa pagina come scheda: punti ferita da segnare, attacchi, abilità, incantesimi e zaino. Resta salvata su questo telefono e si riapre dallo stesso link.</p>
 <p style="text-align:center"><button class="btn" id="apriScheda">Apri la scheda da gioco</button></p></div>` : ''}`; };
@@ -904,10 +904,18 @@ R.fine_dopo = () => {
     $('#annulla').onclick = () => ridisegna(); $('#siBlocca').onclick = () => { S.chiuso = new Date().toISOString(); salva(); salvaPG(calcola()); ridisegna(); }; };
   const b = $('#scarica'); if (!b) return; try { localStorage.setItem(CHIAVE + '-pg', JSON.stringify(calcola())); } catch (e) {}
   $('#apriScheda').onclick = () => { salvaPG(calcola()); apriScheda(); };
-  b.onclick = () => {
-  const p = calcola(), blob = new Blob([JSON.stringify(p, null, 2)], { type: 'application/json' });
-  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `${(p.nome || 'personaggio').replace(/[^\w\- ]+/g, '').trim() || 'personaggio'} - ${S.giocatore}.json`;
-  document.body.appendChild(a); a.click(); a.remove(); }; };
+  b.onclick = () => inviaFile(calcola()); };
+// sul telefono apre il menu Condividi (WhatsApp, Mail…) col file allegato; altrimenti lo scarica
+async function inviaFile(p) {
+  const nome = `${(p.nome || 'personaggio').replace(/[^\w\- ]+/g, '').trim() || 'personaggio'} - ${p.giocatore || S.giocatore}.json`;
+  const testo = JSON.stringify(p, null, 2);
+  try {
+    const f = new File([testo], nome, { type: 'application/json' });
+    if (navigator.canShare && navigator.canShare({ files: [f] })) { await navigator.share({ files: [f], title: 'Personaggio D&D', text: `Personaggio di ${p.giocatore || ''}` }); return; }
+  } catch (e) { if (e && e.name === 'AbortError') return; }
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([testo], { type: 'application/octet-stream' })); a.download = nome;
+  document.body.appendChild(a); a.click(); a.remove();
+}
 V.fine = () => '';
 
 
@@ -989,7 +997,7 @@ ${p.incantesimi.domini ? `<p class="soft">${esc(p.incantesimi.domini)}</p>` : ''
     h += `<div class="card"><h2>${esc(p.nome)}</h2><p>${esc(p.razza)} ${esc(p.classe_livello)} · ${esc(p.allineamento)}${p.divinita ? ' · ' + esc(p.divinita) : ''}</p><p>${esc(p.descrizione)}</p>
 <h3>Talenti</h3><ul>${p.talenti.map(t => { const x = TAL.find(z => t.nome.startsWith(z.nome)); return `<li><b>${esc(t.nome)}</b>${x ? ' — ' + esc(x.beneficio) : ''}</li>`; }).join('')}</ul>
 <h3>Capacità</h3><ul>${p.spiegazioni_extra.map(s => `<li>${esc(s)}</li>`).join('')}</ul><p>Linguaggi: ${esc(p.linguaggi.join(', '))}</p></div>
-<div class="card"><p>${S.chiuso ? '' : '<button class="btn sec piccolo" id="modifica">✏️ Torna alla creazione</button> '}<button class="btn sec piccolo" id="esporta">⬇️ Scarica il file</button></p>
+<div class="card"><p>${S.chiuso ? '' : '<button class="btn sec piccolo" id="modifica">✏️ Torna alla creazione</button> '}<button class="btn sec piccolo" id="esporta">📤 Invia di nuovo il file al DM</button></p>
 <label class="campo"><span>Hai cambiato telefono? Carica il file del personaggio</span><input type="file" id="importa" accept=".json,application/json"></label></div>`;
   }
   $('#main').innerHTML = h;
@@ -999,7 +1007,7 @@ ${p.incantesimi.domini ? `<p class="soft">${esc(p.incantesimi.domini)}</p>` : ''
   const n = $('#note'); if (n) n.oninput = () => { TR.note = n.value; salvaTR(); };
   on('modifica2', () => { if (!S.classe) return; document.querySelector('.nav').style.display = ''; document.querySelector('header h1').textContent = '⚔️ Crea il tuo eroe'; S.passo = attivi().length - 1; disegna(); });
   on('modifica', () => { document.querySelector('.nav').style.display = ''; document.querySelector('header h1').textContent = '⚔️ Crea il tuo eroe'; disegna(); });
-  on('esporta', () => { const blob = new Blob([JSON.stringify(p, null, 2)], { type: 'application/json' }); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `${p.nome} - ${p.giocatore}.json`; document.body.appendChild(a); a.click(); a.remove(); });
+  on('esporta', () => inviaFile(p));
   const imp = $('#importa'); if (imp) imp.onchange = () => { const f = imp.files[0]; if (!f) return; f.text().then(t => { try { const q = JSON.parse(t); if (!q.caratteristiche || !q.tiro) throw 0; salvaPG(q); TR = {}; salvaTR(); apriScheda(); } catch (e) { alert('File non valido'); } }); };
 }
 // avvio: se c'è già un personaggio finito su questo telefono apri la scheda, altrimenti la creazione
