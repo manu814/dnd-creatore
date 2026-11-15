@@ -85,7 +85,7 @@ table.t { border-collapse: collapse; width: 100%; font-size: 15px; } .t td, .t t
 <body>
 <header><h1>⚔️ Crea il tuo eroe</h1><div class="chi" id="chi"></div><div class="passi" id="passi"></div></header>
 <main id="main"></main>
-<p style="text-align:center;font:11px sans-serif;color:var(--soft);margin:0 0 90px">versione 15/11 20:19</p>
+<p style="text-align:center;font:11px sans-serif;color:var(--soft);margin:0 0 90px">versione 15/11 20:23</p>
 <div class="nav"><div class="in"><button class="btn sec" id="indietro">← Indietro</button><div class="msg" id="msg"></div>
 <button class="btn" id="avanti">Avanti →</button></div></div>
 <script>
@@ -943,7 +943,7 @@ function salvaPG(p) { try { localStorage.setItem(CH_PG, JSON.stringify(p)); } ca
 function caricaPG() { try { return JSON.parse(localStorage.getItem(CH_PG)); } catch (e) { return null; } }
 let TR = (() => { try { return JSON.parse(localStorage.getItem(CH_TR)) || {}; } catch (e) { return {}; } })();
 const salvaTR = () => { try { localStorage.setItem(CH_TR, JSON.stringify(TR)); } catch (e) {} };
-let tabScheda = 'combatti';
+let tabScheda = 'dadi';
 function m10(v) { return Math.floor((v - 10) / 2); }
 function apriScheda() {
   const p = caricaPG(); if (!p) return;
@@ -955,7 +955,7 @@ function apriScheda() {
   const ts = (k, c) => p.ts[k].base + M[c] + (p.ts[k].vari || 0);
   if (TR.pf == null) TR.pf = p.pf; if (!TR.slot) TR.slot = {}; if (!TR.note) TR.note = '';
   if (!TR.denaro) TR.denaro = { ...p.denaro };
-  const tabs = [['combatti', '⚔️ Combatti'], ['abilita', '🎯 Abilità'], ...(Object.keys(p.incantesimi.tabella || {}).length ? [['magia', '✨ Magia']] : []), ['zaino', '🎒 Zaino'], ['chi', '📜 Chi sono']];
+  const tabs = [['dadi', '🎲 Dadi'], ['combatti', '⚔️ Combatti'], ['abilita', '🎯 Abilità'], ...(Object.keys(p.incantesimi.tabella || {}).length ? [['magia', '✨ Magia']] : []), ['zaino', '🎒 Zaino'], ['chi', '📜 Chi sono']];
   let h = `<p style="margin:4px 0"><button class="btn sec piccolo" id="modifica2">${S.chiuso || !S.classe ? '← Riepilogo e file' : '← Torna alla creazione'}</button></p><p class="soft" style="margin:4px 0">${esc(statoSync)} <button class="btn sec piccolo" id="sync">↻ Aggiorna</button>${p.pe != null ? ` · PE <b>${p.pe}</b>` : ''}${p.note_dm ? `<br>📣 <b>Dal DM:</b> ${esc(p.note_dm)}` : ''}</p>
 <div class="tabs">${tabs.map(([k, n]) => `<button class="${tabScheda === k ? 'on' : ''}" data-tab="${k}">${n}</button>`).join('')}</div>`;
   if (tabScheda === 'combatti') {
@@ -972,6 +972,19 @@ ${p.modificatori_condizionali ? `<p class="soft">Bonus in casi particolari: ${es
 ${p.attacchi.map(a => `<tr><td><b>${esc(a.nome)}</b><br><span class="soft">critico ${esc(a.critico)}${a.gittata ? ' · gittata ' + esc(a.gittata) : ''}</span></td><td class="num gr">d20 ${esc(a.bonus)}</td><td class="num gr">${esc(a.danni)}</td></tr>`).join('')}</table>
 <p class="soft">Tiri il d20 e aggiungi il numero: se arrivi alla CA del nemico, colpisci e tiri i danni.</p></div>
 <div class="card"><h2>Caratteristiche</h2><div class="big">${Object.entries(p.caratteristiche).map(([k, v]) => `<div><b>${sg(M[k])}</b><span>${k} ${v}</span></div>`).join('')}</div></div>`;
+  }
+  if (tabScheda === 'dadi') {
+    const ts2 = [['Tempra', ts('tempra', 'COS')], ['Riflessi', ts('riflessi', 'DES')], ['Volontà', ts('volonta', 'SAG')]];
+    const abil = AB.map(a => { if (!carAb(a)) return null; const x = p.abilita.find(y => y.nome === (a.nome.startsWith('Conoscenze') ? 'Conoscenze' : a.nome) && (!a.nome.startsWith('Conoscenze') || a.nome.includes(y.spec)));
+      if (!x && !a.senza_addestramento) return null; return [a.nome, (x ? Math.floor(x.gradi) + x.vari : 0) + M[carAb(a)]]; }).filter(Boolean);
+    const ult = (TR.log || [])[0];
+    h += `<div class="card" style="text-align:center">${ult ? `<div class="soft">Tiro n.${ult.n} · ${esc(ult.cosa)}</div><div style="font-size:54px;font-weight:bold;color:var(--acc)" class="rot">${ult.tot}</div>
+<div class="soft">${esc(ult.dett)}</div>${ult.nota ? `<p class="bad"><b>${esc(ult.nota)}</b></p>` : ''}` : '<p class="soft">Tocca un bottone per tirare. Ogni tiro ha un numero: dillo al DM insieme al risultato.</p>'}</div>
+<div class="card"><h3>Attacchi</h3>${p.attacchi.map((x, i) => `<p><b>${esc(x.nome)}</b><br><button class="btn piccolo" data-roll="att" data-i="${i}">Per colpire d20${esc(x.bonus)}</button> <button class="btn sec piccolo" data-roll="dan" data-i="${i}">Danni ${esc(x.danni)}</button></p>`).join('')}
+<h3>Tiri salvezza e iniziativa</h3><p>${ts2.map(([n, v]) => `<button class="btn sec piccolo" data-roll="d20" data-mod="${v}" data-cosa="${n}">${n} ${sg(v)}</button>`).join(' ')} <button class="btn sec piccolo" data-roll="d20" data-mod="${M.DES + p.iniziativa_vari}" data-cosa="Iniziativa">Iniziativa ${sg(M.DES + p.iniziativa_vari)}</button></p>
+<h3>Abilità</h3><select id="abSel"><option value="">— scegli un'abilità —</option>${abil.map(([n, v]) => `<option value="${v}">${esc(n)} ${sg(v)}</option>`).join('')}</select>
+<h3>Dadi liberi</h3><p>${[4, 6, 8, 10, 12, 20, 100].map(f => `<button class="btn sec piccolo" data-roll="lib" data-f="${f}">d${f}</button>`).join(' ')}</p></div>
+<div class="card"><h3>Ultimi tiri</h3><table class="t">${(TR.log || []).slice(0, 15).map(x => `<tr><td class="num">n.${x.n}</td><td>${esc(x.cosa)}<br><span class="soft">${esc(x.dett)}</span></td><td class="num gr">${x.tot}</td></tr>`).join('') || '<tr><td class="soft">ancora nessuno</td></tr>'}</table></div>`;
   }
   if (tabScheda === 'abilita') {
     const righe = AB.map(a => { const mine = p.abilita.filter(x => x.nome === (a.nome.startsWith('Conoscenze') ? 'Conoscenze' : a.nome) && (!a.nome.startsWith('Conoscenze') || a.nome.includes(x.spec)));
@@ -1003,6 +1016,19 @@ ${p.incantesimi.domini ? `<p class="soft">${esc(p.incantesimi.domini)}</p>` : ''
   $('#main').innerHTML = h;
   document.querySelectorAll('[data-tab]').forEach(b => b.onclick = () => { tabScheda = b.dataset.tab; apriScheda(); scrollTo(0, 0); });
   const on = (id, f) => { const e = $('#' + id); if (e) e.onclick = f; };
+  const tira = (cosa, n, f, mod, extra) => { const codice = (p.tiro || {}).codice || S.codice; TR.n = Math.max(TR.n || 0, ((p.stato || {}).ultimo_tiro || 0)) + 1;
+    const d = dadiDaSeme(`${codice}|gioco|${TR.n}`, n, f), s = d.reduce((x, v) => x + v, 0), tot = s + mod;
+    const r = { n: TR.n, cosa, tot, dett: `${n}d${f} = ${d.join('+')}${mod ? ' ' + (mod > 0 ? '+ ' : '− ') + Math.abs(mod) : ''}`, nota: extra ? extra(d) : '' };
+    TR.log = [r, ...(TR.log || [])].slice(0, 50); salvaTR(); tabScheda = 'dadi'; apriScheda(); scrollTo(0, 0); };
+  document.querySelectorAll('[data-roll]').forEach(b => b.onclick = () => { const k = b.dataset.roll;
+    if (k === 'lib') return tira('d' + b.dataset.f, 1, +b.dataset.f, 0);
+    if (k === 'd20') return tira(b.dataset.cosa, 1, 20, +b.dataset.mod);
+    const x = p.attacchi[+b.dataset.i];
+    if (k === 'att') { const m = /^(\d+)(?:-(\d+))?/.exec(x.critico || ''); const min = m && m[2] ? +m[1] : 20;
+      return tira(x.nome + ': per colpire', 1, 20, parseInt(x.bonus) || 0, d => d[0] === 20 ? '20 naturale: colpisce sempre. Minaccia di critico: tira di nuovo per confermare.' : d[0] >= min ? `Minaccia di critico (${x.critico}): tira di nuovo per confermare.` : d[0] === 1 ? '1 naturale: manca sempre.' : ''); }
+    if (k === 'dan') { const pz = /(\d+)d(\d+)\s*([+-]\s*\d+)?/.exec(String(x.danni).split('/')[0]); if (!pz) return;
+      return tira(x.nome + ': danni', +pz[1], +pz[2], pz[3] ? parseInt(pz[3].replace(/\s/g, '')) : 0); } });
+  const abs = $('#abSel'); if (abs) abs.onchange = () => { if (abs.value === '') return; tira(abs.options[abs.selectedIndex].text.replace(/ [+-]\d+$/, ''), 1, 20, +abs.value); };
   on('sync', () => { statoSync = 'controllo…'; apriScheda(); sincronizza().then(apriScheda); });
   const n = $('#note'); if (n) n.oninput = () => { TR.note = n.value; salvaTR(); };
   on('modifica2', () => { if (!S.classe) return; document.querySelector('.nav').style.display = ''; document.querySelector('header h1').textContent = '⚔️ Crea il tuo eroe'; S.passo = attivi().length - 1; disegna(); });
