@@ -467,8 +467,8 @@
    }
   }
  },
- "versione": 24,
- "pe": 0,
+ "versione": 25,
+ "pe": 300,
  "stato": {
   "pf_attuali": 9,
   "slot_usati": {
@@ -489,6 +489,6 @@
   "danni_caratteristiche": {},
   "danni_non_letali": 0
  },
- "aggiornato": "2026-11-16T00:19",
- "note_dm": "Giorno 2 — preparati: liv. 0 Individuazione del magico, Lampo, Luce · liv. 1 Cura ferite leggere, Zanna magica"
+ "aggiornato": "2026-11-16T00:33",
+ "note_dm": "Fine sessione 1: +300 punti esperienza. Si riprende nel corridoio di tele."
 }
