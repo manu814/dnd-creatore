@@ -459,7 +459,7 @@
    }
   }
  },
- "versione": 10,
+ "versione": 11,
  "pe": 0,
  "stato": {
   "pf_attuali": 6,
@@ -477,8 +477,11 @@
     "Parlare con gli animali"
    ]
   },
-  "campagna": "tela-di-fumoscuro"
+  "campagna": "tela-di-fumoscuro",
+  "danni_caratteristiche": {
+   "DES": 2
+  }
  },
- "aggiornato": "2026-11-15T22:31",
+ "aggiornato": "2026-11-15T22:33",
  "note_dm": "Bentornata! La scheda ora si aggiorna da sola."
 }
