@@ -85,7 +85,7 @@ table.t { border-collapse: collapse; width: 100%; font-size: 15px; } .t td, .t t
 <body>
 <header><h1>⚔️ Crea il tuo eroe</h1><div class="chi" id="chi"></div><div class="passi" id="passi"></div></header>
 <main id="main"></main>
-<p style="text-align:center;font:11px sans-serif;color:var(--soft);margin:0 0 90px">versione 15/11 22:10</p>
+<p style="text-align:center;font:11px sans-serif;color:var(--soft);margin:0 0 90px">versione 15/11 22:33</p>
 <div class="nav"><div class="in"><button class="btn sec" id="indietro">← Indietro</button><div class="msg" id="msg"></div>
 <button class="btn" id="avanti">Avanti →</button></div></div>
 <script>
@@ -178,6 +178,8 @@ function raccogli(pg) {
     }
     if (v.note) note.push(`${v.nome}: ${v.note}`);
   }
+  // danni alle caratteristiche (veleni, ecc.): stato.danni_caratteristiche = {DES: 2} — si recuperano 1 punto al giorno di riposo
+  for (const [c, v] of Object.entries((pg.stato || {}).danni_caratteristiche || {})) if (v) { add('car_' + c, -v, 'danni', 'Danni a ' + c); nomi.push(`Danni a ${c}: −${v}`); }
   // oggetti magici indossati: stato.oggetti = [{id}] (dati/oggetti_magici.json)
   const OM = (D.oggetti_magici || {}).oggetti || [], ABN = Object.fromEntries(D.abilita.abilita.map(a => [a.id, a.nome]));
   for (const o of ((pg.stato || {}).oggetti || [])) {
