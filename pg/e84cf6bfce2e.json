@@ -459,7 +459,7 @@
    }
   }
  },
- "versione": 4,
+ "versione": 5,
  "pe": 0,
  "stato": {
   "pf_attuali": 9,
@@ -476,8 +476,9 @@
     "Nascondersi agli animali",
     "Parlare con gli animali"
    ]
-  }
+  },
+  "campagna": "tela-di-fumoscuro"
  },
- "aggiornato": "2026-11-15T21:39",
+ "aggiornato": "2026-11-15T21:47",
  "note_dm": "Preparati oggi — liv. 0: Luce (usata), Individuazione del magico, Riparare · liv. 1: Nascondersi agli animali, Parlare con gli animali"
 }
