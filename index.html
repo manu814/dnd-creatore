@@ -4,11 +4,17 @@
 @media (prefers-color-scheme: dark){body{background:#17130f;color:#f1e6d4}}</style></head>
 <body><p id="m">⚔️ Carico…</p>
 <script>
-// Pagina-guscio: non cambia mai. Scarica l'ULTIMA versione dell'app direttamente dal repository (versione esatta, niente cache di GitHub Pages).
-const RAW = 'https://raw.githubusercontent.com/manu814/dnd-creatore/';
-const scrivi = h => { document.open(); document.write(h); document.close(); };
-fetch('https://api.github.com/repos/manu814/dnd-creatore/commits/main', { cache: 'no-store' })
-  .then(r => r.ok ? r.json() : Promise.reject()).then(j => fetch(RAW + j.sha + '/app.html')).then(r => r.ok ? r.text() : Promise.reject()).then(scrivi)
-  .catch(() => fetch('app.html?t=' + Date.now(), { cache: 'no-store' }).then(r => r.text()).then(scrivi)
-  .catch(() => { document.getElementById('m').innerHTML = 'Connessione assente: <a href="app.html' + location.search + '">riprova</a>'; }));
+// Pagina-guscio: non cambia mai. Scarica l'ULTIMA versione dell'app dal repository (versione esatta, niente cache di GitHub Pages).
+// Tutto dentro una funzione: nessun nome globale, così non si scontra con quelli dell'app (errore del 15/11: "RAW già dichiarato").
+(function () {
+  var base = 'https://raw.githubusercontent.com/manu814/dnd-creatore/';
+  function mostra(h) { document.open(); document.write(h); document.close(); }
+  function ripiego() { return fetch('app.html?t=' + Date.now(), { cache: 'no-store' }).then(function (r) { return r.text(); }).then(mostra); }
+  fetch('https://api.github.com/repos/manu814/dnd-creatore/commits/main', { cache: 'no-store' })
+    .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
+    .then(function (j) { return fetch(base + j.sha + '/app.html'); })
+    .then(function (r) { return r.ok ? r.text() : Promise.reject(); })
+    .then(mostra)
+    .catch(function () { ripiego().catch(function () { document.getElementById('m').innerHTML = 'Connessione assente: <a href="app.html' + location.search + '">riprova</a>'; }); });
+})();
 </script></body></html>
