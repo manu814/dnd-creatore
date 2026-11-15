@@ -459,11 +459,14 @@
    }
   }
  },
- "versione": 2,
+ "versione": 3,
  "pe": 0,
  "stato": {
-  "pf_attuali": 9
+  "pf_attuali": 9,
+  "slot_usati": {
+   "0": 1
+  }
  },
- "aggiornato": "2026-11-15T20:20",
+ "aggiornato": "2026-11-15T21:32",
  "note_dm": "Benvenuta! Scegli il tuo abito gratuito (artigiano, contadino, esploratore, intrattenitore, monaco, studioso o viaggiatore) e dimmelo."
 }
