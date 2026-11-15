@@ -157,6 +157,9 @@ const CAR_SPIEGA = {
   SAG: 'percezione (vedere, sentire), forza di volontà, incantesimi di chierico, druido, ranger',
   CAR: 'convincere, mentire, comandare, incantesimi di stregone e bardo, poteri del paladino' };
 const qs = new URLSearchParams(location.search);
+// il codice nel link può arrivare sporco (asterischi, punti, spazi copiati da un messaggio): tengo solo lettere, cifre e trattini
+const pulisci = c => { const m = String(c || '').toUpperCase().match(/[A-Z]{1,6}-[A-Z2-9]{4}-[A-Z2-9]{4}/); return m ? m[0] : String(c || '').toUpperCase().replace(/[^A-Z0-9-]/g, ''); };
+if (qs.get('codice')) qs.set('codice', pulisci(qs.get('codice')));
 const CHIAVE = 'creatore-dnd35';
 let S = carica() || nuovo();
 function nuovo() { return { codice: (qs.get('codice') || '').toUpperCase(), giocatore: '', passo: 0, idea: {}, razza: null, classe: null,
@@ -212,13 +215,13 @@ function ridisegna() { const y = scrollY; disegna(); scrollTo(0, y); }
 R.inizio = () => `<div class="card"><h2>Benvenuto!</h2>
 <p>Qui crei il tuo personaggio per <b>Dungeons &amp; Dragons 3.5</b>, passo per passo, seguendo il Manuale del Giocatore. Non serve sapere niente: ogni cosa è spiegata quando arriva.</p>
 <div class="spiega">I dadi li tira la pagina quando premi il bottone, a partire dal tuo <b>codice personale</b>: escono sempre uguali, quindi c'è un solo tentativo. Alla fine scarichi un file e lo mandi al Dungeon Master (il DM, chi guida la partita).</div>
-<label class="campo"><span>Il tuo nome (quello vero)</span><input type="text" id="giocatore" value="${esc(S.giocatore)}" placeholder="es. Luca"></label>
-<label class="campo"><span>Codice personale (te l'ha dato il DM)</span><input type="text" id="codice" value="${esc(S.codice)}" placeholder="es. LUCA-7F3K-92QD" ${qs.get('codice') ? 'readonly' : ''}></label>
+<label class="campo"><span>Il tuo nome (quello vero)</span><input type="text" id="giocatore" autocomplete="given-name" value="${esc(S.giocatore)}" placeholder="es. Luca"></label>
+<label class="campo"><span>Codice personale (te l'ha dato il DM)</span><input type="text" id="codice" autocomplete="off" autocapitalize="characters" spellcheck="false" value="${esc(S.codice)}" placeholder="es. LUCA-7F3K-92QD" ${qs.get('codice') ? 'readonly' : ''}></label>
 ${S.serie != null ? '<p class="soft">Hai già tirato i dadi con questo codice: il codice non si può più cambiare.</p>' : ''}</div>`;
 function leggiInizio() {   // legge i campi anche se il telefono non ha mandato l'evento (autocompletamento, tastiere strane)
   const g = $('#giocatore'), c = $('#codice'); if (!g || !c) return;
   S.giocatore = g.value.trim();
-  if (S.serie == null) S.codice = c.value.toUpperCase().replace(/[^A-Z0-9-]/g, '');
+  if (S.serie == null) S.codice = pulisci(c.value);
   salva();
 }
 R.inizio_dopo = () => {
