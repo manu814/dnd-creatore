@@ -467,10 +467,10 @@
    }
   }
  },
- "versione": 22,
+ "versione": 23,
  "pe": 0,
  "stato": {
-  "pf_attuali": 5,
+  "pf_attuali": 9,
   "slot_usati": {},
   "preparati": {
    "0": [
@@ -487,6 +487,6 @@
   "danni_caratteristiche": {},
   "danni_non_letali": 0
  },
- "aggiornato": "2026-11-16T00:13",
+ "aggiornato": "2026-11-16T00:19",
  "note_dm": "Giorno 2 — preparati: liv. 0 Individuazione del magico, Lampo, Luce · liv. 1 Cura ferite leggere, Zanna magica"
 }
