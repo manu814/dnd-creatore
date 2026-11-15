@@ -66,7 +66,20 @@ table.t { border-collapse: collapse; width: 100%; font-size: 15px; } .t td, .t t
 .riga-sel { background: var(--sel); }
 .filtri { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0; } .filtri input { flex: 1; min-width: 160px; }
 .riepilogo dt { font-size: 13px; color: var(--soft); margin-top: 8px; } .riepilogo dd { margin: 0; }
-@media (max-width: 520px) { body { font-size: 16px; } .scelte { grid-template-columns: 1fr; } .t { font-size: 14px; } }
+@media (max-width: 520px) { .passi span:not(.ora) { display: none; }
+  body { font-size: 16px; } .scelte { grid-template-columns: 1fr; } .t { font-size: 14px; } }
+
+.tabs { display: flex; gap: 6px; overflow-x: auto; margin: 10px 0; position: sticky; top: 0; background: var(--bg); padding: 6px 0; z-index: 3; }
+.tabs button { flex: 0 0 auto; font: 15px -apple-system, system-ui, sans-serif; padding: 9px 14px; border-radius: 99px; border: 1px solid var(--linea); background: var(--carta); color: var(--ink); }
+.tabs button.on { background: var(--acc); color: #fff; border-color: var(--acc); }
+.big { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.big div { background: var(--bg); border: 1px solid var(--linea); border-radius: 12px; padding: 10px 6px; text-align: center; }
+.big b { display: block; font-size: 26px; color: var(--acc); } .big span { font: 12px -apple-system, system-ui, sans-serif; color: var(--soft); }
+.pf { display: flex; align-items: center; justify-content: center; gap: 14px; margin: 8px 0; }
+.pf .val { font-size: 44px; font-weight: bold; min-width: 120px; text-align: center; }
+.pf button { font-size: 26px; width: 56px; height: 56px; border-radius: 50%; }
+.slot { width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--acc); display: inline-block; margin: 3px; cursor: pointer; vertical-align: middle; }
+.slot.usato { background: var(--acc); }
 </style>
 </head>
 <body>
@@ -177,7 +190,7 @@ const V = {};   // validazione per passo -> stringa di errore o ''
 function disegna() {
   const ps = attivi(); if (S.passo >= ps.length) S.passo = ps.length - 1;
   const p = ps[S.passo];
-  $('#passi').innerHTML = ps.map((x, i) => `<span class="${i === S.passo ? 'ora' : i < S.passo ? 'fatto' : ''}">${i + 1}. ${x.nome}</span>`).join('');
+  $('#passi').innerHTML = ps.map((x, i) => `<span class="${i === S.passo ? 'ora' : i < S.passo ? 'fatto' : ''}" title="${x.nome}">${i === S.passo ? `Passo ${i + 1} di ${ps.length}: ` : `${i + 1}. `}${x.nome}</span>`).join('');
   $('#chi').textContent = S.giocatore ? `Giocatore: ${S.giocatore}${S.codice ? ' · codice ' + S.codice : ''}` : '';
   $('#main').innerHTML = R[p.id]();
   if (R[p.id + '_dopo']) R[p.id + '_dopo']();
@@ -718,7 +731,7 @@ function calcola() {
     let b = bab + (dist ? M.DES : M.FOR) + taglia + (competenteArma(o) ? 0 : -4) + (foc.includes(norma(o.nome)) ? 1 : 0);
     let fd = dist ? (lancio || /fionda/i.test(o.nome) ? M.FOR : arco ? Math.min(0, M.FOR) : 0) : o.tipo === 'mischia a due mani' ? Math.floor(M.FOR * 1.5) : M.FOR;
     const dd = piccolo() ? o.danni_piccola : o.danni_media;
-    attacchi.push({ nome: o.nome, bonus: sg(b), danni: dd + (fd ? (fd > 0 ? '+' : '') + fd : ''), critico: o.critico, gittata: o.incremento_gittata && o.incremento_gittata !== '—' ? o.incremento_gittata : '', tipo: o.tipo_danno, note: (o.proprieta || '').slice(0, 70), munizioni: '' });
+    attacchi.push({ nome: o.nome, bonus: sg(b), danni: String(dd).split('/').map(x => x + (fd ? (fd > 0 ? '+' : '') + fd : '')).join('/'), critico: o.critico, gittata: o.incremento_gittata && o.incremento_gittata !== '—' ? o.incremento_gittata : '', tipo: o.tipo_danno, note: (o.proprieta || '').slice(0, 70), munizioni: '' });
   }
   if (S.classe === 'monaco' || !attacchi.length) { const cs = c.capacita_1_livello.find(x => /senz'armi/i.test(x.nome)); const dmono = cs && cs.dati && cs.dati.danni;
     attacchi.unshift({ nome: "Colpo senz'armi", bonus: sg(bab + M.FOR + taglia), danni: (S.classe === 'monaco' ? (typeof dmono === 'object' ? (piccolo() ? dmono.piccola || dmono.Piccola : dmono.media || dmono.Media) : dmono) || '1d6' : (piccolo() ? '1d2' : '1d3')) + (M.FOR ? sg(M.FOR) : ''), critico: 'x2', tipo: 'C', note: S.classe === 'monaco' ? '' : 'danni non letali' }); }
@@ -786,14 +799,115 @@ R.fine = () => { let p; try { p = calcola(); } catch (err) { return `<div class=
 <dt>Monete rimaste</dt><dd>${p.denaro.mo} mo ${p.denaro.ma} ma ${p.denaro.mr} mr</dd></dl></div>
 <div class="card"><h2>Ultimo passo: manda il file al DM</h2><p>Scarica il file del personaggio e mandalo al DM (WhatsApp, mail…). Lui lo controlla e ti stampa la scheda ufficiale.</p>
 <p style="text-align:center"><button class="btn" id="scarica">⬇️ Scarica il personaggio</button></p>
-<p class="soft">Se vuoi rifare qualcosa puoi tornare indietro e cambiare tutto, tranne i dadi: quelli restano quelli del tuo codice.</p></div>`; };
-R.fine_dopo = () => { const b = $('#scarica'); if (!b) return; b.onclick = () => {
+<p class="soft">Se vuoi rifare qualcosa puoi tornare indietro e cambiare tutto, tranne i dadi: quelli restano quelli del tuo codice.</p></div>
+<div class="card"><h2>📱 La tua scheda da gioco</h2><p>Al tavolo usa questa pagina come scheda: punti ferita da segnare, attacchi, abilità, incantesimi e zaino. Resta salvata su questo telefono e si riapre dallo stesso link.</p>
+<p style="text-align:center"><button class="btn" id="apriScheda">Apri la scheda da gioco</button></p></div>`; };
+R.fine_dopo = () => { const b = $('#scarica'); if (!b) return; try { localStorage.setItem(CHIAVE + '-pg', JSON.stringify(calcola())); } catch (e) {}
+  $('#apriScheda').onclick = () => { salvaPG(calcola()); apriScheda(); };
+  b.onclick = () => {
   const p = calcola(), blob = new Blob([JSON.stringify(p, null, 2)], { type: 'application/json' });
   const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `${(p.nome || 'personaggio').replace(/[^\w\- ]+/g, '').trim() || 'personaggio'} - ${S.giocatore}.json`;
   document.body.appendChild(a); a.click(); a.remove(); }; };
 V.fine = () => '';
 
-disegna();
+
+// ===== scheda da gioco (telefono) =====
+// Il DM pubblica la scheda ufficiale in pg/<id>.json (id = primi 12 caratteri esadecimali di SHA-256("<CODICE>|pg")).
+const hex = b => [...b].map(x => x.toString(16).padStart(2, '0')).join('');
+const idOnline = codice => hex(sha256(utf8(codice + '|pg'))).slice(0, 12);
+let statoSync = '';
+async function sincronizza(forza) {
+  const p = caricaPG(); const codice = (p && p.tiro && p.tiro.codice) || S.codice; if (!codice) return;
+  try {
+    const r = await fetch(`pg/${idOnline(codice)}.json?t=${Date.now()}`, { cache: 'no-store' });
+    if (!r.ok) { statoSync = 'in attesa che il DM approvi la scheda'; return; }
+    const q = await r.json(); q.tiro = { ...(q.tiro || {}), codice };
+    const vl = (p && p.versione) || 0;
+    if ((q.versione || 0) > vl || forza) {
+      salvaPG(q); const st = q.stato || {};
+      TR.pf = st.pf_attuali ?? q.pf; if (st.denaro) TR.denaro = { ...st.denaro }; if (st.slot_usati) TR.slot = { ...st.slot_usati };
+      salvaTR(); statoSync = `✅ aggiornata dal DM (versione ${q.versione})`;
+    } else statoSync = `✅ scheda approvata dal DM (versione ${q.versione || 1})`;
+  } catch (e) { statoSync = 'senza connessione: mostro l\'ultima versione salvata'; }
+}
+const CH_PG = CHIAVE + '-pg', CH_TR = CHIAVE + '-traccia';
+function salvaPG(p) { try { localStorage.setItem(CH_PG, JSON.stringify(p)); } catch (e) {} }
+function caricaPG() { try { return JSON.parse(localStorage.getItem(CH_PG)); } catch (e) { return null; } }
+let TR = (() => { try { return JSON.parse(localStorage.getItem(CH_TR)) || {}; } catch (e) { return {}; } })();
+const salvaTR = () => { try { localStorage.setItem(CH_TR, JSON.stringify(TR)); } catch (e) {} };
+let tabScheda = 'combatti';
+function m10(v) { return Math.floor((v - 10) / 2); }
+function apriScheda() {
+  const p = caricaPG(); if (!p) return;
+  document.querySelector('.nav').style.display = 'none'; $('#passi').innerHTML = '';
+  $('#chi').textContent = `${p.razza} ${p.classe_livello} · giocatore ${p.giocatore}`;
+  document.querySelector('header h1').textContent = '⚔️ ' + (p.nome || 'Il tuo eroe');
+  const M = Object.fromEntries(Object.entries(p.caratteristiche).map(([k, v]) => [k, m10(v)]));
+  const ca = 10 + Object.values(p.ca).reduce((a, v) => a + v, 0), contatto = ca - p.ca.armatura - p.ca.scudo - p.ca.naturale, sprov = ca - Math.max(0, p.ca.des);
+  const ts = (k, c) => p.ts[k].base + M[c] + (p.ts[k].vari || 0);
+  if (TR.pf == null) TR.pf = p.pf; if (!TR.slot) TR.slot = {}; if (!TR.note) TR.note = '';
+  if (!TR.denaro) TR.denaro = { ...p.denaro };
+  const tabs = [['combatti', '⚔️ Combatti'], ['abilita', '🎯 Abilità'], ...(Object.keys(p.incantesimi.tabella || {}).length ? [['magia', '✨ Magia']] : []), ['zaino', '🎒 Zaino'], ['chi', '📜 Chi sono']];
+  let h = `<p class="soft" style="margin:4px 0">${esc(statoSync)} <button class="btn sec piccolo" id="sync">↻ Aggiorna</button>${p.pe != null ? ` · PE <b>${p.pe}</b>` : ''}${p.note_dm ? `<br>📣 <b>Dal DM:</b> ${esc(p.note_dm)}` : ''}</p>
+<div class="tabs">${tabs.map(([k, n]) => `<button class="${tabScheda === k ? 'on' : ''}" data-tab="${k}">${n}</button>`).join('')}</div>`;
+  if (tabScheda === 'combatti') {
+    h += `<div class="card"><h2>Punti ferita</h2><div class="pf"><button class="btn sec" id="pfMeno">−</button><div class="val ${TR.pf <= 0 ? 'bad' : ''}">${TR.pf}<span class="soft" style="font-size:18px"> / ${p.pf}</span></div><button class="btn sec" id="pfPiu">+</button></div>
+<p class="soft" style="text-align:center">${TR.pf <= 0 ? (TR.pf <= -10 ? 'Morto.' : TR.pf === 0 ? 'Inabile: puoi fare solo un\'azione semplice.' : 'Morente: perdi 1 PF a round finché qualcuno non ti stabilizza.') : 'Tocca − quando ti colpiscono, + quando ti curano.'}</p>
+<p style="text-align:center"><button class="btn sec piccolo" id="pfReset">Riposo completo (torna al massimo)</button></p></div>
+<div class="card"><div class="big"><div><b>${ca}</b><span>Classe Armatura</span></div><div><b>${sg(M.DES + p.iniziativa_vari)}</b><span>Iniziativa</span></div><div><b>${esc(p.velocita.replace(/ \(.*/, ''))}</b><span>Velocità</span></div>
+<div><b>${sg(ts('tempra', 'COS'))}</b><span>Tempra</span></div><div><b>${sg(ts('riflessi', 'DES'))}</b><span>Riflessi</span></div><div><b>${sg(ts('volonta', 'SAG'))}</b><span>Volontà</span></div></div>
+<p class="soft">CA contro attacchi di contatto ${contatto} · colto alla sprovvista ${sprov}. Lotta ${sg(p.bab + M.FOR + (p.lotta.taglia || 0))}.</p>
+${p.modificatori_condizionali ? `<p class="soft">Bonus in casi particolari: ${esc(p.modificatori_condizionali)}</p>` : ''}</div>
+<div class="card"><h2>Attacchi</h2><table class="t"><tr><th>Arma</th><th class="num">Per colpire</th><th class="num">Danni</th></tr>
+${p.attacchi.map(a => `<tr><td><b>${esc(a.nome)}</b><br><span class="soft">critico ${esc(a.critico)}${a.gittata ? ' · gittata ' + esc(a.gittata) : ''}</span></td><td class="num gr">d20 ${esc(a.bonus)}</td><td class="num gr">${esc(a.danni)}</td></tr>`).join('')}</table>
+<p class="soft">Tiri il d20 e aggiungi il numero: se arrivi alla CA del nemico, colpisci e tiri i danni.</p></div>
+<div class="card"><h2>Caratteristiche</h2><div class="big">${Object.entries(p.caratteristiche).map(([k, v]) => `<div><b>${sg(M[k])}</b><span>${k} ${v}</span></div>`).join('')}</div></div>`;
+  }
+  if (tabScheda === 'abilita') {
+    const righe = AB.map(a => { const mine = p.abilita.filter(x => x.nome === (a.nome.startsWith('Conoscenze') ? 'Conoscenze' : a.nome) && (!a.nome.startsWith('Conoscenze') || a.nome.includes(x.spec)));
+      const x = mine[0]; if (!x && !a.senza_addestramento) return null;
+      const tot = (x ? x.gradi + x.vari : 0) + M[carAb(a)]; return { a, x, tot }; }).filter(Boolean).sort((u, v) => v.tot - u.tot);
+    h += `<div class="card"><h2>Abilità</h2><p class="soft">Quando il DM chiede una prova: d20 + questo numero. Quelle senza numero non le puoi usare.</p><table class="t">
+${righe.map(({ a, x, tot }) => `<tr class="${x && x.gradi ? 'riga-sel' : ''}"><td><b>${esc(a.nome)}${x && x.spec && !a.nome.startsWith('Conoscenze') ? ' (' + esc(x.spec) + ')' : ''}</b><br><span class="soft">${esc(a.a_cosa_serve)}</span></td><td class="num gr">${sg(tot)}</td></tr>`).join('')}</table></div>`;
+  }
+  if (tabScheda === 'magia') {
+    const tb = p.incantesimi.tabella;
+    h += `<div class="card"><h2>Incantesimi di oggi</h2><p class="soft">Tocca un cerchio quando lanci un incantesimo. Dopo una notte di riposo si azzerano.</p>
+${Object.entries(tb).map(([lv, r]) => `<p><b>Livello ${lv}</b> (CD tiro salvezza ${r.cd}): ${Array.from({ length: (+r.giorno || 0) + (+r.bonus || 0) }, (_, i) => `<span class="slot ${(TR.slot[lv] || 0) > i ? 'usato' : ''}" data-slot="${lv}" data-i="${i}"></span>`).join('')}</p>`).join('')}
+<p style="text-align:center"><button class="btn sec piccolo" id="slotReset">Nuovo giorno</button></p>${p.incantesimi.domini ? `<p class="soft">${esc(p.incantesimi.domini)}</p>` : ''}</div>
+<div class="card"><h2>I tuoi incantesimi</h2>${Object.entries(p.incantesimi.per_livello).map(([lv, l]) => `<h3>Livello ${lv}</h3><ul>${l.map(n => { const x = INC.find(i => i.nome === n); return `<li><b>${esc(n)}</b>${x ? ` — ${esc(x.effetto)} <span class="soft">(${esc(x.raggio_di_azione || '')}, ${esc(x.durata || '')})</span>` : ''}</li>`; }).join('')}</ul>`).join('') || '<p class="soft">Gli incantesimi li prepari ogni mattina: chiedi al DM.</p>'}</div>`;
+  }
+  if (tabScheda === 'zaino') {
+    h += `<div class="card"><h2>Monete</h2><div class="big">${['mp', 'mo', 'ma', 'mr'].map(k => `<div><input type="number" data-mon="${k}" value="${TR.denaro[k] || 0}" style="text-align:center;font-size:20px"><span>${{ mp: 'platino', mo: 'oro', ma: 'argento', mr: 'rame' }[k]}</span></div>`).join('')}</div></div>
+<div class="card"><h2>Zaino</h2><ul>${[p.armatura.nome && `${p.armatura.nome} (indossata)`, p.scudo.nome, ...p.oggetti.map(o => o.nome)].filter(Boolean).map(n => `<li>${esc(n)}</li>`).join('')}</ul>
+<label class="campo"><span>Appunti (bottino, cose trovate, nomi…)</span><textarea id="note" style="min-height:160px">${esc(TR.note)}</textarea></label></div>`;
+  }
+  if (tabScheda === 'chi') {
+    h += `<div class="card"><h2>${esc(p.nome)}</h2><p>${esc(p.razza)} ${esc(p.classe_livello)} · ${esc(p.allineamento)}${p.divinita ? ' · ' + esc(p.divinita) : ''}</p><p>${esc(p.descrizione)}</p>
+<h3>Talenti</h3><ul>${p.talenti.map(t => { const x = TAL.find(z => t.nome.startsWith(z.nome)); return `<li><b>${esc(t.nome)}</b>${x ? ' — ' + esc(x.beneficio) : ''}</li>`; }).join('')}</ul>
+<h3>Capacità</h3><ul>${p.spiegazioni_extra.map(s => `<li>${esc(s)}</li>`).join('')}</ul><p>Linguaggi: ${esc(p.linguaggi.join(', '))}</p></div>
+<div class="card"><p><button class="btn sec piccolo" id="modifica">✏️ Torna alla creazione</button> <button class="btn sec piccolo" id="esporta">⬇️ Scarica il file</button></p>
+<label class="campo"><span>Hai cambiato telefono? Carica il file del personaggio</span><input type="file" id="importa" accept=".json,application/json"></label></div>`;
+  }
+  $('#main').innerHTML = h;
+  document.querySelectorAll('[data-tab]').forEach(b => b.onclick = () => { tabScheda = b.dataset.tab; apriScheda(); scrollTo(0, 0); });
+  const on = (id, f) => { const e = $('#' + id); if (e) e.onclick = f; };
+  on('sync', () => { statoSync = 'controllo…'; apriScheda(); sincronizza().then(apriScheda); });
+  on('pfMeno', () => { TR.pf--; salvaTR(); apriScheda(); }); on('pfPiu', () => { TR.pf = Math.min(p.pf, TR.pf + 1); salvaTR(); apriScheda(); });
+  on('pfReset', () => { TR.pf = p.pf; salvaTR(); apriScheda(); }); on('slotReset', () => { TR.slot = {}; salvaTR(); apriScheda(); });
+  document.querySelectorAll('[data-slot]').forEach(s => s.onclick = () => { const lv = s.dataset.slot, i = +s.dataset.i; TR.slot[lv] = (TR.slot[lv] || 0) > i ? i : i + 1; salvaTR(); apriScheda(); });
+  document.querySelectorAll('[data-mon]').forEach(i => i.oninput = () => { TR.denaro[i.dataset.mon] = +i.value || 0; salvaTR(); });
+  const n = $('#note'); if (n) n.oninput = () => { TR.note = n.value; salvaTR(); };
+  on('modifica', () => { document.querySelector('.nav').style.display = ''; document.querySelector('header h1').textContent = '⚔️ Crea il tuo eroe'; disegna(); });
+  on('esporta', () => { const blob = new Blob([JSON.stringify(p, null, 2)], { type: 'application/json' }); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `${p.nome} - ${p.giocatore}.json`; document.body.appendChild(a); a.click(); a.remove(); });
+  const imp = $('#importa'); if (imp) imp.onchange = () => { const f = imp.files[0]; if (!f) return; f.text().then(t => { try { const q = JSON.parse(t); if (!q.caratteristiche || !q.tiro) throw 0; salvaPG(q); TR = {}; salvaTR(); apriScheda(); } catch (e) { alert('File non valido'); } }); };
+}
+// avvio: se c'è già un personaggio finito su questo telefono apri la scheda, altrimenti la creazione
+if (caricaPG() && !qs.has('crea') && (!qs.get('codice') || (caricaPG().tiro || {}).codice === qs.get('codice').toUpperCase())) { apriScheda(); sincronizza().then(apriScheda); }
+else if (qs.get('codice') && !qs.has('crea')) {   // telefono nuovo: se il DM ha già pubblicato la scheda, aprila
+  S.codice = qs.get('codice').toUpperCase(); disegna();
+  fetch(`pg/${idOnline(S.codice)}.json?t=${Date.now()}`, { cache: 'no-store' }).then(r => r.ok ? r.json() : null).then(q => { if (q) { q.tiro = { ...(q.tiro || {}), codice: S.codice }; salvaPG(q); TR = {}; salvaTR(); sincronizza(true).then(apriScheda); } }).catch(() => {});
+} else disegna();
 
 </script>
 </body>
