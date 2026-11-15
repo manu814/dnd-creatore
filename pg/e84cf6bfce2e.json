@@ -467,29 +467,26 @@
    }
   }
  },
- "versione": 21,
+ "versione": 22,
  "pe": 0,
  "stato": {
   "pf_attuali": 5,
-  "slot_usati": {
-   "0": 1,
-   "1": 1
-  },
+  "slot_usati": {},
   "preparati": {
    "0": [
-    "Luce",
     "Individuazione del magico",
-    "Riparare"
+    "Lampo",
+    "Luce"
    ],
    "1": [
-    "Nascondersi agli animali",
-    "Parlare con gli animali"
+    "Cura ferite leggere",
+    "Zanna magica"
    ]
   },
   "campagna": "tela-di-fumoscuro",
   "danni_caratteristiche": {},
   "danni_non_letali": 0
  },
- "aggiornato": "2026-11-16T00:08",
- "note_dm": "Bentornata! La scheda ora si aggiorna da sola."
+ "aggiornato": "2026-11-16T00:13",
+ "note_dm": "Giorno 2 — preparati: liv. 0 Individuazione del magico, Lampo, Luce · liv. 1 Cura ferite leggere, Zanna magica"
 }
