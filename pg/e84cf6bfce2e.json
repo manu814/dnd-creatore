@@ -463,7 +463,7 @@
    }
   }
  },
- "versione": 19,
+ "versione": 20,
  "pe": 0,
  "stato": {
   "pf_attuali": 5,
@@ -483,9 +483,7 @@
    ]
   },
   "campagna": "tela-di-fumoscuro",
-  "danni_caratteristiche": {
-   "DES": 2
-  },
+  "danni_caratteristiche": {},
   "danni_non_letali": 0
  },
  "aggiornato": "2026-11-15T23:39",
