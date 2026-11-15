@@ -85,7 +85,7 @@ table.t { border-collapse: collapse; width: 100%; font-size: 15px; } .t td, .t t
 <body>
 <header><h1>⚔️ Crea il tuo eroe</h1><div class="chi" id="chi"></div><div class="passi" id="passi"></div></header>
 <main id="main"></main>
-<p style="text-align:center;font:11px sans-serif;color:var(--soft);margin:0 0 90px">versione 15/11 20:08</p>
+<p style="text-align:center;font:11px sans-serif;color:var(--soft);margin:0 0 90px">versione 15/11 20:12</p>
 <div class="nav"><div class="in"><button class="btn sec" id="indietro">← Indietro</button><div class="msg" id="msg"></div>
 <button class="btn" id="avanti">Avanti →</button></div></div>
 <script>
@@ -198,7 +198,8 @@ function disegna() {
   $('#chi').textContent = S.giocatore ? `Giocatore: ${S.giocatore}${S.codice ? ' · codice ' + S.codice : ''}` : '';
   $('#main').innerHTML = R[p.id]();
   if (R[p.id + '_dopo']) R[p.id + '_dopo']();
-  $('#indietro').style.visibility = S.passo ? 'visible' : 'hidden';
+  if (S.chiuso) { S.passo = attivi().length - 1; }
+  $('#indietro').style.visibility = S.passo && !S.chiuso ? 'visible' : 'hidden';
   $('#avanti').style.visibility = p.id === 'fine' ? 'hidden' : 'visible';
   aggiornaNav(); salva();
 }
@@ -209,7 +210,7 @@ function aggiornaNav() {
 $('#avanti').onclick = () => { leggiInizio(); aggiornaNav(); const m = $('#msg').textContent;
   if (m) { const x = $('#msg'); x.style.fontWeight = 'bold'; x.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.15)' }, { transform: 'scale(1)' }], 400); return; }
   S.passo++; disegna(); scrollTo(0, 0); };
-$('#indietro').onclick = () => { S.passo--; disegna(); scrollTo(0, 0); };
+$('#indietro').onclick = () => { if (S.chiuso) return; S.passo--; disegna(); scrollTo(0, 0); };
 function ridisegna() { const y = scrollY; disegna(); scrollTo(0, y); }
 
 // ===== 1. inizio =====
@@ -875,7 +876,7 @@ function calcola() {
     descrizione: [S.dett.storia, S.dett.obiettivo && 'Obiettivo: ' + S.dett.obiettivo, S.dett.pregio && 'Pregio e difetto: ' + S.dett.pregio].filter(Boolean).join(' '),
     spiegazioni_extra: [...c.capacita_1_livello.map(x => `${x.nome}: ${x.effetto}`), ...extra],
     tiro: { codice: S.codice, serie: S.serie, punteggi_tirati: serieAttuale().map(x => x.punteggio), assegnazione: { ...S.assegnazione },
-      monete: { modo: e.modo, kit: e.modo === 'kit' ? (e.kitIdx || 0) : null, dadi: e.dadiOro }, creato: new Date().toISOString() },
+      monete: { modo: e.modo, kit: e.modo === 'kit' ? (e.kitIdx || 0) : null, dadi: e.dadiOro }, creato: new Date().toISOString(), chiuso: S.chiuso || null },
     scelte: { idea: S.idea, magia: S.magia, equip: { comprati: e.comprati, tolti: e.tolti } }
   };
 }
@@ -890,12 +891,18 @@ R.fine = () => { let p; try { p = calcola(); } catch (err) { return `<div class=
 <dt>Attacchi</dt><dd>${p.attacchi.map(a => `${esc(a.nome)} <b>${esc(a.bonus)}</b>, danni ${esc(a.danni)}`).join('<br>')}</dd>
 <dt>Talenti</dt><dd>${p.talenti.map(x => esc(x.nome)).join(', ')}</dd>
 <dt>Monete rimaste</dt><dd>${p.denaro.mo} mo ${p.denaro.ma} ma ${p.denaro.mr} mr</dd></dl></div>
-<div class="card"><h2>Ultimo passo: manda il file al DM</h2><p>Scarica il file del personaggio e mandalo al DM (WhatsApp, mail…). Lui lo controlla e ti stampa la scheda ufficiale.</p>
+${!S.chiuso ? `<div class="card"><h2>Ultimo passo: concludi</h2><p>Controlla bene il riepilogo qui sopra. Quando concludi, il personaggio si <b>blocca</b>: non potrai più tornare indietro a cambiarlo.</p>
+<div id="conferma"><p style="text-align:center"><button class="btn" id="concludi">✅ Concludi e blocca il personaggio</button></p></div></div>` : ''}
+${S.chiuso ? `<div class="card"><h2>Ultimo passo: manda il file al DM</h2><p>Scarica il file del personaggio e mandalo al DM (WhatsApp, mail…). Lui lo controlla e ti stampa la scheda ufficiale.</p>
 <p style="text-align:center"><button class="btn" id="scarica">⬇️ Scarica il personaggio</button></p>
-<p class="soft">Se vuoi rifare qualcosa puoi tornare indietro e cambiare tutto, tranne i dadi: quelli restano quelli del tuo codice.</p></div>
+<p class="soft">Personaggio bloccato il ${new Date(S.chiuso).toLocaleString('it')}.</p></div>
 <div class="card"><h2>📱 La tua scheda da gioco</h2><p>Al tavolo usa questa pagina come scheda: punti ferita da segnare, attacchi, abilità, incantesimi e zaino. Resta salvata su questo telefono e si riapre dallo stesso link.</p>
-<p style="text-align:center"><button class="btn" id="apriScheda">Apri la scheda da gioco</button></p></div>`; };
-R.fine_dopo = () => { const b = $('#scarica'); if (!b) return; try { localStorage.setItem(CHIAVE + '-pg', JSON.stringify(calcola())); } catch (e) {}
+<p style="text-align:center"><button class="btn" id="apriScheda">Apri la scheda da gioco</button></p></div>` : ''}`; };
+R.fine_dopo = () => {
+  const c = $('#concludi'); if (c) c.onclick = () => { $('#conferma').innerHTML = `<p class="bad" style="text-align:center"><b>Sicuro? Dopo non si torna più indietro.</b></p>
+<p style="text-align:center"><button class="btn sec" id="annulla">No, ricontrollo</button> <button class="btn" id="siBlocca">Sì, blocca</button></p>`;
+    $('#annulla').onclick = () => ridisegna(); $('#siBlocca').onclick = () => { S.chiuso = new Date().toISOString(); salva(); salvaPG(calcola()); ridisegna(); }; };
+  const b = $('#scarica'); if (!b) return; try { localStorage.setItem(CHIAVE + '-pg', JSON.stringify(calcola())); } catch (e) {}
   $('#apriScheda').onclick = () => { salvaPG(calcola()); apriScheda(); };
   b.onclick = () => {
   const p = calcola(), blob = new Blob([JSON.stringify(p, null, 2)], { type: 'application/json' });
@@ -941,7 +948,7 @@ function apriScheda() {
   if (TR.pf == null) TR.pf = p.pf; if (!TR.slot) TR.slot = {}; if (!TR.note) TR.note = '';
   if (!TR.denaro) TR.denaro = { ...p.denaro };
   const tabs = [['combatti', '⚔️ Combatti'], ['abilita', '🎯 Abilità'], ...(Object.keys(p.incantesimi.tabella || {}).length ? [['magia', '✨ Magia']] : []), ['zaino', '🎒 Zaino'], ['chi', '📜 Chi sono']];
-  let h = `<p style="margin:4px 0"><button class="btn sec piccolo" id="modifica2">← Torna alla creazione</button></p><p class="soft" style="margin:4px 0">${esc(statoSync)} <button class="btn sec piccolo" id="sync">↻ Aggiorna</button>${p.pe != null ? ` · PE <b>${p.pe}</b>` : ''}${p.note_dm ? `<br>📣 <b>Dal DM:</b> ${esc(p.note_dm)}` : ''}</p>
+  let h = `<p style="margin:4px 0"><button class="btn sec piccolo" id="modifica2">${S.chiuso || !S.classe ? '← Riepilogo e file' : '← Torna alla creazione'}</button></p><p class="soft" style="margin:4px 0">${esc(statoSync)} <button class="btn sec piccolo" id="sync">↻ Aggiorna</button>${p.pe != null ? ` · PE <b>${p.pe}</b>` : ''}${p.note_dm ? `<br>📣 <b>Dal DM:</b> ${esc(p.note_dm)}` : ''}</p>
 <div class="tabs">${tabs.map(([k, n]) => `<button class="${tabScheda === k ? 'on' : ''}" data-tab="${k}">${n}</button>`).join('')}</div>`;
   if (tabScheda === 'combatti') {
     const st = p.stato || {}, pfa = st.pf_attuali ?? p.pf, nl = st.danni_non_letali || 0;
@@ -982,7 +989,7 @@ ${p.incantesimi.domini ? `<p class="soft">${esc(p.incantesimi.domini)}</p>` : ''
     h += `<div class="card"><h2>${esc(p.nome)}</h2><p>${esc(p.razza)} ${esc(p.classe_livello)} · ${esc(p.allineamento)}${p.divinita ? ' · ' + esc(p.divinita) : ''}</p><p>${esc(p.descrizione)}</p>
 <h3>Talenti</h3><ul>${p.talenti.map(t => { const x = TAL.find(z => t.nome.startsWith(z.nome)); return `<li><b>${esc(t.nome)}</b>${x ? ' — ' + esc(x.beneficio) : ''}</li>`; }).join('')}</ul>
 <h3>Capacità</h3><ul>${p.spiegazioni_extra.map(s => `<li>${esc(s)}</li>`).join('')}</ul><p>Linguaggi: ${esc(p.linguaggi.join(', '))}</p></div>
-<div class="card"><p><button class="btn sec piccolo" id="modifica">✏️ Torna alla creazione</button> <button class="btn sec piccolo" id="esporta">⬇️ Scarica il file</button></p>
+<div class="card"><p>${S.chiuso ? '' : '<button class="btn sec piccolo" id="modifica">✏️ Torna alla creazione</button> '}<button class="btn sec piccolo" id="esporta">⬇️ Scarica il file</button></p>
 <label class="campo"><span>Hai cambiato telefono? Carica il file del personaggio</span><input type="file" id="importa" accept=".json,application/json"></label></div>`;
   }
   $('#main').innerHTML = h;
@@ -990,7 +997,7 @@ ${p.incantesimi.domini ? `<p class="soft">${esc(p.incantesimi.domini)}</p>` : ''
   const on = (id, f) => { const e = $('#' + id); if (e) e.onclick = f; };
   on('sync', () => { statoSync = 'controllo…'; apriScheda(); sincronizza().then(apriScheda); });
   const n = $('#note'); if (n) n.oninput = () => { TR.note = n.value; salvaTR(); };
-  on('modifica2', () => { document.querySelector('.nav').style.display = ''; document.querySelector('header h1').textContent = '⚔️ Crea il tuo eroe'; S.passo = S.classe ? attivi().length - 1 : 0; disegna(); });
+  on('modifica2', () => { if (!S.classe) return; document.querySelector('.nav').style.display = ''; document.querySelector('header h1').textContent = '⚔️ Crea il tuo eroe'; S.passo = attivi().length - 1; disegna(); });
   on('modifica', () => { document.querySelector('.nav').style.display = ''; document.querySelector('header h1').textContent = '⚔️ Crea il tuo eroe'; disegna(); });
   on('esporta', () => { const blob = new Blob([JSON.stringify(p, null, 2)], { type: 'application/json' }); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `${p.nome} - ${p.giocatore}.json`; document.body.appendChild(a); a.click(); a.remove(); });
   const imp = $('#importa'); if (imp) imp.onchange = () => { const f = imp.files[0]; if (!f) return; f.text().then(t => { try { const q = JSON.parse(t); if (!q.caratteristiche || !q.tiro) throw 0; salvaPG(q); TR = {}; salvaTR(); apriScheda(); } catch (e) { alert('File non valido'); } }); };
