@@ -85,7 +85,7 @@ table.t { border-collapse: collapse; width: 100%; font-size: 15px; } .t td, .t t
 <body>
 <header><h1>⚔️ Crea il tuo eroe</h1><div class="chi" id="chi"></div><div class="passi" id="passi"></div></header>
 <main id="main"></main>
-<p style="text-align:center;font:11px sans-serif;color:var(--soft);margin:0 0 90px">versione 15/11 21:46</p>
+<p style="text-align:center;font:11px sans-serif;color:var(--soft);margin:0 0 90px">versione 15/11 21:49</p>
 <div class="nav"><div class="in"><button class="btn sec" id="indietro">← Indietro</button><div class="msg" id="msg"></div>
 <button class="btn" id="avanti">Avanti →</button></div></div>
 <script>
@@ -1030,10 +1030,25 @@ V.fine = () => '';
 const hex = b => [...b].map(x => x.toString(16).padStart(2, '0')).join('');
 const idOnline = codice => hex(sha256(utf8(codice + '|pg'))).slice(0, 12);
 let statoSync = '';
+// Lettura SENZA la cache di GitHub Pages (che tiene le copie fino a 10 minuti): file del repo alla versione esatta (sha) da raw.githubusercontent.com.
+// Lo sha arriva dall'avviso ntfy del DM o, all'apertura, da una sola chiamata all'API di GitHub.
+let SHA = null;
+const RAW = 'https://raw.githubusercontent.com/manu814/dnd-creatore/';
+async function ultimoSha(forza) {
+  if (SHA && !forza) return SHA;
+  try { const r = await fetch('https://api.github.com/repos/manu814/dnd-creatore/commits/main', { cache: 'no-store' }); if (r.ok) { SHA = (await r.json()).sha; TR.sha = SHA; salvaTR(); return SHA; } } catch (e) {}
+  return SHA || TR.sha || null;
+}
+async function leggiRepo(path, forza) {
+  const sha = await ultimoSha(forza);
+  if (sha) { try { const r = await fetch(RAW + sha + '/' + path); if (r.ok) return r; } catch (e) {} }
+  return fetch(path + '?t=' + Date.now(), { cache: 'no-store' });
+}
+const urlRepo = path => (SHA || TR.sha) ? RAW + (SHA || TR.sha) + '/' + path : path;
 async function sincronizza(forza) {
   const p = caricaPG(); const codice = (p && p.tiro && p.tiro.codice) || S.codice; if (!codice) return;
   try {
-    const r = await fetch(`pg/${idOnline(codice)}.json?t=${Date.now()}`, { cache: 'no-store' });
+    const r = await leggiRepo(`pg/${idOnline(codice)}.json`, forza);
     if (!r.ok) { statoSync = 'in attesa che il DM approvi la scheda'; return; }
     const q = await r.json(); q.tiro = { ...(q.tiro || {}), codice };
     const vl = (p && p.versione) || 0;
@@ -1094,7 +1109,7 @@ ${ult ? `<div class="card" style="text-align:center"><div class="soft">Ultimo ti
   if (tabScheda === 'scene') {
     const camp = (p.stato || {}).campagna, sc = SCENE[camp];
     if (!sc) { caricaScene(camp); h += `<div class="card"><p class="soft">Carico le immagini…</p></div>`; }
-    else h += sc.length ? sc.slice().reverse().map(x => `<div class="card" style="padding:10px"><a href="scene/${encodeURIComponent(camp)}/${encodeURIComponent(x.file)}" target="_blank"><img src="scene/${encodeURIComponent(camp)}/${encodeURIComponent(x.file)}" alt="${esc(x.titolo)}" style="width:100%;border-radius:10px"></a>
+    else h += sc.length ? sc.slice().reverse().map(x => `<div class="card" style="padding:10px"><a href="${urlRepo('scene/' + camp + '/' + x.file)}" target="_blank"><img src="${urlRepo('scene/' + camp + '/' + x.file)}" alt="${esc(x.titolo)}" style="width:100%;border-radius:10px"></a>
 <h3 style="margin:8px 4px 2px">${esc(x.titolo)}</h3>${x.testo ? `<p class="soft" style="margin:0 4px">${esc(x.testo)}</p>` : ''}</div>`).join('') : `<div class="card"><p class="soft">Il DM non ha ancora mandato immagini.</p></div>`;
   }
   if (tabScheda === 'abilita') {
@@ -1134,7 +1149,7 @@ ${p.incantesimi.domini ? `<p class="soft">${esc(p.incantesimi.domini)}</p>` : ''
   const on = (id, f) => { const e = $('#' + id); if (e) e.onclick = f; };
   document.querySelectorAll('[data-esegui]').forEach(b => b.onclick = () => esegui(p, +b.dataset.esegui));
   on('sali', () => { iniziaSalita(p0); apriSalita(p0); });
-  on('sync', () => { statoSync = 'controllo…'; apriScheda(); sincronizza().then(apriScheda); });
+  on('sync', () => { statoSync = 'controllo…'; apriScheda(); sincronizza(true).then(apriScheda); });
   const n = $('#note'); if (n) n.oninput = () => { TR.note = n.value; salvaTR(); };
   on('modifica2', () => { if (!S.classe) return; document.querySelector('.nav').style.display = ''; document.querySelector('header h1').textContent = '⚔️ Crea il tuo eroe'; S.passo = attivi().length - 1; disegna(); });
   on('modifica', () => { document.querySelector('.nav').style.display = ''; document.querySelector('header h1').textContent = '⚔️ Crea il tuo eroe'; disegna(); });
@@ -1147,7 +1162,7 @@ ${p.incantesimi.domini ? `<p class="soft">${esc(p.incantesimi.domini)}</p>` : ''
 }
 const SCENE = {};
 function caricaScene(camp, apri) { if (!camp) return;
-  fetch(`scene/${encodeURIComponent(camp)}/indice.json?t=${Date.now()}`, { cache: 'no-store' }).then(r => r.ok ? r.json() : []).then(l => { SCENE[camp] = l || []; if (apri) tabScheda = 'scene'; if (document.querySelector('.tabs')) apriScheda(); }).catch(() => { SCENE[camp] = []; }); }
+  leggiRepo(`scene/${camp}/indice.json`).then(r => r.ok ? r.json() : []).then(l => { SCENE[camp] = l || []; if (apri) tabScheda = 'scene'; if (document.querySelector('.tabs')) apriScheda(); }).catch(() => { SCENE[camp] = []; }); }
 function promptRitratto(p) {
   const raz = { Umano: 'human', Nano: 'dwarf', Elfo: 'elf', Gnomo: 'gnome', Mezzelfo: 'half-elf', Mezzorco: 'half-orc', Halfling: 'halfling' }[p.razza] || p.razza;
   const cls = { Barbaro: 'barbarian', Bardo: 'bard', Chierico: 'cleric', Druido: 'druid', Guerriero: 'fighter', Ladro: 'rogue', Mago: 'wizard', Monaco: 'monk', Paladino: 'paladin', Ranger: 'ranger', Stregone: 'sorcerer' }[String(p.classe_livello).replace(/\s*\d+$/, '')] || '';
@@ -1167,6 +1182,8 @@ function ascoltaDM() {
     fonte.onopen = () => { statoCanale = '🟢 collegato al DM: aspetta la sua richiesta'; if (tabScheda === 'dadi' && document.querySelector('.tabs')) apriScheda(); };
     fonte.onerror = () => { statoCanale = '🔴 non collegato: controlla internet (riprovo da solo)'; };
     fonte.onmessage = ev => { try { const m = JSON.parse(ev.data); if (m.event !== 'message') return; const r = JSON.parse(m.message);
+      if (r.sha) { SHA = r.sha; TR.sha = r.sha; salvaTR(); }
+      if (r.tipo === 'aggiorna') { sincronizza().then(() => { if (document.querySelector('.tabs')) apriScheda(); }); if (navigator.vibrate) navigator.vibrate(100); return; }
       if (r.tipo === 'scena') { TR.viste = TR.viste || []; const nuova = !TR.viste.includes(m.id); if (nuova) { TR.viste.push(m.id); salvaTR(); }
         const pp = caricaPG(); if (nuova && navigator.vibrate) navigator.vibrate([150, 80, 150]); caricaScene(((pp || {}).stato || {}).campagna, nuova); return; }
       if (!r.n || !r.dadi) return; TR.richieste = TR.richieste || {}; TR.richieste[r.n] = r; salvaTR();
@@ -1308,7 +1325,7 @@ function apriSalita(p) {
 if (caricaPG() && !qs.has('crea') && (!qs.get('codice') || (caricaPG().tiro || {}).codice === qs.get('codice').toUpperCase())) { apriScheda(); sincronizza().then(apriScheda); }
 else if (qs.get('codice') && !qs.has('crea')) {   // telefono nuovo: se il DM ha già pubblicato la scheda, aprila
   S.codice = qs.get('codice').toUpperCase(); disegna();
-  fetch(`pg/${idOnline(S.codice)}.json?t=${Date.now()}`, { cache: 'no-store' }).then(r => r.ok ? r.json() : null).then(q => { if (q) { q.tiro = { ...(q.tiro || {}), codice: S.codice }; salvaPG(q); TR = {}; salvaTR(); sincronizza(true).then(apriScheda); } }).catch(() => {});
+  leggiRepo(`pg/${idOnline(S.codice)}.json`).then(r => r.ok ? r.json() : null).then(q => { if (q) { q.tiro = { ...(q.tiro || {}), codice: S.codice }; salvaPG(q); TR = {}; salvaTR(); sincronizza(true).then(apriScheda); } }).catch(() => {});
 } else disegna();
 
 </script>
