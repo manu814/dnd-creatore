@@ -40,7 +40,7 @@ p { margin: 6px 0; } .soft { color: var(--soft); font-size: 15px; }
   background: var(--linea); color: var(--soft); }
 .opz[disabled] { opacity: .45; cursor: not-allowed; }
 button.btn { font: 16px -apple-system, system-ui, sans-serif; padding: 11px 18px; border-radius: 10px; border: 0; background: var(--acc);
-  color: #fff; cursor: pointer; } button.btn:disabled { opacity: .4; cursor: not-allowed; }
+  color: #fff; cursor: pointer; } button.btn:disabled, button.btn.spento { opacity: .45; }
 button.sec { background: transparent; color: var(--acc); border: 2px solid var(--acc); }
 button.piccolo { padding: 6px 10px; font-size: 14px; }
 .nav { position: fixed; left: 0; right: 0; bottom: 0; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(6px);
@@ -200,9 +200,11 @@ function disegna() {
 }
 function aggiornaNav() {
   const p = attivi()[S.passo]; const err = V[p.id] ? V[p.id]() : '';
-  $('#msg').textContent = err; $('#avanti').disabled = !!err;
+  $('#msg').textContent = err; $('#msg').style.fontWeight = ''; $('#avanti').classList.toggle('spento', !!err);
 }
-$('#avanti').onclick = () => { aggiornaNav(); if ($('#avanti').disabled) return; S.passo++; disegna(); scrollTo(0, 0); };
+$('#avanti').onclick = () => { leggiInizio(); aggiornaNav(); const m = $('#msg').textContent;
+  if (m) { const x = $('#msg'); x.style.fontWeight = 'bold'; x.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.15)' }, { transform: 'scale(1)' }], 400); return; }
+  S.passo++; disegna(); scrollTo(0, 0); };
 $('#indietro').onclick = () => { S.passo--; disegna(); scrollTo(0, 0); };
 function ridisegna() { const y = scrollY; disegna(); scrollTo(0, y); }
 
@@ -213,10 +215,15 @@ R.inizio = () => `<div class="card"><h2>Benvenuto!</h2>
 <label class="campo"><span>Il tuo nome (quello vero)</span><input type="text" id="giocatore" value="${esc(S.giocatore)}" placeholder="es. Luca"></label>
 <label class="campo"><span>Codice personale (te l'ha dato il DM)</span><input type="text" id="codice" value="${esc(S.codice)}" placeholder="es. LUCA-7F3K-92QD" ${qs.get('codice') ? 'readonly' : ''}></label>
 ${S.serie != null ? '<p class="soft">Hai già tirato i dadi con questo codice: il codice non si può più cambiare.</p>' : ''}</div>`;
+function leggiInizio() {   // legge i campi anche se il telefono non ha mandato l'evento (autocompletamento, tastiere strane)
+  const g = $('#giocatore'), c = $('#codice'); if (!g || !c) return;
+  S.giocatore = g.value.trim();
+  if (S.serie == null) S.codice = c.value.toUpperCase().replace(/[^A-Z0-9-]/g, '');
+  salva();
+}
 R.inizio_dopo = () => {
-  $('#giocatore').oninput = e => { S.giocatore = e.target.value.trim(); salva(); aggiornaNav(); };
   const c = $('#codice'); if (S.serie != null) c.readOnly = true;
-  c.oninput = e => { S.codice = e.target.value.trim().toUpperCase(); salva(); aggiornaNav(); };
+  for (const el of [$('#giocatore'), c]) for (const ev of ['input', 'change', 'keyup', 'blur']) el.addEventListener(ev, () => { leggiInizio(); aggiornaNav(); });
 };
 V.inizio = () => !S.giocatore ? 'Scrivi il tuo nome' : !/^[A-Z]{1,6}-[A-Z2-9]{4}-[A-Z2-9]{4}$/.test(S.codice) ? 'Scrivi il codice che ti ha dato il DM' : '';
 
