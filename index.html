@@ -183,8 +183,8 @@ function serieAttuale() { return S.serie == null ? null : serieCar(S.codice, S.s
 // ===== passi =====
 const PASSI = [
   { id: 'inizio', nome: 'Inizio' }, { id: 'idea', nome: 'Idea' }, { id: 'razza', nome: 'Razza' }, { id: 'classe', nome: 'Classe' },
-  { id: 'car', nome: 'Caratteristiche' }, { id: 'abilita', nome: 'Abilità' }, { id: 'talenti', nome: 'Talenti' },
-  { id: 'magia', nome: 'Doti di classe', se: () => typeof haMagia === 'function' && haMagia() },
+  { id: 'car', nome: 'Caratteristiche' }, { id: 'magia', nome: 'Doti di classe', se: () => typeof haMagia === 'function' && haMagia() },
+  { id: 'abilita', nome: 'Abilità' }, { id: 'talenti', nome: 'Talenti' },
   { id: 'equip', nome: 'Equipaggiamento' }, { id: 'dett', nome: 'Dettagli' }, { id: 'fine', nome: 'Fine' }];
 const attivi = () => PASSI.filter(p => !p.se || p.se());
 const R = {};   // render per passo
@@ -257,7 +257,7 @@ R.razza = () => `<div class="card"><h2>Razza</h2><p class="soft">Il popolo a cui
 <div class="scelte">${D.razze.razze.map(r => `<button class="opz ${S.razza === r.id ? 'sel' : ''}" data-r="${r.id}"><b>${esc(r.nome)}</b><small>${esc(r.descrizione)}</small>
 <span class="tag">${Object.entries(r.modificatori_caratteristica).filter(x => x[1]).map(([k, v]) => `${CAR_LUNGA[k.toLowerCase()]} ${sg(v)}`).join(' · ') || 'nessun modificatore'} · velocità ${r.velocita_base_m} m</span></button>`).join('')}</div>
 ${razza() ? `<h3>${esc(razza().nome)}: cosa sa fare</h3><ul>${razza().tratti.map(t => `<li><b>${esc(t.nome)}</b> — ${esc(t.effetto)}</li>`).join('')}</ul><p class="soft">Manuale del Giocatore, p.${razza().pagina_pdf} del PDF</p>` : ''}</div>`;
-R.razza_dopo = () => document.querySelectorAll('.opz[data-r]').forEach(b => b.onclick = () => { S.razza = b.dataset.r; ridisegna(); });
+R.razza_dopo = () => document.querySelectorAll('.opz[data-r]').forEach(b => b.onclick = () => { if (S.razza !== b.dataset.r) { S.razza = b.dataset.r; S.equip = {}; S.dett.lingue = []; S.dett.altezza = S.dett.peso = S.dett.eta = ''; } ridisegna(); });
 V.razza = () => S.razza ? '' : 'Scegli una razza';
 
 // ===== 5. caratteristiche =====
@@ -279,7 +279,8 @@ R.car = () => {
     return `<div class="dado rot"><div class="tot">${x.punteggio}</div><div class="d">${d.map((v, i) => i === mi ? `<s>${v}</s>` : v).join(' ')}</div></div>`; }).join('')}</div>
 ${puo ? `<div class="spiega">Questi punteggi sono bassi: il manuale ti permette di <b>ritirare</b> (somma dei modificatori 0 o meno, oppure il più alto è 13 o meno). È facoltativo: se ritiri, valgono i nuovi e non si torna indietro.
 <p><button class="btn sec piccolo" id="ritira">Ritira i dadi</button></p></div>` : ''}
-</div><div class="card"><h2>Assegna i punteggi</h2><p class="soft">Metti ogni numero dove vuoi tu. Il numero dopo la freccia include la tua razza; il <b>modificatore</b> (+/−) è quello che conta nei tiri.</p>
+</div><div class="card"><h2>Assegna i punteggi</h2>${(() => { const ck = { mago: 'INT', chierico: 'SAG', druido: 'SAG', stregone: 'CAR', bardo: 'CAR' }[S.classe];
+  return ck && punteggio(ck) != null && punteggio(ck) < 11 ? `<div class="spiega bad">⚠️ Con ${CAR_NOMI[ck]} ${punteggio(ck)} il tuo ${esc(nomeClasse(S.classe).toLowerCase())} non potrà lanciare incantesimi di 1° livello (serve almeno 11${punteggio(ck) < 10 ? '; sotto 10 neanche quelli di livello 0' : ''}).</div>` : ''; })()}<p class="soft">Metti ogni numero dove vuoi tu. Il numero dopo la freccia include la tua razza; il <b>modificatore</b> (+/−) è quello che conta nei tiri.</p>
 <p><button class="btn sec piccolo" id="auto">Assegna per me (consigliato per ${esc(nomeClasse(S.classe) || 'la tua classe')})</button> <button class="btn sec piccolo" id="svuota">Svuota</button></p>
 <table class="t"><tr><th>Caratteristica</th><th class="num">Tiro</th><th class="num">Razza</th><th class="num">Totale</th><th class="num">Mod.</th></tr>
 ${CAR.map(c => `<tr><td><b>${CAR_NOMI[c]}</b><br><span class="soft">${CAR_SPIEGA[c]}</span></td>
@@ -302,8 +303,11 @@ V.car = () => S.serie == null ? 'Tira i dadi' : CAR.some(c => base(c) == null) ?
 // ===== 6. abilità =====
 const AB = D.abilita.abilita;
 const abById = id => AB.find(a => a.id === id);
-const carAb = a => CAR_LUNGA[a.caratteristica_chiave.toLowerCase()];
-const diClasse = id => { const r = D.abilita.tabella_abilita_per_classe.righe[id] || D.abilita.tabella_abilita_per_classe.righe[id.replace(/^conoscenze_.*/, 'conoscenze')];
+const carAb = a => a.caratteristica_chiave ? CAR_LUNGA[a.caratteristica_chiave.toLowerCase()] : null;
+function abDaDomini() { if (S.classe !== 'chierico') return []; const dm = (S.magia && S.magia.domini) || [];
+  return (classe().domini || []).filter(d => dm.includes(d.nome)).flatMap(d => d.abilita_di_classe_aggiunte || []); }
+const diClasse = id => { const a0 = abById(id); if (a0 && abDaDomini().includes(a0.nome)) return true;
+  const r = D.abilita.tabella_abilita_per_classe.righe[id] || D.abilita.tabella_abilita_per_classe.righe[id.replace(/^conoscenze_.*/, 'conoscenze')];
   if (r && S.classe && r[S.classe] != null) return r[S.classe] === 'C';
   const a = abById(id); return !!(a && a.classi_di_classe && a.classi_di_classe.includes(S.classe)); };
 function puntiAbilita() {
@@ -388,7 +392,10 @@ function motivoNo(t, perBonus) {
   if (p.bab && babClasse() < p.bab) return `serve bonus di attacco base +${p.bab}`;
   for (const id of p.talenti || []) if (!haTalento(id)) return `serve ${talById(id) ? talById(id).nome : id}`;
   for (const [ab, g] of Object.entries(p.gradi_abilita || {})) { const a = AB.find(x => x.nome === ab); if (!a || gradi(a.id) < g) return `servono ${g} gradi in ${ab}`; }
-  if (p.livello_incantatore || p.livello_classe || p.livello_personaggio) return 'serve un livello più alto';
+  const livInc = ['mago', 'stregone', 'chierico', 'druido', 'bardo'].includes(S.classe) ? 1 : 0;
+  if (p.livello_incantatore && livInc < p.livello_incantatore) return livInc ? 'serve un livello da incantatore più alto' : 'serve saper lanciare incantesimi';
+  for (const [cl, lv] of Object.entries(p.livello_classe || {})) if (S.classe !== cl || lv > 1) return `serve ${cl} di ${lv}° livello`;
+  if (p.livello_personaggio && p.livello_personaggio > 1) return 'serve un livello più alto';
   if ((p.capacita_classe || []).some(cc => !(cc === 'scacciare_o_intimorire' && S.classe === 'chierico') && !(cc === 'forma_selvatica' && false))) return `serve la capacità "${p.capacita_classe.join(', ').replace(/_/g, ' ')}"`;
   if (!t.piu_volte && haTalento(t.id)) return 'già preso';
   return '';
@@ -435,12 +442,23 @@ R.talenti_dopo = () => {
 function opzioniScelta(t) {
   const tipo = t.richiede_scelta.tipo;
   if (tipo === 'abilita') return AB.map(a => a.nome);
+  if (tipo === 'incantesimi') return ((S.magia && S.magia.libro1) || []).map(id => (incById(id) || {}).nome || id);
   if (tipo === 'scuola_di_magia') return ['Abiurazione', 'Ammaliamento', 'Divinazione', 'Evocazione', 'Illusione', 'Invocazione', 'Necromanzia', 'Trasmutazione'];
   if (typeof opzioniArmi === 'function') return opzioniArmi(tipo, t);
   return [];
 }
+function talentoNonValido() {   // ricontrolla i talenti già scelti (se si torna indietro e si cambiano caratteristiche, razza, abilità…)
+  for (const [lista, bonus] of [[S.talBonus, true], [S.talenti, false]]) for (let i = 0; i < lista.length; i++) {
+    const x = lista.splice(i, 1)[0]; const bc = BONUS_CLASSE[S.classe];
+    const mot = bonus && bc && !bc.filtro(talById(x.id)) ? 'non è nella lista della classe' : motivoNo(talById(x.id), bonus);
+    lista.splice(i, 0, x); if (mot) return `${talById(x.id).nome}: ${mot}`; }
+  return '';
+}
 V.talenti = () => { const n = numLiberi();
   if (BONUS_CLASSE[S.classe] && !S.talBonus.length) return 'Scegli il talento bonus della tua classe';
+  if (!BONUS_CLASSE[S.classe] && S.talBonus.length) S.talBonus = [];
+  if (S.talenti.length > n) return `Hai ${S.talenti.length} talenti ma te ne spettano ${n}: togline ${S.talenti.length - n}`;
+  const nv = talentoNonValido(); if (nv) return 'Non più valido → ' + nv;
   return S.talenti.length < n ? `Scegli ancora ${n - S.talenti.length} talent${n - S.talenti.length > 1 ? 'i' : 'o'}` : ''; };
 
 // ===== 4. classe + allineamento =====
@@ -469,8 +487,8 @@ ${c ? `<h3>${esc(c.nome)} al 1° livello</h3><ul>${c.capacita_1_livello.map(x =>
 <div class="scelte">${Object.entries(ALL).map(([k, [n, d]]) => `<button class="opz ${S.dett.all === k ? 'sel' : ''}" data-a="${k}" ${amm.includes(k) ? '' : 'disabled'}><b>${n}</b><small>${d}</small></button>`).join('')}</div>` : ''}</div>`;
 };
 R.classe_dopo = () => {
-  document.querySelectorAll('.opz[data-c]').forEach(b => b.onclick = () => { if (S.classe !== b.dataset.c) { S.classe = b.dataset.c; S.abilita = {}; S.talenti = []; S.talBonus = []; S.magia = {}; S.dett.all = null; } ridisegna(); });
-  document.querySelectorAll('.opz[data-a]').forEach(b => b.onclick = () => { S.dett.all = b.dataset.a; ridisegna(); });
+  document.querySelectorAll('.opz[data-c]').forEach(b => b.onclick = () => { if (S.classe !== b.dataset.c) { S.classe = b.dataset.c; S.abilita = {}; S.spec = {}; S.talenti = []; S.talBonus = []; S.magia = {}; S.equip = {}; S.dett.all = null; S.dett.eta = ''; } ridisegna(); });
+  document.querySelectorAll('.opz[data-a]').forEach(b => b.onclick = () => { if (S.dett.all !== b.dataset.a) { S.dett.all = b.dataset.a; if (S.classe === 'chierico') S.magia = {}; } ridisegna(); });
 };
 V.classe = () => !S.classe ? 'Scegli una classe' : !S.dett.all ? 'Scegli l\'allineamento' : '';
 
@@ -482,6 +500,13 @@ const passoAll = (a, b) => { const ax = x => x === 'N' ? ['N', 'N'] : x.length =
   return Math.abs(lc[a1] - lc[b1]) + Math.abs(bm[a2] - bm[b2]); };
 const DOM_ALL = { Bene: 'B', Male: 'M', Legge: 'L', Caos: 'C' };
 function domOk(dom) { const x = DOM_ALL[dom]; if (!x) return true; return (S.dett.all || '').includes(x); }
+function divinitaAmmesse() { const c = CL.find(x => x.id === 'chierico');
+  return c.divinita.filter(d => passoAll(d.allineamento, S.dett.all) <= 1 && !(S.dett.all === 'N' && d.allineamento !== 'N')
+    && !(d.nome === 'St. Cuthbert' && !['LB', 'LN'].includes(S.dett.all))
+    && !(d.razze_richieste_per_chierico && d.nome !== 'Ehlonna' && !d.razze_richieste_per_chierico.includes(S.razza))); }
+const NESSUNA_DIV = 'Nessuna divinità';
+function dominiDisponibili() { const c = CL.find(x => x.id === 'chierico');
+  if (S.magia.divinita === NESSUNA_DIV) return c.domini.map(d => d.nome); const d = c.divinita.find(x => x.nome === S.magia.divinita); return d ? d.domini : []; }
 function listaInc(cl, liv) { return (D.incantesimi.liste[cl] || {})[liv] || []; }
 function scuolaProibita(id) { const m = S.magia; return (m.proibite || []).includes((incById(id) || {}).scuola); }
 function sceltaInc(chiave, ids, quanti, titolo) {
@@ -497,13 +522,12 @@ function bonusInc1() {   // incantesimi bonus di 1° livello dalla Tabella 1-1
 R.magia = () => {
   const c = classe(), m = S.magia; let h = `<div class="card"><h2>Doti della tua classe</h2>`;
   if (S.classe === 'chierico') {
-    const div = c.divinita.filter(d => passoAll(d.allineamento, S.dett.all) <= 1 && !(S.dett.all === 'N' && d.allineamento !== 'N')
-      && !(d.razze_richieste_per_chierico && d.nome !== 'Ehlonna' && !d.razze_richieste_per_chierico.includes(S.razza)));
+    const div = divinitaAmmesse();
     h += `<p>Il chierico serve una <b>divinità</b>: deve avere un allineamento uguale o "a un passo" dal suo. Da lei riceve 2 <b>domini</b>, cioè due campi di potere con un'abilità speciale e un incantesimo extra.</p>
-<div class="scelte">${div.map(d => `<button class="opz ${m.divinita === d.nome ? 'sel' : ''}" data-div="${esc(d.nome)}"><b>${esc(d.nome)}</b><small>${esc(d.titolo)} · ${ALL[d.allineamento][0]}<br>Domini: ${d.domini.join(', ')}</small></button>`).join('')}</div>`;
-    const d = c.divinita.find(x => x.nome === m.divinita);
-    if (d) { const dm = m.domini || [];
-      h += `<h3>Scegli 2 domini <span class="pill">${dm.length} / 2</span></h3><div class="scelte">${d.domini.map(n => { const x = D.incantesimi.domini[n] || {}; const ok = domOk(n), on = dm.includes(n);
+<div class="scelte">${div.map(d => `<button class="opz ${m.divinita === d.nome ? 'sel' : ''}" data-div="${esc(d.nome)}"><b>${esc(d.nome)}</b><small>${esc(d.titolo)} · ${ALL[d.allineamento][0]}<br>Domini: ${d.domini.join(', ')}</small>${d.nome === 'Ehlonna' && !(d.razze_richieste_per_chierico || []).includes(S.razza) ? '<span class="tag">per la tua razza chiedi conferma al DM</span>' : ''}</button>`).join('')}
+<button class="opz ${m.divinita === NESSUNA_DIV ? 'sel' : ''}" data-div="${NESSUNA_DIV}"><b>Nessuna divinità</b><small>Il manuale lo permette: servi un ideale o una causa, e scegli 2 domini qualsiasi che la rappresentano.</small></button></div>`;
+    if (m.divinita) { const dm = m.domini || [];
+      h += `<h3>Scegli 2 domini <span class="pill">${dm.length} / 2</span></h3><p class="soft">I domini possono darti abilità di classe in più: le vedrai nel passo Abilità.</p><div class="scelte">${dominiDisponibili().map(n => { const x = D.incantesimi.domini[n] || {}; const ok = domOk(n), on = dm.includes(n);
         return `<button class="opz ${on ? 'sel' : ''}" data-dom="${n}" ${!ok || (!on && dm.length >= 2) ? 'disabled' : ''}><b>${n}</b><small>${esc(x.poteri_concessi || '')}<br>Incantesimo extra: ${esc((incById(x.incantesimo_1) || {}).nome || x.incantesimo_1 || '')}</small>${ok ? '' : '<span class="tag">non adatto al tuo allineamento</span>'}</button>`; }).join('')}</div>`; }
     h += `<div class="spiega">Gli incantesimi il chierico li sceglie ogni mattina pregando, da tutta la lista: al 1° livello ne prepara ${c.incantatore.incantesimi_al_giorno_1_livello['0']} di livello 0 e ${c.incantatore.incantesimi_al_giorno_1_livello['1'] + bonusInc1()} di 1° (più 1 di dominio). Li sceglierete al tavolo; qui sotto puoi segnare i tuoi preferiti di 1° livello.</div>`
       + sceltaInc('preferiti', listaInc('chierico', '1'), c.incantatore.incantesimi_al_giorno_1_livello['1'] + bonusInc1(), 'Incantesimi di 1° livello preferiti (facoltativo)');
@@ -515,7 +539,7 @@ R.magia = () => {
       + sceltaInc('preferiti', listaInc('druido', '1'), c.incantatore.incantesimi_al_giorno_1_livello['1'] + bonusInc1(), 'Incantesimi di 1° livello preferiti (facoltativo)');
   }
   if (S.classe === 'mago' || S.classe === 'stregone') {
-    h += `<h3>Famiglio</h3><p class="soft">Un animaletto magico legato a te: ti dà un piccolo bonus finché è vicino. (Lo stregone lo può evocare anche più tardi.)</p>
+    h += `<h3>Famiglio</h3><p class="soft">Un animaletto magico legato a te: ti dà un piccolo bonus finché è vicino. Per averlo serve un rituale di 24 ore con 100 mo di materiali (p.58): qui scegli quale vorresti, lo evocherai quando avrai le monete o se il DM te lo concede.</p>
 <div class="scelte">${c.famigli.lista.map(f => `<button class="opz ${m.famiglio === f.nome ? 'sel' : ''}" data-fam="${esc(f.nome)}"><b>${esc(f.nome)}</b><small>${esc(f.beneficio)}</small></button>`).join('')}
 <button class="opz ${m.famiglio === 'nessuno' ? 'sel' : ''}" data-fam="nessuno"><b>Nessuno (per ora)</b></button></div>`;
   }
@@ -558,7 +582,10 @@ R.magia_dopo = () => {
   document.querySelectorAll('[data-inc]').forEach(b => b.onclick = () => { const k = b.dataset.inc, l = m[k] || []; const i = l.indexOf(b.dataset.id); i >= 0 ? l.splice(i, 1) : l.push(b.dataset.id); set(k, l); });
 };
 V.magia = () => { const m = S.magia, c = classe();
-  if (S.classe === 'chierico') { if (!m.divinita) return 'Scegli la divinità'; if ((m.domini || []).length !== 2) return 'Scegli 2 domini'; }
+  if (S.classe === 'chierico') { if (!m.divinita) return 'Scegli la divinità';
+    if (m.divinita !== NESSUNA_DIV && !divinitaAmmesse().some(d => d.nome === m.divinita)) return 'La divinità non è più adatta al tuo allineamento o alla tua razza: scegline un\'altra';
+    if ((m.domini || []).length !== 2) return 'Scegli 2 domini';
+    if (m.domini.some(d => !domOk(d) || !dominiDisponibili().includes(d))) return 'Un dominio non è più adatto: cambialo'; }
   if (S.classe === 'druido' && !m.compagno) return 'Scegli il compagno animale';
   if ((S.classe === 'mago' || S.classe === 'stregone') && !m.famiglio) return 'Scegli il famiglio (o "nessuno")';
   if (S.classe === 'mago') { if (m.scuola) { const n = c.scuole_specializzazione.scuole.find(x => x.nome === m.scuola).scuole_proibite_da_scegliere; if ((m.proibite || []).length !== n) return `Scegli ${n} scuole proibite`; }
@@ -580,13 +607,26 @@ const CATALOGO = [
   ['Cibo e alloggio', EQ.cibo_bevande_alloggio.lista], ['Cavalcature', EQ.cavalcature_finimenti.lista.filter(x => x.costo_mr)]];
 const TUTTI = CATALOGO.flatMap(([c, l]) => l.map(x => ({ ...x, _cat: c })));
 const norma = s => (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]/g, '');
-const ogg = nome => TUTTI.find(x => norma(x.nome) === norma(nome)) || TUTTI.find(x => norma(x.nome).startsWith(norma(nome)) || norma(nome).startsWith(norma(x.nome)));
+// nomi usati nei kit del manuale -> voce del listino (e quante unità del listino sono)
+const ALIAS = { ...Object.fromEntries(['Abito da artigiano', 'Abito da contadino', 'Abito da esploratore', 'Abito da intrattenitore', 'Abito da monaco', 'Abito da studioso', 'Abito da viaggiatore'].map(n => [n + ' (indossato)', [n, 1]])), "1,5 litri d'olio": ['Olio (ampolla da 0,5 l)', 3], "2,5 litri d'olio": ['Olio (ampolla da 0,5 l)', 5], '10 candele': ['Candela', 10],
+  '3 fogli di pergamena': ['Pergamena (foglio)', 3], '3 torce': ['Torcia', 3], 'Astuccio con 10 proiettili per fionda': ['Proiettili per fionda', 1],
+  'Custodia con 10 proiettili per fionda': ['Proiettili per fionda', 1], 'Astuccio con 10 quadrelli': ['Quadrelli per balestra leggera/pesante/a mano', 1],
+  'Faretra con 20 frecce': ['Frecce', 1], 'Custodia per mappe': ['Custodia per mappe o pergamene', 1], 'Inchiostro': ['Inchiostro (fiala da 30 gr)', 1],
+  'Libro degli incantesimi': ['Libro degli incantesimi da mago (vuoto)', 1], 'Liuto (comune)': ['Strumento musicale comune', 1],
+  'Razioni da viaggio (1 giorno)': ['Razioni da viaggio (al giorno)', 1], 'Spada corta (secondaria)': ['Spada corta', 1], 'Zaino': ['Zaino (vuoto)', 1], 'Sacco': ['Sacco (vuoto)', 1] };
+const ALIAS_N = Object.fromEntries(Object.entries(ALIAS).map(([k, v]) => [norma(k), v]));
+function ogg(nome) {
+  const al = ALIAS_N[norma(nome)];
+  if (al) { const x = TUTTI.find(y => y.nome === al[0]); if (x) return al[1] === 1 ? x : { ...x, costo_mr: x.costo_mr * al[1], peso_kg: (x.peso_kg || 0) * al[1] }; }
+  return TUTTI.find(x => norma(x.nome) === norma(nome)) || TUTTI.find(x => norma(x.nome).startsWith(norma(nome)));
+}
 const piccolo = () => (razza() || {}).taglia === 'Piccola';
 function pesoOgg(x) { const p = x.peso_kg || 0; if (!piccolo()) return p; if (x._arma || x._arm) return p / 2; return x.peso_quarto_se_piccola ? p / 4 : p; }
 const fmtMr = mr => { const mo = Math.floor(mr / 100), ma = Math.floor((mr % 100) / 10), r = mr % 10; return [mo && mo + ' mo', ma && ma + ' ma', r && r + ' mr'].filter(Boolean).join(' ') || '0'; };
 function parseDadi(s) { const m = /(\d+)d(\d+)(?:\s*x\s*(\d+))?/.exec(s); return m ? { n: +m[1], f: +m[2], x: +(m[3] || 1) } : null; }
 const modello = () => EQ.modelli_iniziali_per_classe.lista.filter(m => norma(m.classe) === norma(nomeClasse(S.classe)));
-function competenteArma(a) { const c = comp(); const n = norma(a.nome);
+function competenteArma(a) { const c = comp(); const n = norma(a.nome.replace(/\s*\(\d+\)$/, ''));
+  if (S.classe === 'chierico' && (S.magia.domini || []).includes('Guerra') && norma(armaGuerra()) === n) return true;
   if (a.categoria === 'semplice' && c.armi.includes('semplici')) return true;
   if (a.categoria === 'da guerra' && c.armi.includes('guerra')) return true;
   if (c.armi.some(x => norma(x) === n)) return true;
@@ -596,7 +636,8 @@ function competenteArma(a) { const c = comp(); const n = norma(a.nome);
     || (a.categoria === 'semplice' && haTalento('competenza_armi_semplici'));
 }
 function competenteArm(a) { const c = comp(); if (a.categoria === 'scudo') return a.nome === 'Scudo torre' ? !!c.torre || haTalento('competenza_negli_scudi_torre') : c.scudi || haTalento('competenza_negli_scudi');
-  return c.arm.includes(a.categoria) || haTalento('competenza_armature_' + a.categoria); }
+  const pl = { leggera: 'leggere', media: 'medie', pesante: 'pesanti' }[a.categoria] || a.categoria;
+  return c.arm.includes(pl) || haTalento('competenza_armature_' + pl); }
 const METALLO = /maglia|piastre|scaglie|bande|strisce|mezza|completa|metallo|torre/i;
 function avvisoOgg(x) {
   if (x._arma && !competenteArma(x)) return 'non sei competente: −4 per colpire';
@@ -604,6 +645,7 @@ function avvisoOgg(x) {
   if (x._arm && S.classe === 'druido' && METALLO.test(x.nome)) return 'il druido non può usare armature o scudi di metallo';
   return '';
 }
+function armaGuerra() { const d = (CL.find(x => x.id === 'chierico').divinita || []).find(x => x.nome === (S.magia || {}).divinita); return (d && d.arma_preferita_dominio_guerra) || ''; }
 function oroIniziale() {
   const e = S.equip; if (!e.modo) return 0;
   const spec = e.modo === 'kit' ? (modello()[e.kitIdx || 0] || {}).denaro : (EQ.denaro_iniziale.tabella.find(r => norma(r.classe) === norma(nomeClasse(S.classe))) || {}).dadi;
@@ -617,8 +659,10 @@ function contiEquip() {
   const daCredito = Math.min(kitV, spesa), cassa = oroIniziale() - (spesa - daCredito);
   return { credito: kitV - daCredito, cassa, spesa };
 }
+const ABITI = ['Abito da artigiano', 'Abito da contadino', 'Abito da esploratore', 'Abito da intrattenitore', 'Abito da monaco', 'Abito da studioso', 'Abito da viaggiatore'];
 function inventario() {   // [{nome, q}]
   const e = S.equip, out = {};
+  if (e.abito) out[e.abito + ' (indossato)'] = 1;
   if (e.modo === 'kit') { const m = modello()[e.kitIdx || 0]; if (m) [...m.armatura, ...m.armi, ...m.attrezzatura].filter(n => !/^nessun/i.test(n)).forEach(n => out[n] = (out[n] || 0) + 1); }
   for (const [n, q] of Object.entries(e.tolti || {})) { out[n] -= q; if (out[n] <= 0) delete out[n]; }
   for (const [n, q] of Object.entries(e.comprati || {})) out[n] = (out[n] || 0) + q;
@@ -644,8 +688,10 @@ ${e.modo === 'kit' ? 'Puoi togliere pezzi del kit e usarne il valore per comprar
   h += `<div class="contatore">💰 Monete: <b class="${k.cassa < 0 ? 'bad' : 'ok'}">${fmtMr(Math.max(k.cassa, 0))}</b>${k.cassa < 0 ? ' <span class="bad">(mancano ' + fmtMr(-k.cassa) + ')</span>' : ''}
 ${e.modo === 'kit' ? ` · credito da scambi: <b>${fmtMr(k.credito)}</b>` : ''} · tiro: ${(e.dadiOro || []).join('+')}
 <br>⚖️ Peso: <b class="${pt > cm.l ? 'bad' : 'ok'}">${pt.toFixed(1).replace('.', ',')} kg</b> <span class="soft">(leggero fino a ${cm.l} kg${pt > cm.l ? ': oltre sei più lento e impacciato' : ''})</span></div>
-<h3>Il tuo zaino</h3><table class="t">${inv.map(x => { const o = ogg(x.nome); return `<tr><td>${x.q > 1 ? x.q + '× ' : ''}<b>${esc(x.nome)}</b>${o ? `<br><span class="soft">${esc(o.a_cosa_serve || o.proprieta || '')}</span>` : ''}${o && avvisoOgg(o) ? `<br><span class="bad">${esc(avvisoOgg(o))}</span>` : ''}</td>
-<td class="num">${o ? fmtMr(o.costo_mr) : ''}</td><td class="num"><button class="btn sec piccolo" data-tog="${esc(x.nome)}">−</button></td></tr>`; }).join('') || '<tr><td class="soft">vuoto</td></tr>'}</table>
+<h3>Abito</h3><p class="soft">Il manuale te ne regala uno a scelta (p.112): è quello che indossi.</p>
+<select id="abito"><option value="">— scegli —</option>${ABITI.map(n => `<option ${e.abito === n ? 'selected' : ''}>${n}</option>`).join('')}</select>
+<h3>Il tuo zaino</h3><table class="t"><tr><th>Oggetto</th><th class="num">Costo</th><th class="num">Peso</th><th></th></tr>${inv.map(x => { const o = ogg(x.nome); return `<tr><td>${x.q > 1 ? x.q + '× ' : ''}<b>${esc(x.nome)}</b>${o ? `<br><span class="soft">${esc(o.a_cosa_serve || o.proprieta || '')}</span>` : ''}${o && avvisoOgg(o) ? `<br><span class="bad">${esc(avvisoOgg(o))}</span>` : ''}</td>
+<td class="num">${o && !/\(indossato\)$/.test(x.nome) ? fmtMr(o.costo_mr) : 'gratis'}</td><td class="num">${o && pesoOgg(o) ? (+(pesoOgg(o) * x.q).toFixed(2)).toLocaleString('it') + ' kg' : '—'}</td><td class="num">${/\(indossato\)$/.test(x.nome) ? '' : `<button class="btn sec piccolo" data-tog="${esc(x.nome)}">−</button>`}</td></tr>`; }).join('') || '<tr><td class="soft">vuoto</td></tr>'}</table>
 <h3>Negozio</h3><div class="filtri">${CATALOGO.map(([c]) => `<button class="btn ${c === catEq ? '' : 'sec'} piccolo" data-cat="${esc(c)}">${esc(c)}</button>`).join('')}</div>
 <div class="filtri"><input type="text" id="eqCerca" placeholder="Cerca…" value="${esc(filtroEq)}"></div>
 <table class="t"><tr><th>Oggetto</th><th class="num">Costo</th><th class="num">Peso</th><th></th></tr>${(filtroEq ? TUTTI.filter(x => norma(x.nome + x.a_cosa_serve).includes(norma(filtroEq))) : TUTTI.filter(x => x._cat === catEq)).filter(x => x.costo_mr > 0).map(x => `<tr><td><b>${esc(x.nome)}</b>
@@ -660,6 +706,7 @@ R.equip_dopo = () => {
     e.modo = b.dataset.modo; if (e.modo === 'kit' && e.kitIdx == null) { const i = modello().findIndex(m => norma(m.razza_del_modello) === norma((razza() || {}).id)); e.kitIdx = Math.max(0, i); } ridisegna(); });
   if ($('#kitIdx')) $('#kitIdx').onchange = ev => { e.kitIdx = +ev.target.value; ridisegna(); };
   if ($('#tiraOro')) $('#tiraOro').onclick = () => { e.tirato = true; ridisegna(); };
+  if ($('#abito')) $('#abito').onchange = ev => { e.abito = ev.target.value; ridisegna(); };
   if ($('#eqReset')) $('#eqReset').onclick = () => { e.comprati = {}; e.tolti = {}; ridisegna(); };
   document.querySelectorAll('[data-cat]').forEach(b => b.onclick = () => { catEq = b.dataset.cat; filtroEq = ''; ridisegna(); });
   document.querySelectorAll('[data-buy]').forEach(b => b.onclick = () => { const n = b.dataset.buy; e.comprati[n] = (e.comprati[n] || 0) + 1; ridisegna(); });
@@ -667,7 +714,7 @@ R.equip_dopo = () => {
     if (e.comprati[n]) { e.comprati[n]--; if (!e.comprati[n]) delete e.comprati[n]; } else e.tolti[n] = (e.tolti[n] || 0) + 1; ridisegna(); });
   const c = $('#eqCerca'); if (c) c.oninput = () => { filtroEq = c.value; ridisegna(); const n = $('#eqCerca'); n.focus(); n.setSelectionRange(n.value.length, n.value.length); };
 };
-V.equip = () => { const e = S.equip; if (!e.modo) return 'Scegli kit o spesa'; if (!e.tirato) return 'Tira le monete'; return contiEquip().cassa < 0 ? 'Hai speso più monete di quelle che hai' : ''; };
+V.equip = () => { const e = S.equip; if (!e.modo) return 'Scegli kit o spesa'; if (!e.tirato) return 'Tira le monete'; if (!e.abito) return 'Scegli l\'abito gratuito'; return contiEquip().cassa < 0 ? 'Hai speso più monete di quelle che hai' : ''; };
 function opzioniArmi(tipo, t) {
   const l = EQ.armi.lista.filter(a => a.costo_mr > 0 || tipo === 'arma');
   if (tipo === 'arma_esotica') return l.filter(a => a.categoria === 'esotica').map(a => a.nome);
@@ -679,41 +726,61 @@ function opzioniArmi(tipo, t) {
 
 // ===== 10. dettagli =====
 function catEta() { const c = S.classe; return ['barbaro', 'ladro', 'stregone'].includes(c) ? 'barbaro_ladro_stregone' : ['bardo', 'guerriero', 'paladino', 'ranger'].includes(c) ? 'bardo_guerriero_paladino_ranger' : 'chierico_druido_mago_monaco'; }
+function rangeCorpo() {   // dalla Tabella 6-6 del MdG: altezza = base + tiro × 2,5 cm; peso = base + tiro altezza × tiro peso × 0,5 kg
+  const ap = (razza() || {}).altezza_peso; if (!ap || !S.dett.sesso) return null; const b = ap[S.dett.sesso === 'F' ? 'femmina' : 'maschio'];
+  const dh = parseDadi(ap.dado_altezza), dw = parseDadi(ap.dadi_peso);
+  const hMin = b.altezza_base_cm + dh.n * ap.cm_per_punto_altezza, hMax = b.altezza_base_cm + dh.n * dh.f * ap.cm_per_punto_altezza;
+  const h = +S.dett.altezza; const tiroH = (h >= hMin && h <= hMax) ? (h - b.altezza_base_cm) / ap.cm_per_punto_altezza : null;
+  const wMin = tiroH == null ? null : b.peso_base_kg + tiroH * (dw ? dw.n : 1) * ap.kg_per_punto_peso;
+  const wMax = tiroH == null ? null : b.peso_base_kg + tiroH * (dw ? dw.n * dw.f : 1) * ap.kg_per_punto_peso;
+  return { hMin, hMax, wMin, wMax };
+}
+function etaMax() { const e = (razza() || {}).eta; if (!e) return 99; const d = parseDadi((e.dadi_per_categoria || {})[catEta()] || ''); return e.maturita_anni + (d ? d.n * d.f : 0); }
 function etaMin() { const e = (razza() || {}).eta; if (!e) return 15; const d = parseDadi((e.dadi_per_categoria || {})[catEta()] || ''); return e.maturita_anni + (d ? d.n : 0); }
-function linguaggiBonusN() { return Math.max(0, mod('INT')); }
+function linguaggiBonusN() { return Math.max(0, mod('INT')) + Math.floor(gradi('parlare_linguaggi')); }
+function linguaggiGratis() { const cl = classe(); return (cl ? cl.capacita_1_livello : []).flatMap(c => [].concat((c.dati && c.dati.gratis) || [])).filter(x => typeof x === 'string'); }
 function linguaggiPossibili() { const r = razza() || {}, lb = r.linguaggi_bonus || {}; let l = lb.qualsiasi ? ['Abissale', 'Aquan', 'Auran', 'Celestiale', 'Draconico', 'Elfico', 'Gigante', 'Gnoll', 'Gnomesco', 'Goblin', 'Halfling', 'Ignan', 'Infernale', 'Nanico', 'Orchesco', 'Silvano', 'Sottocomune', 'Terran'] : [...(lb.elenco || [])];
-  const cl = classe(); (cl ? cl.capacita_1_livello : []).forEach(c => (c.dati && c.dati.linguaggi || []).forEach(x => l.push(x)));
+  const cl = classe(); (cl ? cl.capacita_1_livello : []).forEach(c => [...(c.dati && c.dati.linguaggi || []), ...(c.dati && c.dati.bonus_possibili || [])].forEach(x => l.push(x)));
   return [...new Set(l)].filter(x => !(r.linguaggi_automatici || []).includes(x)); }
 function tiraCorpo() { const ap = (razza() || {}).altezza_peso; if (!ap) return; const sx = S.dett.sesso === 'F' ? 'femmina' : 'maschio';
   const dh = parseDadi(ap.dado_altezza), dw = parseDadi(ap.dadi_peso);
   const th = dadiDaSeme(`${S.codice}|altezza`, dh.n, dh.f).reduce((a, v) => a + v, 0);
   const tw = dw ? dadiDaSeme(`${S.codice}|peso`, dw.n, dw.f).reduce((a, v) => a + v, 0) : 1;
-  S.dett.altezza = (ap[sx].altezza_base_cm + th * ap.cm_per_punto_altezza).toLocaleString('it') + ' cm';
-  S.dett.peso = (ap[sx].peso_base_kg + th * tw * ap.kg_per_punto_peso).toLocaleString('it') + ' kg'; }
+  S.dett.altezza = ap[sx].altezza_base_cm + th * ap.cm_per_punto_altezza;
+  S.dett.peso = ap[sx].peso_base_kg + th * tw * ap.kg_per_punto_peso;
+  const e = (razza() || {}).eta, de = e && parseDadi((e.dadi_per_categoria || {})[catEta()] || '');
+  if (de) S.dett.eta = e.maturita_anni + dadiDaSeme(`${S.codice}|eta`, de.n, de.f).reduce((x, v) => x + v, 0); }
 const DIV_TUTTE = () => (CL.find(c => c.id === 'chierico').divinita || []);
 R.dett = () => { const d = S.dett, nL = linguaggiBonusN(), r = razza();
   const campo = (k, t, ph = '') => `<label class="campo"><span>${t}</span><input type="text" data-d="${k}" value="${esc(d[k] || '')}" placeholder="${ph}"></label>`;
   return `<div class="card"><h2>Chi è il tuo personaggio</h2>
 ${campo('nome', 'Nome del personaggio', 'es. Brenna Corvofulvo')}
 <label class="campo"><span>Sesso</span><select data-d="sesso"><option value="">—</option><option value="M" ${d.sesso === 'M' ? 'selected' : ''}>Maschio</option><option value="F" ${d.sesso === 'F' ? 'selected' : ''}>Femmina</option></select></label>
-<label class="campo"><span>Età (minimo per ${esc(r.nome.toLowerCase())} ${esc(nomeClasse(S.classe).toLowerCase())}: ${etaMin()} anni)</span><input type="number" data-d="eta" min="${etaMin()}" value="${esc(d.eta || '')}"></label>
-<div style="display:flex;gap:10px;align-items:end"><div style="flex:1">${campo('altezza', 'Altezza')}</div><div style="flex:1">${campo('peso', 'Peso')}</div>
-<button class="btn sec piccolo" id="tiraCorpo" style="margin-bottom:12px" ${d.sesso ? '' : 'disabled'}>🎲 Tira (tabella del manuale)</button></div>
+${(() => { const rc = rangeCorpo(); return `<div class="spiega">Età, altezza e peso devono stare nei limiti della tabella del manuale per ${esc(r.nome.toLowerCase())} (p.110 del PDF). Puoi sceglierli tu dentro i limiti, oppure tirarli a caso.
+${d.sesso ? '' : '<br><b>Scegli prima il sesso.</b>'}<br><button class="btn sec piccolo" id="tiraCorpo" ${d.sesso ? '' : 'disabled'}>🎲 Tira età, altezza e peso</button></div>
+<label class="campo"><span>Età in anni (da ${etaMin()} a ${etaMax()})</span><input type="number" data-d="eta" min="${etaMin()}" max="${etaMax()}" value="${esc(d.eta || '')}"></label>
+<label class="campo"><span>Altezza in cm ${rc ? `(da ${rc.hMin.toLocaleString('it')} a ${rc.hMax.toLocaleString('it')})` : ''}</span><input type="number" step="0.5" data-d="altezza" ${rc ? `min="${rc.hMin}" max="${rc.hMax}"` : 'disabled'} value="${esc(d.altezza || '')}"></label>
+<label class="campo"><span>Peso in kg ${rc && rc.wMin != null ? `(con questa altezza: da ${rc.wMin.toLocaleString('it')} a ${rc.wMax.toLocaleString('it')})` : rc ? '(prima scegli un\'altezza valida)' : ''}</span><input type="number" step="0.5" data-d="peso" ${rc && rc.wMin != null ? `min="${rc.wMin}" max="${rc.wMax}"` : 'disabled'} value="${esc(d.peso || '')}"></label>`; })()}
 ${campo('occhi', 'Occhi')}${campo('capelli', 'Capelli')}${campo('pelle', 'Pelle')}
 ${S.classe !== 'chierico' ? `<label class="campo"><span>Divinità (facoltativa)</span><select data-d="divinita"><option value="">Nessuna</option>${DIV_TUTTE().map(x => `<option ${d.divinita === x.nome ? 'selected' : ''}>${esc(x.nome)}</option>`).join('')}</select></label>` : ''}
-<h3>Linguaggi</h3><p>Parli già: <b>${(r.linguaggi_automatici || []).join(', ')}</b>.${nL ? ` Grazie all'Intelligenza ne scegli altri <b>${nL}</b>:` : ' Con la tua Intelligenza non ne impari altri per ora.'}</p>
+<h3>Linguaggi</h3><p>Parli già: <b>${[...(r.linguaggi_automatici || []), ...linguaggiGratis()].join(', ')}</b>.${nL ? ` Grazie all'Intelligenza ne scegli altri <b>${nL}</b>:` : ' Con la tua Intelligenza non ne impari altri per ora.'}</p>
 ${nL ? `<div class="scelte">${linguaggiPossibili().map(l => { const on = (d.lingue || []).includes(l); return `<button class="opz ${on ? 'sel' : ''}" data-l="${esc(l)}" ${!on && (d.lingue || []).length >= nL ? 'disabled' : ''}><b>${esc(l)}</b></button>`; }).join('')}</div>` : ''}
 <h3>La sua storia</h3>
 <label class="campo"><span>Da dove viene e cosa ha fatto finora (2-3 righe)</span><textarea data-d="storia">${esc(d.storia || '')}</textarea></label>
 ${campo('obiettivo', 'Cosa vuole ottenere', 'es. ritrovare la sorella scomparsa')}
 ${campo('pregio', 'Un pregio e un difetto', 'es. leale fino alla morte, ma testardo')}</div>`; };
 R.dett_dopo = () => {
-  document.querySelectorAll('[data-d]').forEach(i => i[i.tagName === 'SELECT' ? 'onchange' : 'oninput'] = () => { S.dett[i.dataset.d] = i.value; salva(); aggiornaNav(); if (i.tagName === 'SELECT') ridisegna(); });
+  document.querySelectorAll('[data-d]').forEach(i => { i[i.tagName === 'SELECT' ? 'onchange' : 'oninput'] = () => { S.dett[i.dataset.d] = i.value; salva(); aggiornaNav(); if (i.tagName === 'SELECT') ridisegna(); };
+    if (i.dataset.d === 'altezza') i.onchange = () => { S.dett.altezza = i.value; ridisegna(); }; });
   document.querySelectorAll('[data-l]').forEach(b => b.onclick = () => { const l = S.dett.lingue = S.dett.lingue || []; const i = l.indexOf(b.dataset.l); i >= 0 ? l.splice(i, 1) : l.push(b.dataset.l); ridisegna(); });
   if ($('#tiraCorpo')) $('#tiraCorpo').onclick = () => { tiraCorpo(); ridisegna(); };
 };
-V.dett = () => !S.dett.nome ? 'Dai un nome al personaggio' : !S.dett.sesso ? 'Scegli il sesso' : !(+S.dett.eta >= etaMin()) ? `L'età minima è ${etaMin()}` :
-  (S.dett.lingue || []).length < Math.min(linguaggiBonusN(), linguaggiPossibili().length) ? 'Scegli i linguaggi bonus' : '';
+V.dett = () => { const rc = rangeCorpo(), h = +S.dett.altezza, w = +S.dett.peso;
+  return !S.dett.nome ? 'Dai un nome al personaggio' : !S.dett.sesso ? 'Scegli il sesso' : !(+S.dett.eta >= etaMin() && +S.dett.eta <= etaMax()) ? `Età tra ${etaMin()} e ${etaMax()}` :
+  !(rc && h >= rc.hMin && h <= rc.hMax) ? 'Altezza fuori dai limiti' : !(w >= rc.wMin && w <= rc.wMax) ? 'Peso fuori dai limiti' :
+  (S.dett.lingue || []).some(l => !linguaggiPossibili().includes(l)) ? 'Un linguaggio scelto non è più disponibile: toglilo' :
+  (S.dett.lingue || []).length > linguaggiBonusN() ? `Puoi scegliere solo ${linguaggiBonusN()} linguaggi bonus` :
+  (S.dett.lingue || []).length < Math.min(linguaggiBonusN(), linguaggiPossibili().length) ? 'Scegli i linguaggi bonus' : ''; };
 
 // ===== 11. fine: calcolo della scheda =====
 const haT = id => haTalento(id);
@@ -725,6 +792,7 @@ const SKILL_FEAT = { acrobatico: ['Acrobazia', 'Saltare'], affinita_animale: ['A
   ingannevole: ['Camuffare', 'Falsificare'], manolesta: ['Rapidità di Mano', 'Utilizzare Corde'], negoziatore: ['Diplomazia', 'Percepire Intenzioni'],
   persuasivo: ['Intimidire', 'Raggirare'], vocazione_magica: ['Sapienza Magica', 'Utilizzare Oggetti Magici'] };
 const LANCIO = /giavellotto|dardo|ascia da lancio|shuriken|bolas|rete|pugnale|lancia corta|lancia|martello leggero|tridente|randello|fionda/i;
+const m0 = () => S.magia || {};
 function calcola() {
   const c = classe(), r = razza(), inv = inventario().map(x => ({ ...x, o: ogg(x.nome) })).filter(x => x.o);
   const arm = inv.map(x => x.o).find(o => o._arm && o.categoria !== 'scudo'), scu = inv.map(x => x.o).find(o => o._arm && o.categoria === 'scudo');
@@ -733,30 +801,36 @@ function calcola() {
   const cm = caricoMax(), pt = pesoTot(); const car = pt > cm.m ? EQ.carico.effetti.tabella[2] : pt > cm.l ? EQ.carico.effetti.tabella[1] : EQ.carico.effetti.tabella[0];
   let desMax = Math.min(arm && arm.bonus_des_max != null ? arm.bonus_des_max : 99, car.des_max != null ? car.des_max : 99);
   const des = Math.min(M.DES, desMax), penTot = Math.min(pen, car.penalita_prova || 0);
-  const monaco = S.classe === 'monaco' && !arm && !scu;
+  const monaco = S.classe === 'monaco' && !arm && !scu && car === EQ.carico.effetti.tabella[0];
   const ca = { armatura: arm ? arm.bonus_ca : 0, scudo: scu ? scu.bonus_ca : 0, des, taglia, naturale: 0, deviazione: 0, vari: monaco ? Math.max(0, M.SAG) : 0 };
-  const dv = parseInt(c.dado_vita.slice(1)), pf = Math.max(1, dv + M.COS) + (haT('robustezza') ? 3 : 0);
+  const dv = parseInt(c.dado_vita.slice(1)), pf = Math.max(1, dv + M.COS) + 3 * [...S.talenti, ...S.talBonus].filter(x => x.id === 'robustezza').length;
   const ts = { tempra: { base: c.ts.tempra, vari: bonusTsRazza('Tempra') + (haT('tempra_possente') ? 2 : 0) },
     riflessi: { base: c.ts.riflessi, vari: bonusTsRazza('Riflessi') + (haT('riflessi_fulminei') ? 2 : 0) },
     volonta: { base: c.ts.volonta, vari: bonusTsRazza('Volontà') + (haT('volonta_di_ferro') ? 2 : 0) } };
   const bab = c.bab, foc = talScelta('arma_focalizzata').map(norma);
+  if (S.classe === 'chierico' && (m0().domini || []).includes('Guerra') && armaGuerra()) foc.push(norma(armaGuerra()));
+  const penNonComp = (arm && !competenteArm(arm) ? arm.penalita_prova : 0) + (scu && !competenteArm(scu) ? scu.penalita_prova : 0);
+  const accurata = haT('arma_accurata');
   const attacchi = [];
   for (const { o } of inv.filter(x => x.o._arma)) {
     const dist = o.tipo === 'a distanza', lancio = dist && LANCIO.test(o.nome), arco = /arco/i.test(o.nome) && !/composito/i.test(o.nome);
-    let b = bab + (dist ? M.DES : M.FOR) + taglia + (competenteArma(o) ? 0 : -4) + (foc.includes(norma(o.nome)) ? 1 : 0);
-    let fd = dist ? (lancio || /fionda/i.test(o.nome) ? M.FOR : arco ? Math.min(0, M.FOR) : 0) : o.tipo === 'mischia a due mani' ? Math.floor(M.FOR * 1.5) : M.FOR;
+    const leggera = o.tipo === 'mischia leggera' || /^(stocco|frusta|catena chiodata)$/i.test(o.nome);
+    const modAtt = dist ? M.DES : (accurata && leggera ? Math.max(M.FOR, M.DES) : M.FOR);
+    let b = bab + modAtt + taglia + (competenteArma(o) ? 0 : -4) + (foc.includes(norma(o.nome)) ? 1 : 0) + penNonComp;
+    let fd = dist ? (lancio || /fionda/i.test(o.nome) ? M.FOR : arco ? Math.min(0, M.FOR) : 0) : o.tipo === 'mischia a due mani' ? (M.FOR > 0 ? Math.floor(M.FOR * 1.5) : M.FOR) : M.FOR;
     const dd = piccolo() ? o.danni_piccola : o.danni_media;
     attacchi.push({ nome: o.nome, bonus: sg(b), danni: String(dd).split('/').map(x => x + (fd ? (fd > 0 ? '+' : '') + fd : '')).join('/'), critico: o.critico, gittata: o.incremento_gittata && o.incremento_gittata !== '—' ? o.incremento_gittata : '', tipo: o.tipo_danno, note: (o.proprieta || '').slice(0, 70), munizioni: '' });
   }
   if (S.classe === 'monaco' || !attacchi.length) { const cs = c.capacita_1_livello.find(x => /senz'armi/i.test(x.nome)); const dmono = cs && cs.dati && cs.dati.danni;
-    attacchi.unshift({ nome: "Colpo senz'armi", bonus: sg(bab + M.FOR + taglia), danni: (S.classe === 'monaco' ? (typeof dmono === 'object' ? (piccolo() ? dmono.piccola || dmono.Piccola : dmono.media || dmono.Media) : dmono) || '1d6' : (piccolo() ? '1d2' : '1d3')) + (M.FOR ? sg(M.FOR) : ''), critico: 'x2', tipo: 'C', note: S.classe === 'monaco' ? '' : 'danni non letali' }); }
+    attacchi.unshift({ nome: "Colpo senz'armi", bonus: sg(bab + M.FOR + taglia + penNonComp), danni: (S.classe === 'monaco' ? (typeof dmono === 'object' ? (piccolo() ? dmono.piccola || dmono.Piccola : dmono.media || dmono.Media) : dmono) || '1d6' : (piccolo() ? '1d2' : '1d3')) + (M.FOR ? sg(M.FOR) : ''), critico: 'x2', tipo: 'C', note: S.classe === 'monaco' ? '' : 'danni non letali' }); }
   const abilita = [];
   for (const a of AB) { const g = gradi(a.id); const fe = Object.entries(SKILL_FEAT).filter(([f, l]) => haT(f) && l.includes(a.nome)).length * 2 + (talScelta('abilita_focalizzata').includes(a.nome) ? 3 : 0);
     const armP = a.penalita_armatura === 'si' ? penTot : a.penalita_armatura === 'doppia' ? 2 * penTot : 0;
-    const v = bonusRazzaAb(a.nome) + fe + armP;
-    if (g || (a.senza_addestramento && v)) { const nm = a.nome.startsWith('Conoscenze') ? 'Conoscenze' : a.nome;
+    const bc = c.capacita_1_livello.filter(x => x.dati && x.dati.abilita && typeof x.dati.bonus === 'number' && !/nemico/i.test(x.nome) && x.dati.abilita.includes(a.nome)).reduce((s, x) => s + x.dati.bonus, 0);
+    const v = bonusRazzaAb(a.nome) + fe + armP + bc;
+    if (a.id !== 'parlare_linguaggi' && (g || (a.senza_addestramento && v))) { const nm = a.nome.startsWith('Conoscenze') ? 'Conoscenze' : a.nome;
       abilita.push({ nome: nm, spec: a.nome.startsWith('Conoscenze') ? a.nome.replace(/^Conoscenze \(?/, '').replace(/\)$/, '') : S.spec[a.id] || '', gradi: Math.floor(g) === g ? g : g, vari: v, classe: diClasse(a.id), car: carAb(a) }); } }
-  const vel = r.velocita_base_m, lenta = arm && arm.categoria !== 'leggera' && !r.tratti.some(t => t.dati.non_ridotta_da_armatura_o_carico);
+  const vel = r.velocita_base_m, nanoTenace = r.tratti.some(t => t.dati.non_ridotta_da_armatura_o_carico), lenta = !nanoTenace && ((arm && arm.categoria !== 'leggera') || car !== EQ.carico.effetti.tabella[0]);
   const talenti = [...(TAL_FISSI[S.classe] || []).map(id => ({ nome: talById(id).nome + ' (classe)', pag: talById(id).pagina_pdf })),
     ...[...S.talBonus, ...S.talenti].map(t => ({ nome: talById(t.id).nome + (t.scelta ? ` (${t.scelta})` : ''), pag: talById(t.id).pagina_pdf }))];
   const capacita = [...r.tratti.filter(t => !['taglia', 'velocita', 'modificatori_caratteristica', 'classe_preferita'].includes(t.dati.tipo)).map(t => t.nome),
@@ -769,30 +843,33 @@ function calcola() {
   if (['chierico', 'druido'].includes(S.classe) && (m.preferiti || []).length) inc.per_livello['1'] = nomi(m.preferiti);
   if (c.incantatore && c.incantatore.incantesimi_al_giorno_1_livello) { const ic = c.incantatore, ck = { Intelligenza: 'INT', Saggezza: 'SAG', Carisma: 'CAR' }[ic.caratteristica];
     const g = ic.incantesimi_al_giorno_1_livello, cn = ic.incantesimi_conosciuti_1_livello || {};
-    inc.tabella['0'] = { conosciuti: cn['0'] ?? '', cd: 10 + M[ck], giorno: g['0'] };
-    if (g['1'] != null) inc.tabella['1'] = { conosciuti: cn['1'] ?? '', cd: 11 + M[ck], giorno: g['1'] + (m.scuola ? 1 : 0), bonus: bonusInc1() };
+    const pk = punteggio(ck), puo = lv => pk >= 10 + lv;
+    inc.tabella['0'] = { conosciuti: cn['0'] ?? '', cd: 10 + M[ck], giorno: puo(0) ? g['0'] + (m.scuola ? 1 : 0) : 0 };
+    if (g['1'] != null) inc.tabella['1'] = { conosciuti: cn['1'] ?? '', cd: 11 + M[ck], giorno: puo(1) ? g['1'] + (m.scuola ? 1 : 0) + (S.classe === 'chierico' ? (ic.slot_dominio_1_livello || 1) : 0) : 0, bonus: puo(1) ? bonusInc1() : 0 };
+    if (!puo(1)) inc.avviso = `Con ${ic.caratteristica} ${pk} non puoi lanciare incantesimi di 1° livello (serve almeno 11)${puo(0) ? '' : ', né di livello 0 (serve 10)'}.`;
     if (S.classe === 'chierico') inc.domini = (m.domini || []).join(', ') + ' — ' + m.divinita; if (m.scuola) inc.domini = `Specialista: ${m.scuola} · proibite: ${(m.proibite || []).join(', ')}`;
-    inc.fallimento_arcano = ic.tipo === 'arcano' ? (parseInt(arm ? arm.fallimento_arcani : 0) + parseInt(scu ? scu.fallimento_arcani : 0)) + '' : ''; }
+    inc.fallimento_arcano = ic.tipo === 'arcano' ? (parseInt(arm && !(S.classe === 'bardo' && arm.categoria === 'leggera') ? arm.fallimento_arcani : 0) + parseInt(scu ? scu.fallimento_arcani : 0)) + '' : ''; }
   const e = S.equip, k = contiEquip(), cassa = Math.max(0, k.cassa);
   const extra = [];
-  if (m.famiglio && m.famiglio !== 'nessuno') extra.push(`Famiglio: ${m.famiglio}`); if (m.compagno) extra.push(`Compagno animale: ${m.compagno}`);
+  if (m.famiglio && m.famiglio !== 'nessuno') extra.push(`Famiglio desiderato: ${m.famiglio} (si evoca con un rituale di 24 ore e 100 mo di materiali)`);
+  if (inc.avviso) extra.push(inc.avviso); if (m.compagno) extra.push(`Compagno animale: ${m.compagno}`);
   if (m.nemico) extra.push(`Nemico prescelto: ${m.nemico}`);
   return {
     nome: S.dett.nome, giocatore: S.giocatore, classe_livello: c.nome + ' 1', razza: r.nome, allineamento: ALL[S.dett.all][0],
-    divinita: S.classe === 'chierico' ? m.divinita : S.dett.divinita || '', taglia: r.taglia, eta: S.dett.eta, sesso: S.dett.sesso, altezza: S.dett.altezza || '', peso: S.dett.peso || '',
+    divinita: S.classe === 'chierico' ? m.divinita : S.dett.divinita || '', taglia: r.taglia, eta: S.dett.eta, sesso: S.dett.sesso, altezza: S.dett.altezza ? (+S.dett.altezza).toLocaleString('it') + ' cm' : '', peso: S.dett.peso ? (+S.dett.peso).toLocaleString('it') + ' kg' : '',
     occhi: S.dett.occhi || '', capelli: S.dett.capelli || '', pelle: S.dett.pelle || '',
-    caratteristiche: Object.fromEntries(CAR.map(k => [k, punteggio(k)])), pf, velocita: (lenta ? (r.velocita_base_m === 9 ? 6 : 4.5) : vel).toLocaleString('it') + ' m' + (monaco ? ' (+3 m monaco)' : ''),
+    caratteristiche: Object.fromEntries(CAR.map(k => [k, punteggio(k)])), pf, velocita: ((lenta ? (r.velocita_base_m === 9 ? 6 : 4.5) : vel) + (S.classe === 'barbaro' && !(arm && arm.categoria === 'pesante') && car !== EQ.carico.effetti.tabella[2] ? 3 : 0)).toLocaleString('it') + ' m',
     ca, iniziativa_vari: haT('iniziativa_migliorata') ? 4 : 0, ts, bab, lotta: { taglia: piccolo() ? -4 : 0, vari: 0 },
     modificatori_condizionali: r.tratti.flatMap(t => [...(t.dati.bonus_ts || []).filter(x => x.condizione).map(x => `${sg(x.valore)} TS ${x.condizione}`),
       ...(t.dati.condizione && t.dati.valore ? [`${sg(t.dati.valore)} ${t.dati.tipo === 'bonus_ca_condizionale' ? 'CA' : 'attacco'} ${t.dati.condizione}`] : [])]).join('; '),
     attacchi: attacchi.slice(0, 5), grado_massimo: '4/2', abilita, classe_abilita: AB.filter(a => diClasse(a.id)).map(a => a.nome.startsWith('Conoscenze') ? 'Conoscenze' : a.nome),
     punti_esperienza: '0',
-    armatura: arm ? { nome: arm.nome, tipo: arm.categoria, bonus_ca: sg(arm.bonus_ca), des_max: sg(arm.bonus_des_max), penalita: String(arm.penalita_prova), fallimento: arm.fallimento_arcani, velocita: r.velocita_base_m === 9 ? arm.velocita_base_9m : arm.velocita_base_6m, peso: arm.peso } : {},
-    scudo: scu ? { nome: scu.nome, bonus_ca: sg(scu.bonus_ca), peso: scu.peso, penalita: String(scu.penalita_prova), fallimento: scu.fallimento_arcani } : {},
+    armatura: arm ? { nome: arm.nome, tipo: arm.categoria, bonus_ca: sg(arm.bonus_ca), des_max: sg(arm.bonus_des_max), penalita: String(arm.penalita_prova), fallimento: arm.fallimento_arcani, velocita: r.velocita_base_m === 9 ? arm.velocita_base_9m : arm.velocita_base_6m, peso: (+pesoOgg(arm).toFixed(2)).toLocaleString('it') + ' kg' } : {},
+    scudo: scu ? { nome: scu.nome, bonus_ca: sg(scu.bonus_ca), peso: (+pesoOgg(scu).toFixed(2)).toLocaleString('it') + ' kg', penalita: String(scu.penalita_prova), fallimento: scu.fallimento_arcani } : {},
     oggetti: inv.filter(x => !x.o._arm || (x.o !== arm && x.o !== scu)).map(x => ({ nome: (x.q > 1 ? x.q + '× ' : '') + x.nome, peso: +(pesoOgg(x.o) * x.q).toFixed(2) })),
     carichi: Object.fromEntries([['leggero', cm.l], ['medio', cm.m], ['pesante', cm.p], ['sopra_testa', cm.p], ['da_terra', cm.p * 2], ['spingere', cm.p * 5]].map(([k, v]) => [k, (+v.toFixed(2)).toLocaleString('it') + ' kg'])),
     denaro: { mo: Math.floor(cassa / 100), ma: Math.floor(cassa % 100 / 10), mr: cassa % 10 },
-    talenti, capacita_speciali: [...capacita, ...extra], linguaggi: [...(r.linguaggi_automatici || []), ...(S.dett.lingue || [])],
+    talenti, capacita_speciali: [...capacita, ...extra], linguaggi: [...(r.linguaggi_automatici || []), ...linguaggiGratis(), ...(S.dett.lingue || [])],
     incantesimi: inc,
     descrizione: [S.dett.storia, S.dett.obiettivo && 'Obiettivo: ' + S.dett.obiettivo, S.dett.pregio && 'Pregio e difetto: ' + S.dett.pregio].filter(Boolean).join(' '),
     spiegazioni_extra: [...c.capacita_1_livello.map(x => `${x.nome}: ${x.effetto}`), ...extra],
@@ -863,12 +940,14 @@ function apriScheda() {
   if (TR.pf == null) TR.pf = p.pf; if (!TR.slot) TR.slot = {}; if (!TR.note) TR.note = '';
   if (!TR.denaro) TR.denaro = { ...p.denaro };
   const tabs = [['combatti', '⚔️ Combatti'], ['abilita', '🎯 Abilità'], ...(Object.keys(p.incantesimi.tabella || {}).length ? [['magia', '✨ Magia']] : []), ['zaino', '🎒 Zaino'], ['chi', '📜 Chi sono']];
-  let h = `<p class="soft" style="margin:4px 0">${esc(statoSync)} <button class="btn sec piccolo" id="sync">↻ Aggiorna</button>${p.pe != null ? ` · PE <b>${p.pe}</b>` : ''}${p.note_dm ? `<br>📣 <b>Dal DM:</b> ${esc(p.note_dm)}` : ''}</p>
+  let h = `<p style="margin:4px 0"><button class="btn sec piccolo" id="modifica2">← Torna alla creazione</button></p><p class="soft" style="margin:4px 0">${esc(statoSync)} <button class="btn sec piccolo" id="sync">↻ Aggiorna</button>${p.pe != null ? ` · PE <b>${p.pe}</b>` : ''}${p.note_dm ? `<br>📣 <b>Dal DM:</b> ${esc(p.note_dm)}` : ''}</p>
 <div class="tabs">${tabs.map(([k, n]) => `<button class="${tabScheda === k ? 'on' : ''}" data-tab="${k}">${n}</button>`).join('')}</div>`;
   if (tabScheda === 'combatti') {
-    h += `<div class="card"><h2>Punti ferita</h2><div class="pf"><button class="btn sec" id="pfMeno">−</button><div class="val ${TR.pf <= 0 ? 'bad' : ''}">${TR.pf}<span class="soft" style="font-size:18px"> / ${p.pf}</span></div><button class="btn sec" id="pfPiu">+</button></div>
-<p class="soft" style="text-align:center">${TR.pf <= 0 ? (TR.pf <= -10 ? 'Morto.' : TR.pf === 0 ? 'Inabile: puoi fare solo un\'azione semplice.' : 'Morente: perdi 1 PF a round finché qualcuno non ti stabilizza.') : 'Tocca − quando ti colpiscono, + quando ti curano.'}</p>
-<p style="text-align:center"><button class="btn sec piccolo" id="pfReset">Riposo completo (torna al massimo)</button></p></div>
+    const st = p.stato || {}, pfa = st.pf_attuali ?? p.pf, nl = st.danni_non_letali || 0;
+    const cond = pfa <= -10 ? 'Morto.' : pfa < 0 ? 'Morente: perdi 1 punto ferita a round finché qualcuno non ti stabilizza.' : pfa === 0 ? 'Inabile: puoi fare solo un\'azione semplice per round.' : nl && nl >= pfa ? 'Stordito dai danni non letali.' : '';
+    h += `<div class="card"><h2>Punti ferita</h2><div class="pf"><div class="val ${pfa <= 0 ? 'bad' : ''}">${pfa}<span class="soft" style="font-size:18px"> / ${p.pf}</span></div></div>
+${nl ? `<p style="text-align:center">Danni non letali: <b>${nl}</b></p>` : ''}${cond ? `<p class="bad" style="text-align:center"><b>${cond}</b></p>` : ''}
+<p class="soft" style="text-align:center">Li aggiorna il DM quando ti colpiscono, ti curano o riposi (regole del manuale). Premi ↻ Aggiorna per vedere l'ultimo valore.</p></div>
 <div class="card"><div class="big"><div><b>${ca}</b><span>Classe Armatura</span></div><div><b>${sg(M.DES + p.iniziativa_vari)}</b><span>Iniziativa</span></div><div><b>${esc(p.velocita.replace(/ \(.*/, ''))}</b><span>Velocità</span></div>
 <div><b>${sg(ts('tempra', 'COS'))}</b><span>Tempra</span></div><div><b>${sg(ts('riflessi', 'DES'))}</b><span>Riflessi</span></div><div><b>${sg(ts('volonta', 'SAG'))}</b><span>Volontà</span></div></div>
 <p class="soft">CA contro attacchi di contatto ${contatto} · colto alla sprovvista ${sprov}. Lotta ${sg(p.bab + M.FOR + (p.lotta.taglia || 0))}.</p>
@@ -881,19 +960,20 @@ ${p.attacchi.map(a => `<tr><td><b>${esc(a.nome)}</b><br><span class="soft">criti
   if (tabScheda === 'abilita') {
     const righe = AB.map(a => { const mine = p.abilita.filter(x => x.nome === (a.nome.startsWith('Conoscenze') ? 'Conoscenze' : a.nome) && (!a.nome.startsWith('Conoscenze') || a.nome.includes(x.spec)));
       const x = mine[0]; if (!x && !a.senza_addestramento) return null;
-      const tot = (x ? x.gradi + x.vari : 0) + M[carAb(a)]; return { a, x, tot }; }).filter(Boolean).sort((u, v) => v.tot - u.tot);
+      if (!carAb(a)) return null; const tot = (x ? Math.floor(x.gradi) + x.vari : 0) + M[carAb(a)]; return { a, x, tot }; }).filter(Boolean).sort((u, v) => v.tot - u.tot);
     h += `<div class="card"><h2>Abilità</h2><p class="soft">Quando il DM chiede una prova: d20 + questo numero. Quelle senza numero non le puoi usare.</p><table class="t">
 ${righe.map(({ a, x, tot }) => `<tr class="${x && x.gradi ? 'riga-sel' : ''}"><td><b>${esc(a.nome)}${x && x.spec && !a.nome.startsWith('Conoscenze') ? ' (' + esc(x.spec) + ')' : ''}</b><br><span class="soft">${esc(a.a_cosa_serve)}</span></td><td class="num gr">${sg(tot)}</td></tr>`).join('')}</table></div>`;
   }
   if (tabScheda === 'magia') {
     const tb = p.incantesimi.tabella;
-    h += `<div class="card"><h2>Incantesimi di oggi</h2><p class="soft">Tocca un cerchio quando lanci un incantesimo. Dopo una notte di riposo si azzerano.</p>
-${Object.entries(tb).map(([lv, r]) => `<p><b>Livello ${lv}</b> (CD tiro salvezza ${r.cd}): ${Array.from({ length: (+r.giorno || 0) + (+r.bonus || 0) }, (_, i) => `<span class="slot ${(TR.slot[lv] || 0) > i ? 'usato' : ''}" data-slot="${lv}" data-i="${i}"></span>`).join('')}</p>`).join('')}
-<p style="text-align:center"><button class="btn sec piccolo" id="slotReset">Nuovo giorno</button></p>${p.incantesimi.domini ? `<p class="soft">${esc(p.incantesimi.domini)}</p>` : ''}</div>
+    h += `<div class="card"><h2>Incantesimi di oggi</h2><p class="soft">I cerchi pieni sono quelli già usati: li segna il DM quando lanci, e tornano liberi dopo una notte di riposo.</p>
+${Object.entries(tb).map(([lv, r]) => `<p><b>Livello ${lv}</b> (CD tiro salvezza ${r.cd}): ${Array.from({ length: (+r.giorno || 0) + (+r.bonus || 0) }, (_, i) => `<span class="slot ${(((p.stato || {}).slot_usati || {})[lv] || 0) > i ? 'usato' : ''}"></span>`).join('')}</p>`).join('')}
+${p.incantesimi.domini ? `<p class="soft">${esc(p.incantesimi.domini)}</p>` : ''}</div>
 <div class="card"><h2>I tuoi incantesimi</h2>${Object.entries(p.incantesimi.per_livello).map(([lv, l]) => `<h3>Livello ${lv}</h3><ul>${l.map(n => { const x = INC.find(i => i.nome === n); return `<li><b>${esc(n)}</b>${x ? ` — ${esc(x.effetto)} <span class="soft">(${esc(x.raggio_di_azione || '')}, ${esc(x.durata || '')})</span>` : ''}</li>`; }).join('')}</ul>`).join('') || '<p class="soft">Gli incantesimi li prepari ogni mattina: chiedi al DM.</p>'}</div>`;
   }
   if (tabScheda === 'zaino') {
-    h += `<div class="card"><h2>Monete</h2><div class="big">${['mp', 'mo', 'ma', 'mr'].map(k => `<div><input type="number" data-mon="${k}" value="${TR.denaro[k] || 0}" style="text-align:center;font-size:20px"><span>${{ mp: 'platino', mo: 'oro', ma: 'argento', mr: 'rame' }[k]}</span></div>`).join('')}</div></div>
+    const den = (p.stato || {}).denaro || p.denaro;
+    h += `<div class="card"><h2>Monete</h2><div class="big">${['mp', 'mo', 'ma', 'mr'].map(k => `<div><b>${den[k] || 0}</b><span>${{ mp: 'platino', mo: 'oro', ma: 'argento', mr: 'rame' }[k]}</span></div>`).join('')}</div><p class="soft">Le aggiorna il DM quando compri o trovi qualcosa.</p></div>
 <div class="card"><h2>Zaino</h2><ul>${[p.armatura.nome && `${p.armatura.nome} (indossata)`, p.scudo.nome, ...p.oggetti.map(o => o.nome)].filter(Boolean).map(n => `<li>${esc(n)}</li>`).join('')}</ul>
 <label class="campo"><span>Appunti (bottino, cose trovate, nomi…)</span><textarea id="note" style="min-height:160px">${esc(TR.note)}</textarea></label></div>`;
   }
@@ -908,11 +988,8 @@ ${Object.entries(tb).map(([lv, r]) => `<p><b>Livello ${lv}</b> (CD tiro salvezza
   document.querySelectorAll('[data-tab]').forEach(b => b.onclick = () => { tabScheda = b.dataset.tab; apriScheda(); scrollTo(0, 0); });
   const on = (id, f) => { const e = $('#' + id); if (e) e.onclick = f; };
   on('sync', () => { statoSync = 'controllo…'; apriScheda(); sincronizza().then(apriScheda); });
-  on('pfMeno', () => { TR.pf--; salvaTR(); apriScheda(); }); on('pfPiu', () => { TR.pf = Math.min(p.pf, TR.pf + 1); salvaTR(); apriScheda(); });
-  on('pfReset', () => { TR.pf = p.pf; salvaTR(); apriScheda(); }); on('slotReset', () => { TR.slot = {}; salvaTR(); apriScheda(); });
-  document.querySelectorAll('[data-slot]').forEach(s => s.onclick = () => { const lv = s.dataset.slot, i = +s.dataset.i; TR.slot[lv] = (TR.slot[lv] || 0) > i ? i : i + 1; salvaTR(); apriScheda(); });
-  document.querySelectorAll('[data-mon]').forEach(i => i.oninput = () => { TR.denaro[i.dataset.mon] = +i.value || 0; salvaTR(); });
   const n = $('#note'); if (n) n.oninput = () => { TR.note = n.value; salvaTR(); };
+  on('modifica2', () => { document.querySelector('.nav').style.display = ''; document.querySelector('header h1').textContent = '⚔️ Crea il tuo eroe'; S.passo = S.classe ? attivi().length - 1 : 0; disegna(); });
   on('modifica', () => { document.querySelector('.nav').style.display = ''; document.querySelector('header h1').textContent = '⚔️ Crea il tuo eroe'; disegna(); });
   on('esporta', () => { const blob = new Blob([JSON.stringify(p, null, 2)], { type: 'application/json' }); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `${p.nome} - ${p.giocatore}.json`; document.body.appendChild(a); a.click(); a.remove(); });
   const imp = $('#importa'); if (imp) imp.onchange = () => { const f = imp.files[0]; if (!f) return; f.text().then(t => { try { const q = JSON.parse(t); if (!q.caratteristiche || !q.tiro) throw 0; salvaPG(q); TR = {}; salvaTR(); apriScheda(); } catch (e) { alert('File non valido'); } }); };
