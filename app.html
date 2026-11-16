@@ -85,7 +85,7 @@ table.t { border-collapse: collapse; width: 100%; font-size: 15px; } .t td, .t t
 <body>
 <header><h1>⚔️ Crea il tuo eroe</h1><div class="chi" id="chi"></div><div class="passi" id="passi"></div></header>
 <main id="main"></main>
-<p style="text-align:center;font:11px sans-serif;color:var(--soft);margin:0 0 90px">versione 16/11 03:41</p>
+<p style="text-align:center;font:11px sans-serif;color:var(--soft);margin:0 0 90px">versione 16/11 03:54</p>
 <div class="nav"><div class="in"><button class="btn sec" id="indietro">← Indietro</button><div class="msg" id="msg"></div>
 <button class="btn" id="avanti">Avanti →</button></div></div>
 <script>
@@ -1042,6 +1042,19 @@ async function ultimoSha(forza) {
   try { const r = await fetch('https://api.github.com/repos/manu814/dnd-creatore/commits/main', { cache: 'no-store' }); if (r.ok) { SHA = (await r.json()).sha; TR.sha = SHA; salvaTR(); return SHA; } } catch (e) {}
   return SHA || TR.sha || null;
 }
+let ritrattoInCorso = false;
+async function scaricaRitratto(p) {   // ritratto messo dal DM sul sito, cifrato col codice: solo chi ha il codice lo apre
+  const cod = (p.tiro || {}).codice; if (!cod || ritrattoInCorso) return; ritrattoInCorso = true;
+  try {
+    const r = await leggiRepo(p.ritratto_cifrato); if (!r.ok) return;
+    const b = new Uint8Array(await r.arrayBuffer());
+    const k = await crypto.subtle.importKey('raw', await crypto.subtle.digest('SHA-256', new TextEncoder().encode(cod + '|ritratto')), 'AES-GCM', false, ['decrypt']);
+    const jpg = new Uint8Array(await crypto.subtle.decrypt({ name: 'AES-GCM', iv: b.slice(0, 12) }, k, b.slice(12)));
+    let bin = ''; for (let i = 0; i < jpg.length; i += 8192) bin += String.fromCharCode(...jpg.subarray(i, i + 8192));
+    localStorage.setItem(CHIAVE + '-ritratto-' + cod, 'data:image/jpeg;base64,' + btoa(bin));
+    if (tabScheda === 'chi' && document.querySelector('.tabs')) apriScheda();
+  } catch (e) {} finally { ritrattoInCorso = false; }
+}
 async function leggiRepo(path, forza) {
   const sha = await ultimoSha(forza);
   if (sha) { try { const r = await fetch(RAW + sha + '/' + path); if (r.ok) return r; } catch (e) {} }
@@ -1142,6 +1155,7 @@ ${p.incantesimi.domini ? `<p class="soft">${esc(p.incantesimi.domini)}</p>` : ''
     const ritr = (() => { try { const k = CHIAVE + '-ritratto-' + ((caricaPG() || {}).tiro || {}).codice, vecchio = localStorage.getItem(CHIAVE + '-ritratto');
       if (vecchio && !localStorage.getItem(k)) { localStorage.setItem(k, vecchio); localStorage.removeItem(CHIAVE + '-ritratto'); }  // ritratto salvato con la versione vecchia
       return localStorage.getItem(k); } catch (e) { return null; } })();
+    if (!ritr && p.ritratto_cifrato) scaricaRitratto(p);
     h += `<div class="card"><h2>🖼️ Ritratto</h2>${ritr ? `<img src="${ritr}" alt="ritratto" style="width:100%;border-radius:12px">` : ''}
 <p class="soft">Per un ritratto fantasy col tuo viso: 1) copia la descrizione; 2) apri ChatGPT o Gemini (gratis); 3) carica un tuo selfie e incolla la descrizione; 4) salva l'immagine e caricala qui. Il ritratto resta solo su questo telefono.</p>
 <p><button class="btn sec piccolo" id="copiaPrompt">📋 Copia la descrizione</button> <label class="btn sec piccolo" style="display:inline-block">📷 Carica il ritratto<input type="file" id="ritrattoFile" accept="image/*" style="display:none"></label></p>
