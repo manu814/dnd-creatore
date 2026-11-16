@@ -85,7 +85,7 @@ table.t { border-collapse: collapse; width: 100%; font-size: 15px; } .t td, .t t
 <body>
 <header><h1>⚔️ Crea il tuo eroe</h1><div class="chi" id="chi"></div><div class="passi" id="passi"></div></header>
 <main id="main"></main>
-<p style="text-align:center;font:11px sans-serif;color:var(--soft);margin:0 0 90px">versione 16/11 15:53</p>
+<p style="text-align:center;font:11px sans-serif;color:var(--soft);margin:0 0 90px">versione 16/11 16:11</p>
 <div class="nav"><div class="in"><button class="btn sec" id="indietro">← Indietro</button><div class="msg" id="msg"></div>
 <button class="btn" id="avanti">Avanti →</button></div></div>
 <script>
@@ -1077,6 +1077,46 @@ function mostraRevocato() {   // il DM ha rinnovato il codice (link finito in ma
   try { localStorage.removeItem(CH_PG); localStorage.removeItem(CH_TR); } catch (e) {}
   document.body.innerHTML = '<div style="max-width:480px;margin:40px auto;padding:20px;font-family:sans-serif;text-align:center"><h2>🔒 Link non più valido</h2><p>Il master ha sostituito questo link con uno nuovo. Chiedigli il link nuovo e apri quello: il tuo personaggio è al sicuro, non hai perso niente.</p></div>';
 }
+// ===== consiglio facoltativo: aprire nel browser vero / icona sulla schermata Home (mai obbligatorio) =====
+function inAppBrowser() { return /Telegram|WhatsApp|FBAN|FBAV|Instagram|Line\/|; wv\)/i.test(navigator.userAgent); }
+function consiglioHtml() {
+  let visto = false; try { visto = !!localStorage.getItem(CHIAVE + '-consiglio-visto'); } catch (e) {}
+  const standalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+  if (visto || standalone) return '';
+  const ios = /iPhone|iPad/i.test(navigator.userAgent), android = /Android/i.test(navigator.userAgent);
+  const chrome = android ? `<a class="btn sec piccolo" href="intent://${location.host}${location.pathname}${location.search}#Intent;scheme=https;package=com.android.chrome;end">Apri in Chrome</a> ` : '';
+  const home = ios ? 'in Safari tocca <b>Condividi</b> (il quadrato con la freccia) → <b>Aggiungi alla schermata Home</b>.' : android ? 'in Chrome tocca <b>⋮</b> → <b>Aggiungi a schermata Home</b>.' : 'dal menu del browser scegli "Aggiungi alla schermata Home".';
+  return `<div class="card" style="border:2px dashed var(--acc)"><b>💡 Consiglio (facoltativo)</b>
+<p>${inAppBrowser() ? 'Stai aprendo la scheda <b>dentro Telegram o WhatsApp</b>: a volte dimenticano i tuoi appunti. Meglio aprirla nel browser del telefono.' : 'Per ritrovarla sempre al volo puoi metterla come icona sul telefono.'}</p>
+<p class="soft">Icona sul telefono: ${home}</p>
+<p>${chrome}<button class="btn sec piccolo" id="consCopia">📋 Copia il link</button> <button class="btn sec piccolo" id="consOk">Ho capito, non mostrare più</button></p>
+<p class="soft">Se non ci riesci, nessun problema: la scheda funziona lo stesso, e i tuoi appunti sono salvati anche dal master.</p></div>`;
+}
+// ===== appunti salvati anche sul Mac del master (canale degli esiti) e recuperati cifrati col codice =====
+let notaTimer = null;
+function mandaNote(p) {
+  clearTimeout(notaTimer);
+  notaTimer = setTimeout(() => { const codice = (p.tiro || {}).codice; if (!codice) return;
+    fetch(`https://ntfy.sh/${canale(codice, 'e')}`, { method: 'POST', body: JSON.stringify({ tipo: 'note', nome: p.nome, testo: TR.note, quando: new Date().toISOString() }) }).catch(() => {}); }, 3000);
+}
+async function decifra(cod, scopo, path) {
+  const r = await leggiRepo(path); if (!r.ok) return null;
+  const b = new Uint8Array(await r.arrayBuffer());
+  const k = await crypto.subtle.importKey('raw', await crypto.subtle.digest('SHA-256', new TextEncoder().encode(cod + '|' + scopo)), 'AES-GCM', false, ['decrypt']);
+  return new Uint8Array(await crypto.subtle.decrypt({ name: 'AES-GCM', iv: b.slice(0, 12) }, k, b.slice(12)));
+}
+async function recuperaNote(p) {
+  TR.noteProvate = true; salvaTR();
+  const cod = (p.tiro || {}).codice; if (!cod) return;
+  try {   // 1) copia del master sul sito (cifrata)  2) ultimo invio ancora su ntfy (12 ore)
+    let testo = null;
+    const b = await decifra(cod, 'note', `note/${idOnline(cod)}.bin`).catch(() => null);
+    if (b) testo = new TextDecoder().decode(b);
+    if (!testo) { const tx = await (await fetch(`https://ntfy.sh/${canale(cod, 'e')}/json?poll=1&since=12h`)).text();
+      for (const l of tx.split('\n')) { try { const m = JSON.parse(JSON.parse(l).message || '{}'); if (m.tipo === 'note') testo = m.testo; } catch (e) {} } }
+    if (testo && !TR.note) { TR.note = testo; salvaTR(); if (tabScheda === 'zaino' && document.querySelector('.tabs')) apriScheda(); }
+  } catch (e) {}
+}
 async function sincronizza(forza) {
   const p = caricaPG(); const codice = (p && p.tiro && p.tiro.codice) || S.codice; if (!codice) return;
   try {
@@ -1115,7 +1155,7 @@ function apriScheda() {
   let h = `<p style="margin:4px 0"><button class="btn sec piccolo" id="modifica2">${S.chiuso || !S.classe ? '← Riepilogo e file' : '← Torna alla creazione'}</button></p><p class="soft" style="margin:4px 0">${esc(statoSync)} <button class="btn sec piccolo" id="sync">↻ Aggiorna</button>${p.pe != null ? ` · PE <b>${p.pe}</b>` : ''}${p.note_dm ? `<br>📣 <b>Dal DM:</b> ${esc(p.note_dm)}` : ''}</p>
 ${puoSalire(p) ? `<div class="card" style="text-align:center;border:2px solid var(--ok)"><b>🎉 Hai abbastanza punti esperienza!</b><br><button class="btn" id="sali" style="margin-top:8px">⬆️ Sali al livello ${livelloDi(p) + 1}</button></div>` : ''}
 ${TT.nomi.length ? `<div class="spiega"><b>Effetti attivi:</b> ${TT.nomi.map(esc).join(' · ')}<br><span class="soft">I numeri qui sotto sono già aggiornati.</span>${TT.condizionali.length ? '<br>' + TT.condizionali.map(esc).join('<br>') : ''}${TT.note.length ? '<br>' + TT.note.map(esc).join('<br>') : ''}</div>` : ''}
-<div class="tabs">${tabs.map(([k, n]) => `<button class="${tabScheda === k ? 'on' : ''}" data-tab="${k}">${n}</button>`).join('')}</div>`;
+${consiglioHtml()}<div class="tabs">${tabs.map(([k, n]) => `<button class="${tabScheda === k ? 'on' : ''}" data-tab="${k}">${n}</button>`).join('')}</div>`;
   if (tabScheda === 'combatti') {
     const st = p.stato || {}, pfa = st.pf_attuali ?? p.pf, nl = st.danni_non_letali || 0;
     const cond = pfa <= -10 ? 'Morto.' : pfa < 0 ? 'Morente: perdi 1 punto ferita a round finché qualcuno non ti stabilizza.' : pfa === 0 ? 'Inabile: puoi fare solo un\'azione semplice per round.' : nl && nl >= pfa ? 'Stordito dai danni non letali.' : '';
@@ -1188,7 +1228,10 @@ ${p.incantesimi.domini ? `<p class="soft">${esc(p.incantesimi.domini)}</p>` : ''
   document.querySelectorAll('[data-esegui]').forEach(b => b.onclick = () => esegui(p, +b.dataset.esegui));
   on('sali', () => { iniziaSalita(p0); apriSalita(p0); });
   on('sync', () => { statoSync = 'controllo…'; apriScheda(); sincronizza('github').then(apriScheda); });
-  const n = $('#note'); if (n) n.oninput = () => { TR.note = n.value; salvaTR(); };
+  const n = $('#note'); if (n) n.oninput = () => { TR.note = n.value; salvaTR(); mandaNote(p); };
+  on('consOk', () => { try { localStorage.setItem(CHIAVE + '-consiglio-visto', '1'); } catch (e) {} apriScheda(); });
+  on('consCopia', () => { (navigator.clipboard ? navigator.clipboard.writeText(location.href) : Promise.reject()).then(() => { $('#consCopia').textContent = '✅ Link copiato'; }).catch(() => prompt('Copia questo link:', location.href)); });
+  if (!TR.note && !TR.noteProvate) recuperaNote(p);
   on('modifica2', () => { if (!S.classe) return; document.querySelector('.nav').style.display = ''; document.querySelector('header h1').textContent = '⚔️ Crea il tuo eroe'; S.passo = attivi().length - 1; disegna(); });
   on('modifica', () => { document.querySelector('.nav').style.display = ''; document.querySelector('header h1').textContent = '⚔️ Crea il tuo eroe'; disegna(); });
   on('esporta', () => inviaFile(p));
