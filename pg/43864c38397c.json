@@ -351,7 +351,7 @@
  },
  "denaro": {
   "mo": 3,
-  "ma": 8,
+  "ma": 3,
   "mr": 0
  },
  "talenti": [
@@ -460,11 +460,11 @@
   }
  },
  "pe": 0,
- "versione": 3,
+ "versione": 4,
  "stato": {
   "pf_attuali": 9,
   "campagna": "campane-di-salmastro"
  },
- "aggiornato": "2026-11-16T18:35",
- "note_dm": "Zuppa alla Conchiglia: 2 ma"
+ "aggiornato": "2026-11-16T19:45",
+ "note_dm": "Stanza alla Conchiglia: 5 ma"
 }
