@@ -254,7 +254,7 @@
   },
   {
    "nome": "Arma Focalizzata (Spada lunga)",
-   "pag": null
+   "pag": 90
   }
  ],
  "capacita_speciali": [
@@ -329,7 +329,7 @@
    "tolti": {}
   }
  },
- "versione": 2,
+ "versione": 3,
  "pe": 0,
  "stato": {
   "pf_attuali": 14
