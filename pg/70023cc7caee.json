@@ -329,11 +329,12 @@
    "tolti": {}
   }
  },
- "versione": 4,
+ "versione": 5,
  "pe": 0,
  "stato": {
   "pf_attuali": 14,
   "campagna": "campane-di-salmastro"
  },
- "aggiornato": "2026-11-16T03:41"
+ "aggiornato": "2026-11-16T03:55",
+ "ritratto_cifrato": "ritratti/70023cc7caee.bin"
 }
