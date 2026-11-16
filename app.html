@@ -85,7 +85,7 @@ table.t { border-collapse: collapse; width: 100%; font-size: 15px; } .t td, .t t
 <body>
 <header><h1>⚔️ Crea il tuo eroe</h1><div class="chi" id="chi"></div><div class="passi" id="passi"></div></header>
 <main id="main"></main>
-<p style="text-align:center;font:11px sans-serif;color:var(--soft);margin:0 0 90px">versione 15/11 22:33</p>
+<p style="text-align:center;font:11px sans-serif;color:var(--soft);margin:0 0 90px">versione 16/11 02:52</p>
 <div class="nav"><div class="in"><button class="btn sec" id="indietro">← Indietro</button><div class="msg" id="msg"></div>
 <button class="btn" id="avanti">Avanti →</button></div></div>
 <script>
@@ -1078,7 +1078,8 @@ function apriScheda() {
   p = { ...p, attacchi: TT.attacchi, velocita: TT.velocita, iniziativa_vari: TT.iniziativa - M.DES };
   if (TR.pf == null) TR.pf = p.pf; if (!TR.slot) TR.slot = {}; if (!TR.note) TR.note = '';
   if (!TR.denaro) TR.denaro = { ...p.denaro };
-  const tabs = [['dadi', '🎲 Dadi'], ['combatti', '⚔️ Combatti'], ['abilita', '🎯 Abilità'], ...(Object.keys(p.incantesimi.tabella || {}).length ? [['magia', '✨ Magia']] : []), ['zaino', '🎒 Zaino'], ...((p.stato || {}).campagna ? [['scene', '🖼️ Scene']] : []), ['chi', '📜 Chi sono']];
+  if (tabScheda === 'scene') tabScheda = 'dadi';
+  const tabs = [['dadi', '🎲 Dadi'], ['combatti', '⚔️ Combatti'], ['abilita', '🎯 Abilità'], ...(Object.keys(p.incantesimi.tabella || {}).length ? [['magia', '✨ Magia']] : []), ['zaino', '🎒 Zaino'], ['chi', '📜 Chi sono']];
   let h = `<p style="margin:4px 0"><button class="btn sec piccolo" id="modifica2">${S.chiuso || !S.classe ? '← Riepilogo e file' : '← Torna alla creazione'}</button></p><p class="soft" style="margin:4px 0">${esc(statoSync)} <button class="btn sec piccolo" id="sync">↻ Aggiorna</button>${p.pe != null ? ` · PE <b>${p.pe}</b>` : ''}${p.note_dm ? `<br>📣 <b>Dal DM:</b> ${esc(p.note_dm)}` : ''}</p>
 ${puoSalire(p) ? `<div class="card" style="text-align:center;border:2px solid var(--ok)"><b>🎉 Hai abbastanza punti esperienza!</b><br><button class="btn" id="sali" style="margin-top:8px">⬆️ Sali al livello ${livelloDi(p) + 1}</button></div>` : ''}
 ${TT.nomi.length ? `<div class="spiega"><b>Effetti attivi:</b> ${TT.nomi.map(esc).join(' · ')}<br><span class="soft">I numeri qui sotto sono già aggiornati.</span>${TT.condizionali.length ? '<br>' + TT.condizionali.map(esc).join('<br>') : ''}${TT.note.length ? '<br>' + TT.note.map(esc).join('<br>') : ''}</div>` : ''}
@@ -1108,7 +1109,7 @@ ${ult ? `<div class="card" style="text-align:center"><div class="soft">Ultimo ti
 <div class="soft">${esc(ult.dett)}</div>${ult.nota ? `<p class="bad"><b>${esc(ult.nota)}</b></p>` : ''}</div>` : ''}
 <div class="card"><h3>Tiri fatti</h3><table class="t">${(TR.log || []).slice(0, 20).map(x => `<tr><td class="num">n.${x.n}</td><td>${esc(x.cosa)}<br><span class="soft">${esc(x.dett)}</span></td><td class="num gr">${x.tot}</td></tr>`).join('') || '<tr><td class="soft">ancora nessuno</td></tr>'}</table></div>`;
   }
-  if (tabScheda === 'scene') {
+  if (false) {
     const camp = (p.stato || {}).campagna, sc = SCENE[camp];
     if (!sc) { caricaScene(camp); h += `<div class="card"><p class="soft">Carico le immagini…</p></div>`; }
     else h += sc.length ? sc.slice().reverse().map(x => `<div class="card" style="padding:10px"><a href="${urlRepo('scene/' + camp + '/' + x.file)}" target="_blank"><img src="${urlRepo('scene/' + camp + '/' + x.file)}" alt="${esc(x.titolo)}" style="width:100%;border-radius:10px"></a>
@@ -1190,8 +1191,7 @@ function ascoltaDM() {
     fonte.onmessage = ev => { try { const m = JSON.parse(ev.data); if (m.event !== 'message') return; const r = JSON.parse(m.message);
       if (r.sha) { SHA = r.sha; TR.sha = r.sha; salvaTR(); }
       if (r.tipo === 'aggiorna') { sincronizza().then(() => { if (document.querySelector('.tabs')) apriScheda(); }); if (navigator.vibrate) navigator.vibrate(100); return; }
-      if (r.tipo === 'scena') { TR.viste = TR.viste || []; const nuova = !TR.viste.includes(m.id); if (nuova) { TR.viste.push(m.id); salvaTR(); }
-        const pp = caricaPG(); if (nuova && navigator.vibrate) navigator.vibrate([150, 80, 150]); caricaScene(((pp || {}).stato || {}).campagna, nuova); return; }
+      if (r.tipo === 'scena') return; // sezione Scene tolta (regista 16/11/26)
       if (!r.n || !r.dadi) return; TR.richieste = TR.richieste || {}; TR.richieste[r.n] = r; salvaTR();
       if (document.querySelector('.tabs')) { tabScheda = 'dadi'; apriScheda(); } if (navigator.vibrate) navigator.vibrate(200); } catch (e) {} };
   } catch (e) { statoCanale = 'questo browser non riceve le richieste del DM'; }
