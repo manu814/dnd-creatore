@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Crea il tuo eroe</title>
+<title>RoleGameAI 3.5 · Crea il tuo eroe</title>
 <style>
 :root {
   --bg: #f4ecdc; --carta: #fffaf0; --ink: #2a2018; --soft: #6b5a48; --linea: #e0d2b8;
@@ -85,7 +85,7 @@ table.t { border-collapse: collapse; width: 100%; font-size: 15px; } .t td, .t t
 <body>
 <header><h1>⚔️ Crea il tuo eroe</h1><div class="chi" id="chi"></div><div class="passi" id="passi"></div></header>
 <main id="main"></main>
-<p style="text-align:center;font:11px sans-serif;color:var(--soft);margin:0 0 90px">versione 16/11 03:54</p>
+<p style="text-align:center;font:11px sans-serif;color:var(--soft);margin:0 0 90px">versione 16/11 04:01</p>
 <div class="nav"><div class="in"><button class="btn sec" id="indietro">← Indietro</button><div class="msg" id="msg"></div>
 <button class="btn" id="avanti">Avanti →</button></div></div>
 <script>
@@ -323,7 +323,7 @@ function ridisegna() { const y = scrollY; disegna(); scrollTo(0, y); }
 
 // ===== 1. inizio =====
 R.inizio = () => `<div class="card"><h2>Benvenuto!</h2>
-<p>Qui crei il tuo personaggio per <b>Dungeons &amp; Dragons 3.5</b>, passo per passo, seguendo il Manuale del Giocatore. Non serve sapere niente: ogni cosa è spiegata quando arriva.</p>
+<p>Qui crei il tuo personaggio per <b>RoleGameAI 3.5</b>, passo per passo, seguendo il Manuale del Giocatore. Non serve sapere niente: ogni cosa è spiegata quando arriva.</p>
 <div class="spiega">I dadi li tira la pagina quando premi il bottone, a partire dal tuo <b>codice personale</b>: escono sempre uguali, quindi c'è un solo tentativo. Alla fine scarichi un file e lo mandi al Dungeon Master (il DM, chi guida la partita).</div>
 <label class="campo"><span>Il tuo nome (quello vero)</span><input type="text" id="giocatore" autocomplete="given-name" value="${esc(S.giocatore)}" placeholder="es. Luca"></label>
 <label class="campo"><span>Codice personale (te l'ha dato il DM)</span><input type="text" id="codice" autocomplete="off" autocapitalize="characters" spellcheck="false" value="${esc(S.codice)}" placeholder="es. LUCA-7F3K-92QD" ${qs.get('codice') ? 'readonly' : ''}></label>
@@ -1020,7 +1020,7 @@ async function inviaFile(p) {
   const testo = JSON.stringify(p, null, 2);
   try {
     const f = new File([testo], nome, { type: 'application/json' });
-    if (navigator.canShare && navigator.canShare({ files: [f] })) { await navigator.share({ files: [f], title: 'Personaggio D&D', text: `Personaggio di ${p.giocatore || ''}` }); return; }
+    if (navigator.canShare && navigator.canShare({ files: [f] })) { await navigator.share({ files: [f], title: 'Personaggio RoleGameAI', text: `Personaggio di ${p.giocatore || ''}` }); return; }
   } catch (e) { if (e && e.name === 'AbortError') return; }
   const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([testo], { type: 'application/octet-stream' })); a.download = nome;
   document.body.appendChild(a); a.click(); a.remove();
