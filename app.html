@@ -85,7 +85,7 @@ table.t { border-collapse: collapse; width: 100%; font-size: 15px; } .t td, .t t
 <body>
 <header><h1>⚔️ Crea il tuo eroe</h1><div class="chi" id="chi"></div><div class="passi" id="passi"></div></header>
 <main id="main"></main>
-<p style="text-align:center;font:11px sans-serif;color:var(--soft);margin:0 0 90px">versione 16/11 04:01</p>
+<p style="text-align:center;font:11px sans-serif;color:var(--soft);margin:0 0 90px">versione 16/11 15:44</p>
 <div class="nav"><div class="in"><button class="btn sec" id="indietro">← Indietro</button><div class="msg" id="msg"></div>
 <button class="btn" id="avanti">Avanti →</button></div></div>
 <script>
@@ -1061,12 +1061,16 @@ async function leggiRepo(path, forza) {
   return fetch(path + '?t=' + Date.now(), { cache: 'no-store' });
 }
 const urlRepo = path => (SHA || TR.sha) ? RAW + (SHA || TR.sha) + '/' + path : path;
+function mostraRevocato() {   // il DM ha rinnovato il codice (link finito in mani sbagliate): questo link non vale più
+  try { localStorage.removeItem(CH_PG); localStorage.removeItem(CH_TR); } catch (e) {}
+  document.body.innerHTML = '<div style="max-width:480px;margin:40px auto;padding:20px;font-family:sans-serif;text-align:center"><h2>🔒 Link non più valido</h2><p>Il master ha sostituito questo link con uno nuovo. Chiedigli il link nuovo e apri quello: il tuo personaggio è al sicuro, non hai perso niente.</p></div>';
+}
 async function sincronizza(forza) {
   const p = caricaPG(); const codice = (p && p.tiro && p.tiro.codice) || S.codice; if (!codice) return;
   try {
     const r = await leggiRepo(`pg/${idOnline(codice)}.json`, forza);
     if (!r.ok) { statoSync = 'in attesa che il DM approvi la scheda'; return; }
-    const q = await r.json(); q.tiro = { ...(q.tiro || {}), codice };
+    const q = await r.json(); if (q.revocato) { mostraRevocato(); return; } q.tiro = { ...(q.tiro || {}), codice };
     const vl = (p && p.versione) || 0;
     if ((q.versione || 0) > vl || forza) {
       salvaPG(q); const st = q.stato || {};
@@ -1350,7 +1354,7 @@ function apriSalita(p) {
 if (caricaPG() && !qs.has('crea') && (!qs.get('codice') || (caricaPG().tiro || {}).codice === qs.get('codice').toUpperCase())) { apriScheda(); sincronizza().then(apriScheda); }
 else if (qs.get('codice') && !qs.has('crea')) {   // telefono nuovo: se il DM ha già pubblicato la scheda, aprila
   S.codice = qs.get('codice').toUpperCase(); disegna();
-  leggiRepo(`pg/${idOnline(S.codice)}.json`).then(r => r.ok ? r.json() : null).then(q => { if (q) { q.tiro = { ...(q.tiro || {}), codice: S.codice }; salvaPG(q); TR = {}; salvaTR(); sincronizza(true).then(apriScheda); } }).catch(() => {});
+  leggiRepo(`pg/${idOnline(S.codice)}.json`).then(r => r.ok ? r.json() : null).then(q => { if (q && q.revocato) { mostraRevocato(); return; } if (q) { q.tiro = { ...(q.tiro || {}), codice: S.codice }; salvaPG(q); TR = {}; salvaTR(); sincronizza(true).then(apriScheda); } }).catch(() => {});
 } else disegna();
 
 </script>
