@@ -350,8 +350,8 @@
   "spingere": "325 kg"
  },
  "denaro": {
-  "mo": 4,
-  "ma": 0,
+  "mo": 3,
+  "ma": 8,
   "mr": 0
  },
  "talenti": [
@@ -460,10 +460,11 @@
   }
  },
  "pe": 0,
- "versione": 2,
+ "versione": 3,
  "stato": {
   "pf_attuali": 9,
   "campagna": "campane-di-salmastro"
  },
- "aggiornato": "2026-11-16T00:41"
+ "aggiornato": "2026-11-16T18:35",
+ "note_dm": "Zuppa alla Conchiglia: 2 ma"
 }
