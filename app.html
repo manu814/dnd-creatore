@@ -85,7 +85,7 @@ table.t { border-collapse: collapse; width: 100%; font-size: 15px; } .t td, .t t
 <body>
 <header><h1>⚔️ Crea il tuo eroe</h1><div class="chi" id="chi"></div><div class="passi" id="passi"></div></header>
 <main id="main"></main>
-<p style="text-align:center;font:11px sans-serif;color:var(--soft);margin:0 0 90px">versione 16/11 02:52</p>
+<p style="text-align:center;font:11px sans-serif;color:var(--soft);margin:0 0 90px">versione 16/11 03:26</p>
 <div class="nav"><div class="in"><button class="btn sec" id="indietro">← Indietro</button><div class="msg" id="msg"></div>
 <button class="btn" id="avanti">Avanti →</button></div></div>
 <script>
@@ -508,6 +508,7 @@ function motivoNo(t, perBonus) {
   if (p.livello_personaggio && p.livello_personaggio > 1) return 'serve un livello più alto';
   if ((p.capacita_classe || []).some(cc => !(cc === 'scacciare_o_intimorire' && S.classe === 'chierico') && !(cc === 'forma_selvatica' && false))) return `serve la capacità "${p.capacita_classe.join(', ').replace(/_/g, ' ')}"`;
   if (!t.piu_volte && haTalento(t.id)) return 'già preso';
+  if (talentiVirtuali().includes(t.id)) return 'ce l\'hai già dalla classe';
   return '';
 }
 let filtroTal = '';
