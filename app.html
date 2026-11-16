@@ -85,7 +85,7 @@ table.t { border-collapse: collapse; width: 100%; font-size: 15px; } .t td, .t t
 <body>
 <header><h1>⚔️ Crea il tuo eroe</h1><div class="chi" id="chi"></div><div class="passi" id="passi"></div></header>
 <main id="main"></main>
-<p style="text-align:center;font:11px sans-serif;color:var(--soft);margin:0 0 90px">versione 16/11 03:26</p>
+<p style="text-align:center;font:11px sans-serif;color:var(--soft);margin:0 0 90px">versione 16/11 03:30</p>
 <div class="nav"><div class="in"><button class="btn sec" id="indietro">← Indietro</button><div class="msg" id="msg"></div>
 <button class="btn" id="avanti">Avanti →</button></div></div>
 <script>
@@ -1070,7 +1070,9 @@ const salvaTR = () => { try { localStorage.setItem(CH_TR, JSON.stringify(TR)); }
 let tabScheda = 'dadi';
 function m10(v) { return Math.floor((v - 10) / 2); }
 function apriScheda() {
-  let p = caricaPG(); if (!p) return; ascoltaDM(); const p0 = p;
+  let p = caricaPG(); if (!p) return;
+  { const cod = (p.tiro || {}).codice || ''; if (TR.codice !== cod) { TR = { codice: cod }; salvaTR(); } }  // tiri e stato di un altro personaggio su questo telefono: si ripulisce
+  ascoltaDM(); const p0 = p;
   document.querySelector('.nav').style.display = 'none'; $('#passi').innerHTML = '';
   $('#chi').textContent = `${p.razza} ${p.classe_livello} · giocatore ${p.giocatore}`;
   document.querySelector('header h1').textContent = '⚔️ ' + (p.nome || 'Il tuo eroe');
