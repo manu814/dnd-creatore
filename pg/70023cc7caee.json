@@ -56,7 +56,7 @@
  "attacchi": [
   {
    "nome": "Spada lunga",
-   "bonus": "+3",
+   "bonus": "+4",
    "danni": "1d8+2",
    "critico": "19-20/x2",
    "gittata": "",
@@ -253,8 +253,8 @@
    "pag": 101
   },
   {
-   "nome": "Competenza nelle Armi da Guerra (Spada lunga)",
-   "pag": 95
+   "nome": "Arma Focalizzata (Spada lunga)",
+   "pag": null
   }
  ],
  "capacita_speciali": [
@@ -329,10 +329,10 @@
    "tolti": {}
   }
  },
- "versione": 1,
+ "versione": 2,
  "pe": 0,
  "stato": {
   "pf_attuali": 14
  },
- "aggiornato": "2026-11-16T03:25"
+ "aggiornato": "2026-11-16T03:27"
 }
