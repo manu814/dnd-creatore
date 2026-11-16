@@ -85,7 +85,7 @@ table.t { border-collapse: collapse; width: 100%; font-size: 15px; } .t td, .t t
 <body>
 <header><h1>⚔️ Crea il tuo eroe</h1><div class="chi" id="chi"></div><div class="passi" id="passi"></div></header>
 <main id="main"></main>
-<p style="text-align:center;font:11px sans-serif;color:var(--soft);margin:0 0 90px">versione 16/11 03:30</p>
+<p style="text-align:center;font:11px sans-serif;color:var(--soft);margin:0 0 90px">versione 16/11 03:41</p>
 <div class="nav"><div class="in"><button class="btn sec" id="indietro">← Indietro</button><div class="msg" id="msg"></div>
 <button class="btn" id="avanti">Avanti →</button></div></div>
 <script>
@@ -1139,7 +1139,9 @@ ${p.incantesimi.domini ? `<p class="soft">${esc(p.incantesimi.domini)}</p>` : ''
 <label class="campo"><span>Appunti (bottino, cose trovate, nomi…)</span><textarea id="note" style="min-height:160px">${esc(TR.note)}</textarea></label></div>`;
   }
   if (tabScheda === 'chi') {
-    const ritr = (() => { try { return localStorage.getItem(CHIAVE + '-ritratto'); } catch (e) { return null; } })();
+    const ritr = (() => { try { const k = CHIAVE + '-ritratto-' + ((caricaPG() || {}).tiro || {}).codice, vecchio = localStorage.getItem(CHIAVE + '-ritratto');
+      if (vecchio && !localStorage.getItem(k)) { localStorage.setItem(k, vecchio); localStorage.removeItem(CHIAVE + '-ritratto'); }  // ritratto salvato con la versione vecchia
+      return localStorage.getItem(k); } catch (e) { return null; } })();
     h += `<div class="card"><h2>🖼️ Ritratto</h2>${ritr ? `<img src="${ritr}" alt="ritratto" style="width:100%;border-radius:12px">` : ''}
 <p class="soft">Per un ritratto fantasy col tuo viso: 1) copia la descrizione; 2) apri ChatGPT o Gemini (gratis); 3) carica un tuo selfie e incolla la descrizione; 4) salva l'immagine e caricala qui. Il ritratto resta solo su questo telefono.</p>
 <p><button class="btn sec piccolo" id="copiaPrompt">📋 Copia la descrizione</button> <label class="btn sec piccolo" style="display:inline-block">📷 Carica il ritratto<input type="file" id="ritrattoFile" accept="image/*" style="display:none"></label></p>
@@ -1163,7 +1165,7 @@ ${p.incantesimi.domini ? `<p class="soft">${esc(p.incantesimi.domini)}</p>` : ''
   on('copiaPrompt', () => { const tx = $('#promptTxt'); tx.select(); (navigator.clipboard ? navigator.clipboard.writeText(tx.value) : Promise.reject()).then(() => { $('#copiaPrompt').textContent = '✅ Copiata'; }).catch(() => { document.execCommand('copy'); $('#copiaPrompt').textContent = '✅ Copiata'; }); });
   const rf = $('#ritrattoFile'); if (rf) rf.onchange = () => { const f = rf.files[0]; if (!f) return; const img = new Image(); img.onload = () => {
     const k = Math.min(1, 640 / Math.max(img.width, img.height)), c = document.createElement('canvas'); c.width = img.width * k; c.height = img.height * k; c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
-    try { localStorage.setItem(CHIAVE + '-ritratto', c.toDataURL('image/jpeg', 0.8)); } catch (e) {} apriScheda(); }; img.src = URL.createObjectURL(f); };
+    try { localStorage.setItem(CHIAVE + '-ritratto-' + ((caricaPG() || {}).tiro || {}).codice, c.toDataURL('image/jpeg', 0.8)); } catch (e) {} apriScheda(); }; img.src = URL.createObjectURL(f); };
   const imp = $('#importa'); if (imp) imp.onchange = () => { const f = imp.files[0]; if (!f) return; f.text().then(t => { try { const q = JSON.parse(t); if (!q.caratteristiche || !q.tiro) throw 0; salvaPG(q); TR = {}; salvaTR(); apriScheda(); } catch (e) { alert('File non valido'); } }); };
 }
 const SCENE = {};
