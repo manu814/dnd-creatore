@@ -85,7 +85,7 @@ table.t { border-collapse: collapse; width: 100%; font-size: 15px; } .t td, .t t
 <body>
 <header><h1>⚔️ Crea il tuo eroe</h1><div class="chi" id="chi"></div><div class="passi" id="passi"></div></header>
 <main id="main"></main>
-<p style="text-align:center;font:11px sans-serif;color:var(--soft);margin:0 0 90px">versione 16/11 15:51</p>
+<p style="text-align:center;font:11px sans-serif;color:var(--soft);margin:0 0 90px">versione 16/11 15:53</p>
 <div class="nav"><div class="in"><button class="btn sec" id="indietro">← Indietro</button><div class="msg" id="msg"></div>
 <button class="btn" id="avanti">Avanti →</button></div></div>
 <script>
@@ -1080,7 +1080,7 @@ function mostraRevocato() {   // il DM ha rinnovato il codice (link finito in ma
 async function sincronizza(forza) {
   const p = caricaPG(); const codice = (p && p.tiro && p.tiro.codice) || S.codice; if (!codice) return;
   try {
-    const r = await leggiRepo(`pg/${idOnline(codice)}.json`, forza);
+    const r = await leggiRepo(`pg/${idOnline(codice)}.json`, forza === 'github');   // GitHub solo dal bottone Aggiorna
     if (!r.ok) { statoSync = 'in attesa che il DM approvi la scheda'; return; }
     const q = await r.json(); if (q.revocato) { mostraRevocato(); return; } q.tiro = { ...(q.tiro || {}), codice };
     const vl = (p && p.versione) || 0;
@@ -1187,7 +1187,7 @@ ${p.incantesimi.domini ? `<p class="soft">${esc(p.incantesimi.domini)}</p>` : ''
   const on = (id, f) => { const e = $('#' + id); if (e) e.onclick = f; };
   document.querySelectorAll('[data-esegui]').forEach(b => b.onclick = () => esegui(p, +b.dataset.esegui));
   on('sali', () => { iniziaSalita(p0); apriSalita(p0); });
-  on('sync', () => { statoSync = 'controllo…'; apriScheda(); sincronizza(true).then(apriScheda); });
+  on('sync', () => { statoSync = 'controllo…'; apriScheda(); sincronizza('github').then(apriScheda); });
   const n = $('#note'); if (n) n.oninput = () => { TR.note = n.value; salvaTR(); };
   on('modifica2', () => { if (!S.classe) return; document.querySelector('.nav').style.display = ''; document.querySelector('header h1').textContent = '⚔️ Crea il tuo eroe'; S.passo = attivi().length - 1; disegna(); });
   on('modifica', () => { document.querySelector('.nav').style.display = ''; document.querySelector('header h1').textContent = '⚔️ Crea il tuo eroe'; disegna(); });
