@@ -329,13 +329,14 @@
    "tolti": {}
   }
  },
- "versione": 8,
+ "versione": 9,
  "pe": 0,
  "stato": {
   "pf_attuali": 14,
-  "campagna": "campane-di-salmastro"
+  "campagna": "campane-di-salmastro",
+  "non_letali": 1
  },
- "aggiornato": "2026-11-16T19:12",
+ "aggiornato": "2026-11-16T21:06",
  "ritratto_cifrato": "ritratti/70023cc7caee.bin",
- "note_dm": "Pasta e patate alla Conchiglia: 2 ma"
+ "note_dm": "1 danno non letale (caduta sul molo)"
 }
