@@ -244,7 +244,7 @@
  },
  "denaro": {
   "mo": 11,
-  "ma": 2,
+  "ma": 0,
   "mr": 6
  },
  "talenti": [
@@ -329,13 +329,13 @@
    "tolti": {}
   }
  },
- "versione": 7,
+ "versione": 8,
  "pe": 0,
  "stato": {
   "pf_attuali": 14,
   "campagna": "campane-di-salmastro"
  },
- "aggiornato": "2026-11-16T18:51",
+ "aggiornato": "2026-11-16T19:12",
  "ritratto_cifrato": "ritratti/70023cc7caee.bin",
- "note_dm": "Birra offerta a Pippo: 4 mr"
+ "note_dm": "Pasta e patate alla Conchiglia: 2 ma"
 }
