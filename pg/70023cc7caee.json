@@ -244,8 +244,8 @@
  },
  "denaro": {
   "mo": 11,
-  "ma": 3,
-  "mr": 0
+  "ma": 2,
+  "mr": 6
  },
  "talenti": [
   {
@@ -329,13 +329,13 @@
    "tolti": {}
   }
  },
- "versione": 6,
+ "versione": 7,
  "pe": 0,
  "stato": {
   "pf_attuali": 14,
   "campagna": "campane-di-salmastro"
  },
- "aggiornato": "2026-11-16T18:21",
+ "aggiornato": "2026-11-16T18:51",
  "ritratto_cifrato": "ritratti/70023cc7caee.bin",
- "note_dm": "Caraffa di birra alla Conchiglia: 2 ma"
+ "note_dm": "Birra offerta a Pippo: 4 mr"
 }
