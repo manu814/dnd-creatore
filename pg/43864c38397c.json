@@ -73,16 +73,6 @@
    "tipo": "C",
    "note": "Gratis; aggiungi il bonus di Forza ai danni; ricaricare = azione di mo",
    "munizioni": ""
-  },
-  {
-   "nome": "Spada lunga",
-   "bonus": "+1",
-   "danni": "1d8+1",
-   "critico": "19-20/x2",
-   "gittata": "",
-   "tipo": "T",
-   "note": "La classica spada da una mano.",
-   "munizioni": ""
   }
  ],
  "grado_massimo": "4/2",
@@ -335,10 +325,6 @@
   {
    "nome": "3 torce",
    "peso": 1.5
-  },
-  {
-   "nome": "Spada lunga",
-   "peso": 2
   }
  ],
  "carichi": {
@@ -460,7 +446,7 @@
   }
  },
  "pe": 0,
- "versione": 5,
+ "versione": 6,
  "stato": {
   "pf_attuali": 9,
   "campagna": "campane-di-salmastro"
