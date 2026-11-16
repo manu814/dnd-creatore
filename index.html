@@ -10,9 +10,24 @@
   var base = 'https://raw.githubusercontent.com/manu814/dnd-creatore/';
   function mostra(h) { document.open(); document.write(h); document.close(); }
   function ripiego() { return fetch('app.html?t=' + Date.now(), { cache: 'no-store' }).then(function (r) { return r.text(); }).then(mostra); }
-  fetch('https://api.github.com/repos/manu814/dnd-creatore/commits/main', { cache: 'no-store' })
-    .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
-    .then(function (j) { return fetch(base + j.sha + '/app.html'); })
+  // 1) versione dall'ultima notifica del DM (ntfy), così non si consumano le 60 richieste/ora di GitHub; 2) GitHub; 3) Pages
+  function shaNtfy() {
+    var c = (new URLSearchParams(location.search).get('codice') || '').trim().toUpperCase();
+    if (!c || !window.crypto || !crypto.subtle) return Promise.reject();
+    return crypto.subtle.digest('SHA-256', new TextEncoder().encode(c + '|ntfy-r')).then(function (h) {
+      var hex = Array.prototype.map.call(new Uint8Array(h), function (b) { return ('0' + b.toString(16)).slice(-2); }).join('').slice(0, 24);
+      return fetch('https://ntfy.sh/dnd35r' + hex + '/json?poll=1&since=12h', { cache: 'no-store' });
+    }).then(function (r) { return r.text(); }).then(function (tx) {
+      var sha = null; tx.split('\n').forEach(function (l) { try { var m = JSON.parse(JSON.parse(l).message || '{}'); if (m.sha) sha = m.sha; } catch (e) {} });
+      return sha || Promise.reject();
+    });
+  }
+  function shaGithub() {
+    return fetch('https://api.github.com/repos/manu814/dnd-creatore/commits/main', { cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(); }).then(function (j) { return j.sha; });
+  }
+  shaNtfy().catch(shaGithub)
+    .then(function (sha) { return fetch(base + sha + '/app.html'); })
     .then(function (r) { return r.ok ? r.text() : Promise.reject(); })
     .then(mostra)
     .catch(function () { ripiego().catch(function () { document.getElementById('m').innerHTML = 'Connessione assente: <a href="app.html' + location.search + '">riprova</a>'; }); });

@@ -85,7 +85,7 @@ table.t { border-collapse: collapse; width: 100%; font-size: 15px; } .t td, .t t
 <body>
 <header><h1>⚔️ Crea il tuo eroe</h1><div class="chi" id="chi"></div><div class="passi" id="passi"></div></header>
 <main id="main"></main>
-<p style="text-align:center;font:11px sans-serif;color:var(--soft);margin:0 0 90px">versione 16/11 15:44</p>
+<p style="text-align:center;font:11px sans-serif;color:var(--soft);margin:0 0 90px">versione 16/11 15:51</p>
 <div class="nav"><div class="in"><button class="btn sec" id="indietro">← Indietro</button><div class="msg" id="msg"></div>
 <button class="btn" id="avanti">Avanti →</button></div></div>
 <script>
@@ -1037,9 +1037,21 @@ let statoSync = '';
 // Lo sha arriva dall'avviso ntfy del DM o, all'apertura, da una sola chiamata all'API di GitHub.
 let SHA = null;
 const RAW = 'https://raw.githubusercontent.com/manu814/dnd-creatore/';
+async function shaDaNtfy() {   // versione giusta dall'ultima notifica "aggiorna" del DM: niente richieste a GitHub (limite 60/ora per rete)
+  const p = caricaPG(); const codice = (p && p.tiro && p.tiro.codice) || S.codice; if (!codice) return null;
+  try {
+    const tx = await (await fetch(`https://ntfy.sh/${canale(codice, 'r')}/json?poll=1&since=12h`, { cache: 'no-store' })).text();
+    let sha = null;
+    for (const riga of tx.split('\n')) { try { const m = JSON.parse(JSON.parse(riga).message || '{}'); if (m.sha) sha = m.sha; } catch (e) {} }
+    return sha;
+  } catch (e) { return null; }
+}
 async function ultimoSha(forza) {
   if (SHA && !forza) return SHA;
-  try { const r = await fetch('https://api.github.com/repos/manu814/dnd-creatore/commits/main', { cache: 'no-store' }); if (r.ok) { SHA = (await r.json()).sha; TR.sha = SHA; salvaTR(); return SHA; } } catch (e) {}
+  // apertura normale: prima ntfy, poi GitHub. Bottone "Aggiorna" (forza): prima GitHub (la fonte vera), poi ntfy se GitHub ha finito le richieste
+  const gh = async () => { try { const r = await fetch('https://api.github.com/repos/manu814/dnd-creatore/commits/main', { cache: 'no-store' }); if (r.ok) return (await r.json()).sha; } catch (e) {} return null; };
+  const v = forza ? (await gh()) || (await shaDaNtfy()) : (await shaDaNtfy()) || (await gh());
+  if (v) { SHA = v; TR.sha = v; salvaTR(); return v; }
   return SHA || TR.sha || null;
 }
 let ritrattoInCorso = false;
