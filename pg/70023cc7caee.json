@@ -329,14 +329,14 @@
    "tolti": {}
   }
  },
- "versione": 9,
+ "versione": 10,
  "pe": 0,
  "stato": {
   "pf_attuali": 14,
   "campagna": "campane-di-salmastro",
-  "non_letali": 1
+  "non_letali": 0
  },
- "aggiornato": "2026-11-16T21:06",
+ "aggiornato": "2026-11-17T00:02",
  "ritratto_cifrato": "ritratti/70023cc7caee.bin",
- "note_dm": "1 danno non letale (caduta sul molo)"
+ "note_dm": "Lanterna di Mamma Rosa; 5 ma di debito per la stanza"
 }
