@@ -244,7 +244,7 @@
  },
  "denaro": {
   "mo": 11,
-  "ma": 5,
+  "ma": 3,
   "mr": 0
  },
  "talenti": [
@@ -329,12 +329,13 @@
    "tolti": {}
   }
  },
- "versione": 5,
+ "versione": 6,
  "pe": 0,
  "stato": {
   "pf_attuali": 14,
   "campagna": "campane-di-salmastro"
  },
- "aggiornato": "2026-11-16T03:55",
- "ritratto_cifrato": "ritratti/70023cc7caee.bin"
+ "aggiornato": "2026-11-16T18:21",
+ "ritratto_cifrato": "ritratti/70023cc7caee.bin",
+ "note_dm": "Caraffa di birra alla Conchiglia: 2 ma"
 }
