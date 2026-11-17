@@ -355,12 +355,12 @@
   "denaro": {
    "mo": 29,
    "ma": 8,
-   "mr": 5
+   "mr": 3
   }
  },
  "pe": 0,
- "versione": 16,
- "aggiornato": "2026-11-17T03:30",
+ "versione": 17,
+ "aggiornato": "2026-11-17T15:12",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Anticipo della banca: 20 mo (segnate sul debito)"
 }
