@@ -335,11 +335,11 @@
   "denaro": {
    "mo": 11,
    "ma": 0,
-   "mr": 7
+   "mr": 4
   }
  },
  "pe": 0,
- "versione": 4,
- "aggiornato": "2026-11-17T01:00",
+ "versione": 5,
+ "aggiornato": "2026-11-17T01:10",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin"
 }
