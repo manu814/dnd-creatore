@@ -236,6 +236,10 @@
   {
    "nome": "3× Torcia (1 ora di luce ciascuna)",
    "peso": 1.5
+  },
+  {
+   "nome": "Copia del contratto con la Banca Natidoro",
+   "peso": 0
   }
  ],
  "carichi": {
@@ -343,7 +347,8 @@
   }
  },
  "pe": 0,
- "versione": 7,
+ "versione": 8,
  "aggiornato": "2026-11-17T01:29",
- "ritratto_cifrato": "ritratti/db24020e78d5.bin"
+ "ritratto_cifrato": "ritratti/db24020e78d5.bin",
+ "note_dm": "Anticipo della banca: 20 mo (segnate sul debito)"
 }
