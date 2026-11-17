@@ -252,6 +252,10 @@
   {
    "nome": "Pranzo al sacco di Amabile (pane, salame, formaggio, 2 pesche)",
    "peso": 0.5
+  },
+  {
+   "nome": "Cestino di vimini di Ildegonda con 12 uova nella paglia (fragili; il cestino va riportato)",
+   "peso": 1
   }
  ],
  "carichi": {
@@ -359,7 +363,7 @@
   }
  },
  "pe": 0,
- "versione": 18,
+ "versione": 19,
  "aggiornato": "2026-11-17T16:10",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Anticipo della banca: 20 mo (segnate sul debito)"
