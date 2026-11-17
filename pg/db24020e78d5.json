@@ -254,8 +254,16 @@
    "peso": 0
   },
   {
-   "nome": "Cestino di vimini vuoto di Ildegonda (da riportarle)",
-   "peso": 0.5
+   "nome": "Zaino",
+   "peso": 1
+  },
+  {
+   "nome": "10× Ampolla d olio da lampada (0,5 l)",
+   "peso": 5
+  },
+  {
+   "nome": "3× Sacco di juta pieno di paglia",
+   "peso": 6.75
   }
  ],
  "carichi": {
@@ -363,8 +371,8 @@
   }
  },
  "pe": 0,
- "versione": 24,
- "aggiornato": "2026-11-17T17:53",
+ "versione": 25,
+ "aggiornato": "2026-11-17T18:27",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Anticipo della banca: 20 mo (segnate sul debito)"
 }
