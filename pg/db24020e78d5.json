@@ -349,14 +349,14 @@
   "pf_attuali": 14,
   "campagna": "debiti-di-argentoforte",
   "denaro": {
-   "mo": 30,
-   "ma": 0,
-   "mr": 2
+   "mo": 29,
+   "ma": 9,
+   "mr": 8
   }
  },
  "pe": 0,
- "versione": 12,
- "aggiornato": "2026-11-17T02:37",
+ "versione": 13,
+ "aggiornato": "2026-11-17T02:56",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Anticipo della banca: 20 mo (segnate sul debito)"
 }
