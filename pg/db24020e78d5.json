@@ -371,12 +371,12 @@
   "denaro": {
    "mo": 25,
    "ma": 6,
-   "mr": 5
+   "mr": 1
   }
  },
  "pe": 0,
- "versione": 27,
- "aggiornato": "2026-11-17T20:01",
+ "versione": 28,
+ "aggiornato": "2026-11-17T20:32",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Palla fumogena: -1 olio, -1 sacco paglia"
 }
