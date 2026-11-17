@@ -254,12 +254,12 @@
    "peso": 0.5
   },
   {
-   "nome": "Cestino di vimini di Ildegonda con 12 uova nella paglia (fragili; il cestino va riportato)",
-   "peso": 1
-  },
-  {
    "nome": "Chiave di ottone col nastro verde (portoncino sul retro dello studio di Narseo Anello)",
    "peso": 0
+  },
+  {
+   "nome": "Cestino di vimini vuoto di Ildegonda (da riportarle)",
+   "peso": 0.5
   }
  ],
  "carichi": {
@@ -367,8 +367,8 @@
   }
  },
  "pe": 0,
- "versione": 20,
- "aggiornato": "2026-11-17T17:07",
+ "versione": 21,
+ "aggiornato": "2026-11-17T17:09",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Anticipo della banca: 20 mo (segnate sul debito)"
 }
