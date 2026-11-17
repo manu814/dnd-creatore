@@ -370,13 +370,13 @@
   "campagna": "debiti-di-argentoforte",
   "denaro": {
    "mo": 25,
-   "ma": 4,
-   "mr": 9
+   "ma": 1,
+   "mr": 5
   }
  },
  "pe": 0,
- "versione": 30,
- "aggiornato": "2026-11-18T00:11",
+ "versione": 31,
+ "aggiornato": "2026-11-18T00:56",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
- "note_dm": "Conto dell'Agnello saldato"
+ "note_dm": "Conto dell'Agnello saldato (3 ma 4 mr)"
 }
