@@ -337,13 +337,13 @@
   "pf_attuali": 14,
   "campagna": "debiti-di-argentoforte",
   "denaro": {
-   "mo": 11,
+   "mo": 31,
    "ma": 0,
    "mr": 4
   }
  },
  "pe": 0,
- "versione": 6,
- "aggiornato": "2026-11-17T01:10",
+ "versione": 7,
+ "aggiornato": "2026-11-17T01:29",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin"
 }
