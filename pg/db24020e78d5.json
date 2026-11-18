@@ -328,7 +328,7 @@
  },
  "denaro": {
   "mo": 16,
-  "ma": 6,
+  "ma": 0,
   "mr": 2
  },
  "talenti": [
@@ -418,7 +418,7 @@
   "campagna": "debiti-di-argentoforte",
   "denaro": {
    "mo": 16,
-   "ma": 6,
+   "ma": 0,
    "mr": 2
   },
   "danni_caratteristiche": {
@@ -427,8 +427,8 @@
   }
  },
  "pe": 0,
- "versione": 61,
- "aggiornato": "2026-11-18T19:16",
+ "versione": 62,
+ "aggiornato": "2026-11-18T19:20",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
