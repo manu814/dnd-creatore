@@ -294,8 +294,8 @@
    "peso": 0
   },
   {
-   "nome": "3× Bendaggio di ricambio con impiastro verde (Erminio)",
-   "peso": 0.3
+   "nome": "2× Bendaggio di ricambio con impiastro verde (Erminio)",
+   "peso": 0.2
   },
   {
    "nome": "4× Fascio di paglia + 2× Sacco di juta vuoto + mucchio di fieno marcito bagnato — nella legnaia di Nicola alla Porta del Mulino",
@@ -423,8 +423,8 @@
   }
  },
  "pe": 0,
- "versione": 63,
- "aggiornato": "2026-11-18T19:23",
+ "versione": 64,
+ "aggiornato": "2026-11-18T19:26",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
