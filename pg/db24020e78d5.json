@@ -308,6 +308,10 @@
   {
    "nome": "2× Sacchetto di carbone di quercia (5 kg l uno) — sul carretto del contadino",
    "peso": 0
+  },
+  {
+   "nome": "Pala vecchia del carbonaio (manico consumato, ferro scheggiato) — sul carretto del contadino",
+   "peso": 0
   }
  ],
  "carichi": {
@@ -320,7 +324,7 @@
  },
  "denaro": {
   "mo": 17,
-  "ma": 3,
+  "ma": 1,
   "mr": 2
  },
  "talenti": [
@@ -410,13 +414,13 @@
   "campagna": "debiti-di-argentoforte",
   "denaro": {
    "mo": 17,
-   "ma": 3,
+   "ma": 1,
    "mr": 2
   }
  },
  "pe": 0,
- "versione": 49,
- "aggiornato": "2026-11-18T16:14",
+ "versione": 50,
+ "aggiornato": "2026-11-18T16:16",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
