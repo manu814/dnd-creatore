@@ -218,7 +218,7 @@
    "peso": 2.5
   },
   {
-   "nome": "Spada lunga",
+   "nome": "Spada lunga — da Narseo, dietro la pila del catasto",
    "peso": 2
   },
   {
@@ -226,15 +226,15 @@
    "peso": 0.5
   },
   {
-   "nome": "3× Pasti normali (al giorno)",
+   "nome": "3× Pasti normali (al giorno) — da Narseo, dietro la pila del catasto",
    "peso": 0
   },
   {
-   "nome": "Acciarino e pietra focaia",
+   "nome": "Acciarino e pietra focaia — da Narseo, dietro la pila del catasto",
    "peso": 0
   },
   {
-   "nome": "3× Torcia (1 ora di luce ciascuna)",
+   "nome": "3× Torcia (1 ora di luce ciascuna) — da Narseo, dietro la pila del catasto",
    "peso": 1.5
   },
   {
@@ -250,11 +250,11 @@
    "peso": 0
   },
   {
-   "nome": "Chiave di ottone col nastro verde (portoncino sul retro dello studio di Narseo Anello)",
+   "nome": "Chiave di ottone col nastro verde (portoncino sul retro dello studio di Narseo Anello) — da Narseo, dietro la pila del catasto",
    "peso": 0
   },
   {
-   "nome": "Zaino",
+   "nome": "Zaino — da Narseo, dietro la pila del catasto",
    "peso": 1
   },
   {
@@ -274,19 +274,19 @@
    "peso": 1.5
   },
   {
-   "nome": "1× Panetto di sego",
+   "nome": "1× Panetto di sego — da Narseo, dietro la pila del catasto",
    "peso": 0.5
   },
   {
-   "nome": "Mazzetto di stoppini di canapa",
+   "nome": "Mazzetto di stoppini di canapa — da Narseo, dietro la pila del catasto",
    "peso": 0
   },
   {
-   "nome": "Sacchetto di esca di fungo",
+   "nome": "Sacchetto di esca di fungo — da Narseo, dietro la pila del catasto",
    "peso": 0
   },
   {
-   "nome": "Candela di sego",
+   "nome": "Candela di sego — da Narseo, dietro la pila del catasto",
    "peso": 0
   },
   {
@@ -310,8 +310,12 @@
    "peso": 0
   },
   {
-   "nome": "1× Candelotto fumogeno alla pece (lungo come un avambraccio, sottile come un polso: entra nel tubo grosso)",
+   "nome": "1× Candelotto fumogeno alla pece (lungo come un avambraccio, sottile come un polso: entra nel tubo grosso) — da Narseo, dietro la pila del catasto",
    "peso": 1.5
+  },
+  {
+   "nome": "Giacca di lana marrone da mercante, rifatta, bottoni d'osso (di Mastro Tobia, 'porta fortuna')",
+   "peso": 1
   }
  ],
  "carichi": {
@@ -420,7 +424,7 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 72,
+ "versione": 73,
  "aggiornato": "2026-11-19T00:16",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
