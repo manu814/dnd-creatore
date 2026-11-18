@@ -292,6 +292,14 @@
   {
    "nome": "Sacco di canapa incatramato con 11 pani di pece (1 kg l uno) — NEL BAULE in soffitta all'Agnello",
    "peso": 0
+  },
+  {
+   "nome": "2× Bottiglia di decotto di ortica e miele (Erminio)",
+   "peso": 1
+  },
+  {
+   "nome": "3× Bendaggio di ricambio con impiastro verde (Erminio)",
+   "peso": 0.3
   }
  ],
  "carichi": {
@@ -304,8 +312,8 @@
  },
  "denaro": {
   "mo": 17,
-  "ma": 8,
-  "mr": 2
+  "ma": 4,
+  "mr": 3
  },
  "talenti": [
   {
@@ -394,13 +402,13 @@
   "campagna": "debiti-di-argentoforte",
   "denaro": {
    "mo": 17,
-   "ma": 8,
-   "mr": 2
+   "ma": 4,
+   "mr": 3
   }
  },
  "pe": 0,
- "versione": 45,
- "aggiornato": "2026-11-18T15:53",
+ "versione": 46,
+ "aggiornato": "2026-11-18T16:03",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
