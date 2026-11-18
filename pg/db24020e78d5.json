@@ -262,11 +262,11 @@
    "peso": 4.5
   },
   {
-   "nome": "1× Sacco di juta pieno di paglia (bagnato, da asciugare) — in soffitta all'Agnello",
+   "nome": "1× Sacco di juta pieno di paglia (bagnato) — nel casotto di Cointa alla Porta del Mulino",
    "peso": 4.5
   },
   {
-   "nome": "2× Palla fumogena improvvisata (sacco di juta: legna zuppa fuori, paglia unta asciutta dentro) — in soffitta all'Agnello",
+   "nome": "2× Palla fumogena improvvisata (sacco di juta: legna zuppa fuori, paglia unta asciutta dentro) — legate allo zaino",
    "peso": 3
   },
   {
@@ -290,7 +290,7 @@
    "peso": 0
   },
   {
-   "nome": "Sacco di canapa incatramato con 11 pani di pece (1 kg l uno) — NEL BAULE in soffitta all'Agnello",
+   "nome": "Sacco di canapa incatramato con 11 pani di pece (1 kg l uno) — nel casotto di Cointa alla Porta del Mulino",
    "peso": 0
   },
   {
@@ -419,8 +419,8 @@
   }
  },
  "pe": 0,
- "versione": 53,
- "aggiornato": "2026-11-18T16:38",
+ "versione": 54,
+ "aggiornato": "2026-11-18T17:06",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
