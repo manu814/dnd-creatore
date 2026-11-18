@@ -290,8 +290,8 @@
    "peso": 0
   },
   {
-   "nome": "Sacco di canapa incatramato con 11 pani di pece (1 kg l uno)",
-   "peso": 11
+   "nome": "Sacco di canapa incatramato con 11 pani di pece (1 kg l uno) — NEL BAULE in soffitta all'Agnello",
+   "peso": 0
   }
  ],
  "carichi": {
@@ -399,8 +399,8 @@
   }
  },
  "pe": 0,
- "versione": 44,
- "aggiornato": "2026-11-18T15:41",
+ "versione": 45,
+ "aggiornato": "2026-11-18T15:53",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
