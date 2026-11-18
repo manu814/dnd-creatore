@@ -294,10 +294,6 @@
    "peso": 0
   },
   {
-   "nome": "1× Bottiglia di decotto di ortica e miele (Erminio)",
-   "peso": 0.5
-  },
-  {
    "nome": "3× Bendaggio di ricambio con impiastro verde (Erminio)",
    "peso": 0.3
   },
@@ -427,8 +423,8 @@
   }
  },
  "pe": 0,
- "versione": 62,
- "aggiornato": "2026-11-18T19:20",
+ "versione": 63,
+ "aggiornato": "2026-11-18T19:23",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
