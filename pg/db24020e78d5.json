@@ -258,7 +258,7 @@
    "peso": 1
   },
   {
-   "nome": "7× Ampolla d olio da lampada (0,5 l)",
+   "nome": "7× Ampolla d olio da lampada (0,5 l) — nella carriola da Cointa",
    "peso": 4.5
   },
   {
@@ -268,6 +268,26 @@
   {
    "nome": "2× Palla fumogena improvvisata (sacco di juta: legna zuppa fuori, paglia unta asciutta dentro)",
    "peso": 3
+  },
+  {
+   "nome": "3× Ampolla d olio da lampada (0,5 l) — nello zaino",
+   "peso": 1.5
+  },
+  {
+   "nome": "2× Panetto di sego",
+   "peso": 1
+  },
+  {
+   "nome": "Mazzetto di stoppini di canapa",
+   "peso": 0
+  },
+  {
+   "nome": "Sacchetto di esca di fungo",
+   "peso": 0
+  },
+  {
+   "nome": "Candela di sego",
+   "peso": 0
   }
  ],
  "carichi": {
@@ -279,9 +299,9 @@
   "spingere": "437,5 kg"
  },
  "denaro": {
-  "mo": 21,
-  "ma": 2,
-  "mr": 5
+  "mo": 20,
+  "ma": 8,
+  "mr": 2
  },
  "talenti": [
   {
@@ -369,14 +389,14 @@
   "pf_attuali": 14,
   "campagna": "debiti-di-argentoforte",
   "denaro": {
-   "mo": 21,
-   "ma": 2,
-   "mr": 5
+   "mo": 20,
+   "ma": 8,
+   "mr": 2
   }
  },
  "pe": 0,
- "versione": 37,
- "aggiornato": "2026-11-18T03:50",
+ "versione": 38,
+ "aggiornato": "2026-11-18T03:59",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
