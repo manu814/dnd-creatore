@@ -300,6 +300,14 @@
   {
    "nome": "3× Bendaggio di ricambio con impiastro verde (Erminio)",
    "peso": 0.3
+  },
+  {
+   "nome": "4× Fascio di paglia + 2× Sacco di juta vuoto + mucchio di fieno marcito bagnato — sul carretto del contadino",
+   "peso": 0
+  },
+  {
+   "nome": "2× Sacchetto di carbone di quercia (5 kg l uno) — sul carretto del contadino",
+   "peso": 0
   }
  ],
  "carichi": {
@@ -312,7 +320,7 @@
  },
  "denaro": {
   "mo": 17,
-  "ma": 4,
+  "ma": 3,
   "mr": 2
  },
  "talenti": [
@@ -402,13 +410,13 @@
   "campagna": "debiti-di-argentoforte",
   "denaro": {
    "mo": 17,
-   "ma": 4,
+   "ma": 3,
    "mr": 2
   }
  },
  "pe": 0,
- "versione": 48,
- "aggiornato": "2026-11-18T16:07",
+ "versione": 49,
+ "aggiornato": "2026-11-18T16:14",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
