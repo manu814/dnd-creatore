@@ -262,8 +262,8 @@
    "peso": 4.5
   },
   {
-   "nome": "1× Sacco di juta mezzo vuoto, paglia bagnata — nella legnaia di Nicola alla Porta del Mulino",
-   "peso": 2.5
+   "nome": "1× Sacco di juta vuoto e bagnato — nella legnaia di Nicola alla Porta del Mulino",
+   "peso": 0.5
   },
   {
    "nome": "2× Palla fumogena improvvisata (sacco di juta: legna zuppa fuori, paglia unta asciutta dentro) — legate allo zaino",
@@ -274,8 +274,8 @@
    "peso": 1.5
   },
   {
-   "nome": "2× Panetto di sego",
-   "peso": 1
+   "nome": "1× Panetto di sego",
+   "peso": 0.5
   },
   {
    "nome": "Mazzetto di stoppini di canapa",
@@ -290,7 +290,7 @@
    "peso": 0
   },
   {
-   "nome": "Sacco di canapa incatramato con 10 pani e mezzo di pece (1 kg l uno) — nella legnaia di Nicola alla Porta del Mulino",
+   "nome": "Sacco di canapa incatramato con 9 pani e mezzo di pece (1 kg l uno) — nella legnaia di Nicola alla Porta del Mulino",
    "peso": 0
   },
   {
@@ -312,6 +312,10 @@
   {
    "nome": "Pala vecchia del carbonaio (manico consumato, ferro scheggiato) — nella legnaia di Nicola alla Porta del Mulino",
    "peso": 0
+  },
+  {
+   "nome": "1× Candelotto fumogeno alla pece (lungo come un avambraccio, sottile come un polso: entra nel tubo grosso)",
+   "peso": 1.5
   }
  ],
  "carichi": {
@@ -423,8 +427,8 @@
   }
  },
  "pe": 0,
- "versione": 60,
- "aggiornato": "2026-11-18T19:15",
+ "versione": 61,
+ "aggiornato": "2026-11-18T19:16",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
