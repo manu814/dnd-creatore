@@ -279,8 +279,8 @@
   "spingere": "437,5 kg"
  },
  "denaro": {
-  "mo": 22,
-  "ma": 1,
+  "mo": 21,
+  "ma": 2,
   "mr": 5
  },
  "talenti": [
@@ -369,14 +369,14 @@
   "pf_attuali": 14,
   "campagna": "debiti-di-argentoforte",
   "denaro": {
-   "mo": 22,
-   "ma": 1,
+   "mo": 21,
+   "ma": 2,
    "mr": 5
   }
  },
  "pe": 0,
- "versione": 35,
- "aggiornato": "2026-11-18T02:42",
+ "versione": 36,
+ "aggiornato": "2026-11-18T03:29",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
- "note_dm": "3 mo a Cointa"
+ "note_dm": "Pagate 9 vedette (9 ma)"
 }
