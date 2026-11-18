@@ -262,8 +262,8 @@
    "peso": 4.5
   },
   {
-   "nome": "1× Sacco di juta pieno di paglia (bagnato) — nel casotto di Cointa alla Porta del Mulino",
-   "peso": 4.5
+   "nome": "1× Sacco di juta mezzo vuoto, paglia bagnata — nel casotto di Cointa alla Porta del Mulino",
+   "peso": 2.5
   },
   {
    "nome": "2× Palla fumogena improvvisata (sacco di juta: legna zuppa fuori, paglia unta asciutta dentro) — legate allo zaino",
@@ -290,7 +290,7 @@
    "peso": 0
   },
   {
-   "nome": "Sacco di canapa incatramato con 11 pani di pece (1 kg l uno) — nel casotto di Cointa alla Porta del Mulino",
+   "nome": "Sacco di canapa incatramato con 10 pani e mezzo di pece (1 kg l uno) — nel casotto di Cointa alla Porta del Mulino",
    "peso": 0
   },
   {
@@ -419,8 +419,8 @@
   }
  },
  "pe": 0,
- "versione": 55,
- "aggiornato": "2026-11-18T18:51",
+ "versione": 56,
+ "aggiornato": "2026-11-18T19:04",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
