@@ -258,15 +258,15 @@
    "peso": 1
   },
   {
-   "nome": "8× Ampolla d olio da lampada (0,5 l)",
+   "nome": "7× Ampolla d olio da lampada (0,5 l)",
    "peso": 4.5
   },
   {
-   "nome": "2× Sacco di juta pieno di paglia (uno bagnato, da asciugare)",
+   "nome": "1× Sacco di juta pieno di paglia (bagnato, da asciugare)",
    "peso": 4.5
   },
   {
-   "nome": "Palla fumogena improvvisata (sacco di juta: legna zuppa fuori, paglia unta asciutta dentro)",
+   "nome": "2× Palla fumogena improvvisata (sacco di juta: legna zuppa fuori, paglia unta asciutta dentro)",
    "peso": 3
   }
  ],
@@ -375,8 +375,8 @@
   }
  },
  "pe": 0,
- "versione": 33,
- "aggiornato": "2026-11-18T01:05",
+ "versione": 34,
+ "aggiornato": "2026-11-18T01:10",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Ampolla d'olio rotta: restano 8. Un sacco di paglia bagnato."
 }
