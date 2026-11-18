@@ -238,15 +238,15 @@
    "peso": 1.5
   },
   {
-   "nome": "Copia del contratto con la Banca Natidoro",
+   "nome": "Copia del contratto con la Banca Natidoro — nel baule in soffitta all'Agnello",
    "peso": 0
   },
   {
-   "nome": "Lettera di convocazione della Banca Natidoro (sigillo d oro rotto)",
+   "nome": "Lettera di convocazione della Banca Natidoro (sigillo d oro rotto) — nel baule in soffitta all'Agnello",
    "peso": 0
   },
   {
-   "nome": "Avviso d asta di Castel Raineri (strappato)",
+   "nome": "Avviso d asta di Castel Raineri (strappato) — nel baule in soffitta all'Agnello",
    "peso": 0
   },
   {
@@ -258,7 +258,7 @@
    "peso": 1
   },
   {
-   "nome": "7× Ampolla d olio da lampada (0,5 l) — in soffitta all'Agnello",
+   "nome": "7× Ampolla d olio da lampada (0,5 l) — nello zaino",
    "peso": 4.5
   },
   {
@@ -294,7 +294,7 @@
    "peso": 0
   },
   {
-   "nome": "2× Bendaggio di ricambio con impiastro verde (Erminio)",
+   "nome": "2× Bendaggio di ricambio con impiastro verde (Erminio) — nel baule in soffitta all'Agnello",
    "peso": 0.2
   },
   {
@@ -324,8 +324,8 @@
  },
  "denaro": {
   "mo": 15,
-  "ma": 7,
-  "mr": 2
+  "ma": 1,
+  "mr": 5
  },
  "talenti": [
   {
@@ -414,14 +414,14 @@
   "campagna": "debiti-di-argentoforte",
   "denaro": {
    "mo": 15,
-   "ma": 7,
-   "mr": 2
+   "ma": 1,
+   "mr": 5
   },
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 69,
- "aggiornato": "2026-11-18T19:44",
+ "versione": 70,
+ "aggiornato": "2026-11-18T19:55",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
