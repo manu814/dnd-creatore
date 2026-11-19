@@ -320,6 +320,14 @@
   {
    "nome": "2× Fagotto dell Agnello (pane, formaggio, 2 uova sode, salsiccia; per stasera G7 e colazione G8) — nella giacca",
    "peso": 1
+  },
+  {
+   "nome": "3× Scaldaletto di rame (coperchio forato, manico lungo) — in mano a Pietro",
+   "peso": 6
+  },
+  {
+   "nome": "Filo di ferro (1 m) — in mano a Pietro",
+   "peso": 0.2
   }
  ],
  "carichi": {
@@ -428,8 +436,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 78,
- "aggiornato": "2026-11-19T02:46",
+ "versione": 79,
+ "aggiornato": "2026-11-19T02:47",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
