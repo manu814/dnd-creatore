@@ -250,7 +250,7 @@
    "peso": 0
   },
   {
-   "nome": "Chiave di ottone col nastro verde (portoncino sul retro dello studio di Narseo Anello) — da Narseo, dietro la pila del catasto",
+   "nome": "Chiave di ottone col nastro verde (portoncino sul retro dello studio di Narseo Anello) — in tasca",
    "peso": 0
   },
   {
@@ -424,8 +424,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 73,
- "aggiornato": "2026-11-19T00:16",
+ "versione": 74,
+ "aggiornato": "2026-11-19T02:08",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
