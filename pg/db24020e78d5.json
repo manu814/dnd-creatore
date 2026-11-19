@@ -330,8 +330,8 @@
    "peso": 4
   },
   {
-   "nome": "Lanterna di latta di Bastiano (prestata, accesa, da rendere intera) — in mano sinistra",
-   "peso": 1
+   "nome": "4× Carriola vecchia (2 buone, 1 ruota spaccata, 1 cassone sfondato; di Bastiano, ora tue) — contro il muro della Porta del Mulino, accanto al casotto",
+   "peso": 0
   }
  ],
  "carichi": {
@@ -440,8 +440,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 86,
- "aggiornato": "2026-11-19T17:01",
+ "versione": 87,
+ "aggiornato": "2026-11-19T17:23",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
