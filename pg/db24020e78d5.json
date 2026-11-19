@@ -434,14 +434,14 @@
   "campagna": "debiti-di-argentoforte",
   "denaro": {
    "mo": 16,
-   "ma": 3,
+   "ma": 1,
    "mr": 7
   },
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 85,
- "aggiornato": "2026-11-19T16:41",
+ "versione": 86,
+ "aggiornato": "2026-11-19T17:01",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
