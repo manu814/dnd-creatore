@@ -322,12 +322,20 @@
    "peso": 1
   },
   {
-   "nome": "3× Scaldaletto di rame (coperchio forato, manico lungo) — in mano a Pietro",
-   "peso": 6
+   "nome": "Scaldaletto-bomba di rame (pece sulle braci, coperchio legato col filo di ferro, fumo debole) — per terra nel cortile di Bastiano",
+   "peso": 2
   },
   {
-   "nome": "Filo di ferro (1 m) — in mano a Pietro",
-   "peso": 0.2
+   "nome": "2× Scaldaletto di rame con braci — sulla pietra piatta vicino al cancello del cortile di Bastiano",
+   "peso": 4
+  },
+  {
+   "nome": "Collarino di cuoio rosicchiato con campanellino ammaccato (del gatto di Bastiano) — in tasca",
+   "peso": 0
+  },
+  {
+   "nome": "Lanterna di latta di Bastiano (prestata, accesa, da rendere intera) — in mano sinistra",
+   "peso": 1
   }
  ],
  "carichi": {
@@ -436,8 +444,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 83,
- "aggiornato": "2026-11-19T16:39",
+ "versione": 84,
+ "aggiornato": "2026-11-19T16:40",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
