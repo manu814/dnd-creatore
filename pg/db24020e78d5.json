@@ -238,15 +238,15 @@
    "peso": 1.5
   },
   {
-   "nome": "Copia del contratto con la Banca Natidoro — nel baule in soffitta all'Agnello",
+   "nome": "Copia del contratto con la Banca Natidoro — nella giacca",
    "peso": 0
   },
   {
-   "nome": "Lettera di convocazione della Banca Natidoro (sigillo d oro rotto) — nel baule in soffitta all'Agnello",
+   "nome": "Lettera di convocazione della Banca Natidoro (sigillo d oro rotto) — nella giacca",
    "peso": 0
   },
   {
-   "nome": "Avviso d asta di Castel Raineri (strappato) — nel baule in soffitta all'Agnello",
+   "nome": "Avviso d asta di Castel Raineri (strappato) — nella giacca",
    "peso": 0
   },
   {
@@ -424,8 +424,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 74,
- "aggiornato": "2026-11-19T02:08",
+ "versione": 75,
+ "aggiornato": "2026-11-19T02:15",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
