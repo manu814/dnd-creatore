@@ -274,10 +274,6 @@
    "peso": 1.5
   },
   {
-   "nome": "1× Panetto di sego — nel sacco di tela di Narseo, nella legnaia di Nicola alla Porta del Mulino",
-   "peso": 0.5
-  },
-  {
    "nome": "Mazzetto di stoppini di canapa — nel sacco di tela di Narseo, nella legnaia di Nicola alla Porta del Mulino",
    "peso": 0
   },
@@ -290,7 +286,7 @@
    "peso": 0
   },
   {
-   "nome": "Sacco di canapa incatramato con 9 pani e mezzo di pece (1 kg l uno) — nella legnaia di Nicola alla Porta del Mulino",
+   "nome": "Sacco di canapa incatramato con 8 pani e mezzo di pece (1 kg l uno) — nella legnaia di Nicola alla Porta del Mulino",
    "peso": 0
   },
   {
@@ -350,8 +346,12 @@
    "peso": 0
   },
   {
-   "nome": "Corda di canapa della Ronda (~15 m, prestata da Cointa, da riportare G9 sera) — in mano",
+   "nome": "Corda di canapa della Ronda (~15 m, prestata da Cointa, da riportare G9 sera) — nella legnaia di Nicola alla Porta del Mulino",
    "peso": 5
+  },
+  {
+   "nome": "Materiali per ritentare il candelotto: mezzo pane di pece, metà paglia bagnata, 1 panetto di sego — sulla soglia della legnaia",
+   "peso": 0
   }
  ],
  "carichi": {
@@ -460,8 +460,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 104,
- "aggiornato": "2026-11-20T20:20",
+ "versione": 105,
+ "aggiornato": "2026-11-20T20:22",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
