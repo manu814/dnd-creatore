@@ -467,13 +467,13 @@
   "denaro": {
    "mo": 12,
    "ma": 0,
-   "mr": 6
+   "mr": 5
   },
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 114,
- "aggiornato": "2026-11-20T20:58",
+ "versione": 115,
+ "aggiornato": "2026-11-20T21:04",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
