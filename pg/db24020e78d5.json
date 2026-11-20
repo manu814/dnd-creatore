@@ -294,7 +294,7 @@
    "peso": 0.2
   },
   {
-   "nome": "4× Fascio di paglia + 2× Sacco di juta vuoto + mucchio di fieno marcito bagnato — nella legnaia di Nicola alla Porta del Mulino",
+   "nome": "4× Fascio di paglia + 1× Sacco di juta vuoto + 1 sacco di iuta con 2 manciate di carboni di quercia mezzi buoni + mucchio di fieno marcito bagnato — nella legnaia di Nicola alla Porta del Mulino",
    "peso": 0
   },
   {
@@ -322,7 +322,7 @@
    "peso": 0
   },
   {
-   "nome": "3× Scaldaletto di rame (freddi, con cenere; uno col coperchio legato col filo di ferro) — davanti alla legnaia, alla Porta del Mulino",
+   "nome": "3× Scaldaletto di rame (vuoti e puliti, coperchi coi buchi aperti) — nella legnaia di Nicola alla Porta del Mulino",
    "peso": 0
   },
   {
@@ -352,6 +352,10 @@
   {
    "nome": "1× Candelotto fumogeno alla pece n.2 (come il primo, più compatto: entra nel tubo grosso) — sulla soglia della legnaia, in mano",
    "peso": 1.5
+  },
+  {
+   "nome": "Filo di ferro raddrizzato (~1 m, un po' storto) — nella legnaia di Nicola alla Porta del Mulino",
+   "peso": 0
   }
  ],
  "carichi": {
@@ -460,8 +464,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 109,
- "aggiornato": "2026-11-20T20:32",
+ "versione": 110,
+ "aggiornato": "2026-11-20T20:36",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
