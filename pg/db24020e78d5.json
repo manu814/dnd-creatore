@@ -314,7 +314,7 @@
    "peso": 0.5
   },
   {
-   "nome": "4× Carriola vecchia (2 buone, 1 ruota spaccata, 1 cassone sfondato; di Bastiano, ora tue) — nella legnaia di Nicola alla Porta del Mulino",
+   "nome": "4× Carriola vecchia (2 buone, ingrassate col sego e quasi silenziose, 1 ruota spaccata, 1 cassone sfondato; di Bastiano, ora tue) — nella legnaia di Nicola alla Porta del Mulino",
    "peso": 0
   },
   {
@@ -350,7 +350,7 @@
    "peso": 5
   },
   {
-   "nome": "Materiali per ritentare il candelotto: mezzo pane di pece, metà paglia bagnata, 1 panetto di sego — sulla soglia della legnaia",
+   "nome": "Materiali per ritentare il candelotto: mezzo pane di pece, metà paglia bagnata, mezzo panetto di sego — sulla soglia della legnaia",
    "peso": 0
   }
  ],
@@ -460,8 +460,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 105,
- "aggiornato": "2026-11-20T20:22",
+ "versione": 106,
+ "aggiornato": "2026-11-20T20:23",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
