@@ -364,6 +364,18 @@
   {
    "nome": "NOTA: carriola 1 = 4 pece, 1 carbone, carboni mezzi buoni, 2 paglia, ½ fieno, 1 iuta, 2 scaldaletti, rete; carriola 2 = 4 pece, 1 carbone, 2 paglia, ½ fieno, 2 iuta, 1 scaldaletto, corda Ronda, pala — entrambe cariche nella legnaia",
    "peso": 0
+  },
+  {
+   "nome": "Scala da muratori (8-9 m, la portano in due) — davanti alla legnaia",
+   "peso": 0
+  },
+  {
+   "nome": "Rampino di ferro a tre denti + corda coi nodi (20 m) — davanti alla legnaia",
+   "peso": 0
+  },
+  {
+   "nome": "Mantice da fabbro di Ruggero (prestato da Amabile: se si rompe, cena pagata doppia) — davanti alla legnaia",
+   "peso": 0
   }
  ],
  "carichi": {
@@ -472,8 +484,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 115,
- "aggiornato": "2026-11-20T21:04",
+ "versione": 116,
+ "aggiornato": "2026-11-20T21:07",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
