@@ -218,7 +218,7 @@
    "peso": 2.5
   },
   {
-   "nome": "Spada lunga — nel sacco di tela di Narseo, nella legnaia di Nicola alla Porta del Mulino",
+   "nome": "Spada lunga — al fianco",
    "peso": 2
   },
   {
@@ -226,15 +226,15 @@
    "peso": 0.5
   },
   {
-   "nome": "3× Pasti normali (al giorno) — nel sacco di tela di Narseo, nella legnaia di Nicola alla Porta del Mulino",
+   "nome": "3× Pasti normali (al giorno) — nello zaino",
    "peso": 0
   },
   {
-   "nome": "Acciarino e pietra focaia — nel sacco di tela di Narseo, nella legnaia di Nicola alla Porta del Mulino",
+   "nome": "Acciarino e pietra focaia — nello zaino",
    "peso": 0
   },
   {
-   "nome": "3× Torcia (1 ora di luce ciascuna) — nel sacco di tela di Narseo, nella legnaia di Nicola alla Porta del Mulino",
+   "nome": "3× Torcia (1 ora di luce ciascuna) — nello zaino",
    "peso": 1.5
   },
   {
@@ -254,7 +254,7 @@
    "peso": 0
   },
   {
-   "nome": "Zaino — nella legnaia di Nicola alla Porta del Mulino",
+   "nome": "Zaino — in spalla",
    "peso": 1
   },
   {
@@ -274,15 +274,15 @@
    "peso": 1.5
   },
   {
-   "nome": "Mazzetto di stoppini di canapa — nel sacco di tela di Narseo, nella legnaia di Nicola alla Porta del Mulino",
+   "nome": "Mazzetto di stoppini di canapa — nello zaino",
    "peso": 0
   },
   {
-   "nome": "Sacchetto di esca di fungo — nel sacco di tela di Narseo, nella legnaia di Nicola alla Porta del Mulino",
+   "nome": "Sacchetto di esca di fungo — nello zaino",
    "peso": 0
   },
   {
-   "nome": "Candela di sego — nel sacco di tela di Narseo, nella legnaia di Nicola alla Porta del Mulino",
+   "nome": "Candela di sego — nello zaino",
    "peso": 0
   },
   {
@@ -326,19 +326,11 @@
    "peso": 0
   },
   {
-   "nome": "Tabarro incerato grigio col cappuccio (vecchio, di Tano Lasca, puzza di pesce) — indossato",
+   "nome": "Tabarro incerato grigio col cappuccio (vecchio, di Tano Lasca, puzza di pesce) — indossato sopra la cotta",
    "peso": 1.5
   },
   {
-   "nome": "Cotta di maglia (NON indossata) — nel sacco di tela di Narseo, nella legnaia di Nicola alla Porta del Mulino",
-   "peso": 20
-  },
-  {
-   "nome": "Scudo leggero di metallo (NON imbracciato) — nel sacco di tela di Narseo, nella legnaia di Nicola alla Porta del Mulino",
-   "peso": 3
-  },
-  {
-   "nome": "Sacco di tela grezza di Narseo (per documenti vecchi) — nella legnaia di Nicola alla Porta del Mulino",
+   "nome": "Sacco di tela grezza di Narseo (per documenti vecchi) — davanti alla legnaia, vuoto",
    "peso": 0.5
   },
   {
@@ -484,7 +476,7 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 116,
+ "versione": 117,
  "aggiornato": "2026-11-20T21:07",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
