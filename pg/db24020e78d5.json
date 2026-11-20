@@ -356,6 +356,10 @@
   {
    "nome": "Filo di ferro raddrizzato (~1 m, un po' storto) — nella legnaia di Nicola alla Porta del Mulino",
    "peso": 0
+  },
+  {
+   "nome": "Rotolino di filo di ferro arrugginito (~1 m, regalato da Cointa) — in mano",
+   "peso": 0.2
   }
  ],
  "carichi": {
@@ -464,8 +468,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 110,
- "aggiornato": "2026-11-20T20:36",
+ "versione": 111,
+ "aggiornato": "2026-11-20T20:41",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
