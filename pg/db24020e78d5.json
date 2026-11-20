@@ -322,19 +322,15 @@
    "peso": 1
   },
   {
-   "nome": "Scaldaletto-bomba di rame (pece sulle braci, coperchio legato col filo di ferro, fumo debole) — per terra nel cortile di Bastiano",
-   "peso": 2
-  },
-  {
-   "nome": "2× Scaldaletto di rame con braci — sulla pietra piatta vicino al cancello del cortile di Bastiano",
-   "peso": 4
-  },
-  {
    "nome": "4× Carriola vecchia (2 buone, 1 ruota spaccata, 1 cassone sfondato; di Bastiano, ora tue) — nella legnaia di Nicola alla Porta del Mulino",
    "peso": 0
   },
   {
    "nome": "Rete da pesca vecchia dei Lasca (6 passi × 3, cento rattoppi di filo bianco, corda di canapa, piombi) — nella legnaia di Nicola alla Porta del Mulino",
+   "peso": 0
+  },
+  {
+   "nome": "3× Scaldaletto di rame (freddi, con cenere; uno col coperchio legato col filo di ferro) — contro il muro del mulino di Bastiano, fuori",
    "peso": 0
   }
  ],
@@ -444,8 +440,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 91,
- "aggiornato": "2026-11-20T19:00",
+ "versione": 92,
+ "aggiornato": "2026-11-20T19:03",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
