@@ -306,7 +306,7 @@
    "peso": 0
   },
   {
-   "nome": "1× Candelotto fumogeno alla pece (lungo come un avambraccio, sottile come un polso: entra nel tubo grosso) — nel sacco di tela di Narseo, nella legnaia di Nicola alla Porta del Mulino",
+   "nome": "1× Candelotto fumogeno alla pece (lungo come un avambraccio, sottile come un polso: entra nel tubo grosso) — alla cintura",
    "peso": 1.5
   },
   {
@@ -350,16 +350,20 @@
    "peso": 5
   },
   {
-   "nome": "1× Candelotto fumogeno alla pece n.2 (come il primo, più compatto: entra nel tubo grosso) — sulla soglia della legnaia, in mano",
+   "nome": "1× Candelotto fumogeno alla pece n.2 (come il primo, più compatto: entra nel tubo grosso) — alla cintura",
    "peso": 1.5
   },
   {
-   "nome": "Filo di ferro raddrizzato (~1 m, un po' storto) — nella legnaia di Nicola alla Porta del Mulino",
+   "nome": "Filo di ferro raddrizzato (~1 m, un po' storto) — nella carriola 1, con i 2 scaldaletti",
    "peso": 0
   },
   {
-   "nome": "Rotolino di filo di ferro arrugginito (~1 m, regalato da Cointa) — in mano",
+   "nome": "Rotolino di filo di ferro arrugginito (~1 m, regalato da Cointa) — nella carriola 1, con i 2 scaldaletti",
    "peso": 0.2
+  },
+  {
+   "nome": "NOTA: carriola 1 = 4 pece, 1 carbone, carboni mezzi buoni, 2 paglia, ½ fieno, 1 iuta, 2 scaldaletti, rete; carriola 2 = 4 pece, 1 carbone, 2 paglia, ½ fieno, 2 iuta, 1 scaldaletto, corda Ronda, pala — entrambe cariche nella legnaia",
+   "peso": 0
   }
  ],
  "carichi": {
@@ -468,8 +472,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 111,
- "aggiornato": "2026-11-20T20:41",
+ "versione": 112,
+ "aggiornato": "2026-11-20T20:42",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
