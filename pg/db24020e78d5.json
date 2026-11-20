@@ -322,7 +322,7 @@
    "peso": 0
   },
   {
-   "nome": "3× Scaldaletto di rame (freddi, con cenere; uno col coperchio legato col filo di ferro) — contro il muro del mulino di Bastiano, fuori",
+   "nome": "3× Scaldaletto di rame (freddi, con cenere; uno col coperchio legato col filo di ferro) — davanti alla legnaia, alla Porta del Mulino",
    "peso": 0
   },
   {
@@ -460,8 +460,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 108,
- "aggiornato": "2026-11-20T20:29",
+ "versione": 109,
+ "aggiornato": "2026-11-20T20:32",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
