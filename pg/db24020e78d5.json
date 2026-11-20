@@ -266,7 +266,7 @@
    "peso": 0.5
   },
   {
-   "nome": "2× Palla fumogena improvvisata (sacco di juta: legna zuppa fuori, paglia unta asciutta dentro) — legate allo zaino",
+   "nome": "2× Palla fumogena improvvisata (sacco di juta: legna zuppa fuori, paglia unta asciutta dentro) — una nella carriola 1, una nella carriola 2",
    "peso": 3
   },
   {
@@ -472,8 +472,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 112,
- "aggiornato": "2026-11-20T20:42",
+ "versione": 113,
+ "aggiornato": "2026-11-20T20:43",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
