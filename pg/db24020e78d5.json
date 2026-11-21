@@ -368,6 +368,14 @@
   {
    "nome": "CASSETTA DI FERRO col sigillo dell'alambicco (di Cecco Mascola; lucchetto; chiusa e intatta) — nello zaino",
    "peso": 4
+  },
+  {
+   "nome": "Alambicco d'argento di Cecco Mascola (annerito, becco a testa d'airone) — avvolto nel tabarro sopra lo zaino",
+   "peso": 2
+  },
+  {
+   "nome": "600 monete d'oro antiche della cripta (già contate nel denaro) — nello zaino, nel cappuccio e in un vaso",
+   "peso": 5.4
   }
  ],
  "carichi": {
@@ -476,8 +484,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 127,
- "aggiornato": "2026-11-21T23:20",
+ "versione": 128,
+ "aggiornato": "2026-11-21T23:23",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
