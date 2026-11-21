@@ -218,7 +218,7 @@
    "peso": 2.5
   },
   {
-   "nome": "Spada lunga — al fianco",
+   "nome": "Spada lunga — nella legnaia di Nicola alla Porta del Mulino",
    "peso": 2
   },
   {
@@ -238,15 +238,15 @@
    "peso": 1
   },
   {
-   "nome": "Copia del contratto con la Banca Natidoro — nella tasca interna del tabarro",
+   "nome": "Copia del contratto con la Banca Natidoro — nello zaino (scartoffie)",
    "peso": 0
   },
   {
-   "nome": "Lettera di convocazione della Banca Natidoro (sigillo d oro rotto) — nella tasca interna del tabarro",
+   "nome": "Lettera di convocazione della Banca Natidoro (sigillo d oro rotto) — nello zaino (scartoffie)",
    "peso": 0
   },
   {
-   "nome": "Avviso d asta di Castel Raineri (strappato) — nella tasca interna del tabarro",
+   "nome": "Avviso d asta di Castel Raineri (strappato) — nello zaino (scartoffie)",
    "peso": 0
   },
   {
@@ -258,7 +258,7 @@
    "peso": 1
   },
   {
-   "nome": "7× Ampolla d olio da lampada (0,5 l) — nello zaino",
+   "nome": "7× Ampolla d olio da lampada (0,5 l) — nella legnaia di Nicola alla Porta del Mulino",
    "peso": 4.5
   },
   {
@@ -270,7 +270,7 @@
    "peso": 3
   },
   {
-   "nome": "3× Ampolla d olio da lampada (0,5 l) — nello zaino",
+   "nome": "3× Ampolla d olio da lampada (0,5 l) — nella legnaia di Nicola alla Porta del Mulino",
    "peso": 1.5
   },
   {
@@ -306,7 +306,7 @@
    "peso": 0
   },
   {
-   "nome": "1× Fagotto dell Agnello (pane, formaggio, 2 uova sode, salsiccia; per colazione G8) — nella tasca interna del tabarro",
+   "nome": "1× Fagotto dell Agnello (pane, formaggio, 2 uova sode, salsiccia; per colazione G8) — nello zaino (scartoffie)",
    "peso": 0.5
   },
   {
@@ -322,7 +322,7 @@
    "peso": 0
   },
   {
-   "nome": "Tabarro incerato grigio col cappuccio (vecchio, di Tano Lasca, puzza di pesce) — indossato sopra la cotta",
+   "nome": "Tabarro incerato grigio col cappuccio (vecchio, di Tano Lasca, puzza di pesce) — indossato sopra l'abito",
    "peso": 1.5
   },
   {
@@ -330,7 +330,7 @@
    "peso": 0.5
   },
   {
-   "nome": "Copia dell'opposizione alla cambiale Grasselli (sigillo verde della Cancelleria) — nella tasca del tabarro",
+   "nome": "Copia dell'opposizione alla cambiale Grasselli (sigillo verde della Cancelleria) — nello zaino (scartoffie)",
    "peso": 0
   },
   {
@@ -338,7 +338,7 @@
    "peso": 5
   },
   {
-   "nome": "1× Candelotto fumogeno alla pece n.2 (come il primo, più compatto: entra nel tubo grosso) — alla cintura",
+   "nome": "1× Candelotto fumogeno alla pece n.2 (come il primo, più compatto: entra nel tubo grosso) — nella legnaia di Nicola alla Porta del Mulino",
    "peso": 1.5
   },
   {
@@ -358,7 +358,7 @@
    "peso": 0
   },
   {
-   "nome": "Rampino di ferro a tre denti + corda coi nodi (20 m) — a tracolla",
+   "nome": "Rampino di ferro a tre denti + corda coi nodi (20 m) — nella legnaia di Nicola alla Porta del Mulino",
    "peso": 0
   },
   {
@@ -370,20 +370,24 @@
    "peso": 4
   },
   {
-   "nome": "Alambicco d'argento di Cecco Mascola (annerito, becco a testa d'airone) — avvolto nel tabarro sopra lo zaino",
+   "nome": "Alambicco d'argento di Cecco Mascola (annerito, becco a testa d'airone) — nella legnaia di Nicola alla Porta del Mulino",
    "peso": 2
   },
   {
-   "nome": "600 monete d'oro antiche della cripta (già contate nel denaro) — tutte nello zaino",
-   "peso": 5.4
-  },
-  {
-   "nome": "2× Vaso di terracotta 'FUOCO LIQUIDO – NON SCUOTERE, NON APRIRE VICINO ALLA FIAMMA' — nel fagotto del tabarro",
+   "nome": "2× Vaso di terracotta 'FUOCO LIQUIDO – NON SCUOTERE, NON APRIRE VICINO ALLA FIAMMA' — nella legnaia di Nicola alla Porta del Mulino",
    "peso": 1.5
   },
   {
-   "nome": "2× Vaso di terracotta senza etichetta, cera nera, teschio di gatto disegnato sul tappo — nel fagotto del tabarro",
+   "nome": "2× Vaso di terracotta senza etichetta, cera nera, teschio di gatto disegnato sul tappo — nella legnaia di Nicola alla Porta del Mulino",
    "peso": 1.5
+  },
+  {
+   "nome": "SACCHI DI IUTA con 633 mo (di cui 600 antiche), 105 ma, 53 mr — nascosti nella legnaia di Nicola alla Porta del Mulino",
+   "peso": 0
+  },
+  {
+   "nome": "NOTA: cotta di maglia e scudo leggero NON indossati — nella legnaia di Nicola (G9 13:20)",
+   "peso": 0
   }
  ],
  "carichi": {
@@ -492,7 +496,7 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 135,
+ "versione": 136,
  "aggiornato": "2026-11-22T00:32",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
