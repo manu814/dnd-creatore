@@ -366,10 +366,6 @@
    "peso": 0
   },
   {
-   "nome": "CASSETTA DI FERRO col sigillo dell'alambicco (di Cecco Mascola; lucchetto; chiusa e intatta) — nello zaino",
-   "peso": 4
-  },
-  {
    "nome": "Alambicco d'argento di Cecco Mascola (annerito, becco a testa d'airone) — nella legnaia di Nicola alla Porta del Mulino",
    "peso": 2
   },
@@ -387,6 +383,10 @@
   },
   {
    "nome": "NOTA: cotta di maglia e scudo leggero NON indossati — nella legnaia di Nicola (G9 13:20)",
+   "peso": 0
+  },
+  {
+   "nome": "RICEVUTA della Cancelleria del Magistrato (cassetta di Mascola depositata e sigillata; apertura G11 a mezzogiorno) — in tasca",
    "peso": 0
   }
  ],
@@ -496,8 +496,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 136,
- "aggiornato": "2026-11-22T00:32",
+ "versione": 137,
+ "aggiornato": "2026-11-22T00:51",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
