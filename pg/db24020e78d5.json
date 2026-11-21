@@ -462,7 +462,7 @@
   }
  },
  "stato": {
-  "pf_attuali": 12,
+  "pf_attuali": 11,
   "campagna": "debiti-di-argentoforte",
   "denaro": {
    "mo": 12,
@@ -472,8 +472,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 119,
- "aggiornato": "2026-11-21T17:57",
+ "versione": 120,
+ "aggiornato": "2026-11-21T18:09",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
