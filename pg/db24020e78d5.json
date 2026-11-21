@@ -366,19 +366,7 @@
    "peso": 0
   },
   {
-   "nome": "Alambicco d'argento di Cecco Mascola (annerito, becco a testa d'airone) — nella legnaia di Nicola alla Porta del Mulino",
-   "peso": 2
-  },
-  {
-   "nome": "2× Vaso di terracotta 'FUOCO LIQUIDO – NON SCUOTERE, NON APRIRE VICINO ALLA FIAMMA' — nella legnaia di Nicola alla Porta del Mulino",
-   "peso": 1.5
-  },
-  {
-   "nome": "2× Vaso di terracotta senza etichetta, cera nera, teschio di gatto disegnato sul tappo — nella legnaia di Nicola alla Porta del Mulino",
-   "peso": 1.5
-  },
-  {
-   "nome": "SACCHI DI IUTA con 633 mo (di cui 600 antiche), 105 ma, 53 mr — nascosti nella legnaia di Nicola alla Porta del Mulino",
+   "nome": "SACCHETTO con i soldi propri rimasti: 4 mo e 3 mr — nella legnaia di Nicola alla Porta del Mulino",
    "peso": 0
   },
   {
@@ -387,6 +375,10 @@
   },
   {
    "nome": "RICEVUTA della Cancelleria del Magistrato (cassetta di Mascola depositata e sigillata; apertura G11 a mezzogiorno) — in tasca",
+   "peso": 0
+  },
+  {
+   "nome": "RICEVUTA DI DEPOSITO della Cancelleria: 600 mo antiche + 29 mo 105 ma 50 mr (affitto) + alambicco d'argento + 4 vasi (2 fuoco liquido, 2 teschio di gatto) — in tasca",
    "peso": 0
   }
  ],
@@ -496,8 +488,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 137,
- "aggiornato": "2026-11-22T00:51",
+ "versione": 138,
+ "aggiornato": "2026-11-22T00:59",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
