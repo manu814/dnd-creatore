@@ -364,6 +364,10 @@
   {
    "nome": "Mantice da fabbro di Ruggero (prestato da Amabile: se si rompe, cena pagata doppia) — davanti alla legnaia",
    "peso": 0
+  },
+  {
+   "nome": "CASSETTA DI FERRO col sigillo dell'alambicco (di Cecco Mascola; lucchetto; chiusa e intatta) — stretta al petto",
+   "peso": 4
   }
  ],
  "carichi": {
@@ -472,8 +476,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 124,
- "aggiornato": "2026-11-21T22:22",
+ "versione": 125,
+ "aggiornato": "2026-11-21T22:52",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
