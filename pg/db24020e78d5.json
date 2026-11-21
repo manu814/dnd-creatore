@@ -266,7 +266,7 @@
    "peso": 0.5
   },
   {
-   "nome": "2× Palla fumogena improvvisata (sacco di juta: legna zuppa fuori, paglia unta asciutta dentro) — una alla buca col gruppo di Lucio, una nel tuo zaino",
+   "nome": "2× Palla fumogena improvvisata (sacco di juta: legna zuppa fuori, paglia unta asciutta dentro) — entrambe nella legnaia di Nicola alla Porta del Mulino",
    "peso": 3
   },
   {
@@ -374,7 +374,7 @@
    "peso": 2
   },
   {
-   "nome": "600 monete d'oro antiche della cripta (già contate nel denaro) — nello zaino, nel cappuccio e in un vaso",
+   "nome": "600 monete d'oro antiche della cripta (già contate nel denaro) — tutte nello zaino",
    "peso": 5.4
   },
   {
@@ -492,8 +492,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 132,
- "aggiornato": "2026-11-22T00:09",
+ "versione": 133,
+ "aggiornato": "2026-11-22T00:14",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
