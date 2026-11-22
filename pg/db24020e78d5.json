@@ -354,7 +354,7 @@
    "peso": 0
   },
   {
-   "nome": "DEPOSITO in Cancelleria (1 ma al mese): 496 mo antiche + 29 mo + 105 ma + 50 mr (= 536 mo di valore) + 2 vasi FUOCO LIQUIDO + 1 vaso col teschio di gatto — ricevuta in tasca",
+   "nome": "DEPOSITO in Cancelleria (1 ma al mese): 296 mo antiche + 29 mo + 105 ma + 50 mr (= 336 mo di valore) + 2 vasi FUOCO LIQUIDO + 1 vaso col teschio di gatto — ricevuta in tasca (G13: ritirate 200 mo antiche)",
    "peso": 0
   },
   {
@@ -499,7 +499,7 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 183,
+ "versione": 184,
  "aggiornato": "2026-11-22T23:30",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
