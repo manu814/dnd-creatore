@@ -376,6 +376,14 @@
   {
    "nome": "RICEVUTA DI DEPOSITO della Cancelleria: 600 mo antiche + 29 mo 105 ma 50 mr (affitto) + alambicco d'argento + 4 vasi (2 fuoco liquido, 2 teschio di gatto) — in tasca",
    "peso": 0
+  },
+  {
+   "nome": "SENTENZA del magistrato Stella (G11): erede di Cecco Mascola; debito con la Banca ESTINTO; asta annullata; la Banca deve versare 918 mo in Cancelleria entro G14",
+   "peso": 0
+  },
+  {
+   "nome": "EREDITÀ MASCOLA: la Torre Mascola e il suo contenuto (in Cancelleria: 600 mo antiche, 40 mo d'affitto, alambicco d'argento, 4 vasi) — da ritirare",
+   "peso": 0
   }
  ],
  "carichi": {
@@ -484,8 +492,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 149,
- "aggiornato": "2026-11-22T15:52",
+ "versione": 150,
+ "aggiornato": "2026-11-22T16:03",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
