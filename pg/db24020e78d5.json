@@ -380,6 +380,10 @@
   {
    "nome": "1× Vaso di terracotta senza etichetta, cera nera, teschio di gatto sul tappo — nello zaino",
    "peso": 0.75
+  },
+  {
+   "nome": "Mappa di pelle conciata delle gallerie dei coboldi (dono di Sgnic, G11) — in mano",
+   "peso": 0.2
   }
  ],
  "carichi": {
@@ -488,8 +492,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 160,
- "aggiornato": "2026-11-22T17:46",
+ "versione": 161,
+ "aggiornato": "2026-11-22T18:04",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
