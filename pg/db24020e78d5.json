@@ -226,15 +226,15 @@
    "peso": 0.5
   },
   {
-   "nome": "3× Pasti normali (al giorno) — nello zaino",
+   "nome": "3× Pasti normali (al giorno) — nella legnaia di Nicola alla Porta del Mulino",
    "peso": 0
   },
   {
-   "nome": "Acciarino e pietra focaia — nello zaino",
+   "nome": "Acciarino e pietra focaia — nella legnaia di Nicola alla Porta del Mulino",
    "peso": 0
   },
   {
-   "nome": "2× Torcia (1 ora di luce ciascuna) — nello zaino (una terza ACCESA in mano, G9 9:37)",
+   "nome": "2× Torcia (1 ora di luce ciascuna) — nella legnaia di Nicola alla Porta del Mulino",
    "peso": 1
   },
   {
@@ -274,15 +274,15 @@
    "peso": 1.5
   },
   {
-   "nome": "Mazzetto di stoppini di canapa — nello zaino",
+   "nome": "Mazzetto di stoppini di canapa — nella legnaia di Nicola alla Porta del Mulino",
    "peso": 0
   },
   {
-   "nome": "Sacchetto di esca di fungo — nello zaino",
+   "nome": "Sacchetto di esca di fungo — nella legnaia di Nicola alla Porta del Mulino",
    "peso": 0
   },
   {
-   "nome": "Candela di sego — nello zaino",
+   "nome": "Candela di sego — nella legnaia di Nicola alla Porta del Mulino",
    "peso": 0
   },
   {
@@ -488,8 +488,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 138,
- "aggiornato": "2026-11-22T00:59",
+ "versione": 139,
+ "aggiornato": "2026-11-22T02:22",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
