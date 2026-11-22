@@ -214,7 +214,7 @@
  },
  "oggetti": [
   {
-   "nome": "Abito da viaggiatore (indossato)",
+   "nome": "Abito da viaggiatore NUOVO, lana buona (Mastro Tobia, G12) — indossato sotto la cotta",
    "peso": 2.5
   },
   {
@@ -322,10 +322,6 @@
    "peso": 0
   },
   {
-   "nome": "Tabarro incerato grigio col cappuccio (vecchio, di Tano Lasca, puzza di pesce) — indossato sopra l'abito",
-   "peso": 1.5
-  },
-  {
    "nome": "Sacco di tela grezza di Narseo (per documenti vecchi) — alla TORRE MASCOLA, vuoto",
    "peso": 0.5
   },
@@ -396,6 +392,10 @@
   {
    "nome": "1 uovo di Ildegonda in un fazzoletto (regalo) — in tasca",
    "peso": 0.05
+  },
+  {
+   "nome": "Mantello corto di volpe bordato di pelliccia (era di un conte finito in galera; Mastro Tobia) — indossato sopra la cotta",
+   "peso": 1.5
   }
  ],
  "carichi": {
@@ -504,7 +504,7 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 173,
+ "versione": 174,
  "aggiornato": "2026-11-22T20:56",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
