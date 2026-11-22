@@ -384,6 +384,18 @@
   {
    "nome": "Mappa di pelle conciata delle gallerie dei coboldi (dono di Sgnic, G11) — in mano",
    "peso": 0.2
+  },
+  {
+   "nome": "Mantello buono di Cecco Mascola (lana blu notte, pelliccia, fibbia d'argento ad alambicco) — LASCITO per ILDEGONDA",
+   "peso": 2
+  },
+  {
+   "nome": "Lettera della Banca Natidoro di 41 anni fa a Mascola ('il rimborso del Suo prestito avverrà alla prossima stagione')",
+   "peso": 0
+  },
+  {
+   "nome": "Taccuino dei conti di Mascola ('6.000 mo a Natidoro. Ricevuta nella cassetta. Il resto lo sa Anello.')",
+   "peso": 0.2
   }
  ],
  "carichi": {
@@ -492,8 +504,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 161,
- "aggiornato": "2026-11-22T18:04",
+ "versione": 162,
+ "aggiornato": "2026-11-22T19:32",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
