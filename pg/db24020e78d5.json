@@ -392,6 +392,10 @@
   {
    "nome": "Bottone d'ottone con filo rosso, inciso con una ruota di formaggio crepata (segno di casa Di Biasio) — trovato sotto gli ulivi, nella borsetta",
    "peso": 0
+  },
+  {
+   "nome": "6 uova di Ildegonda in un fazzoletto (regalo) — in mano",
+   "peso": 0.3
   }
  ],
  "carichi": {
@@ -500,8 +504,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 170,
- "aggiornato": "2026-11-22T20:41",
+ "versione": 171,
+ "aggiornato": "2026-11-22T20:42",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
