@@ -477,15 +477,15 @@
   "pf_attuali": 13,
   "campagna": "debiti-di-argentoforte",
   "denaro": {
-   "mo": 9,
-   "ma": 1,
+   "mo": 7,
+   "ma": 7,
    "mr": 0
   },
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 148,
- "aggiornato": "2026-11-22T15:47",
+ "versione": 149,
+ "aggiornato": "2026-11-22T15:52",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
