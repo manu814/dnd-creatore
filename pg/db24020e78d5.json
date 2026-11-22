@@ -306,10 +306,6 @@
    "peso": 0
   },
   {
-   "nome": "1× Fagotto dell Agnello (pane, formaggio, 2 uova sode, salsiccia; per colazione G8) — nello zaino (scartoffie)",
-   "peso": 0.5
-  },
-  {
    "nome": "4× Carriola vecchia (2 buone, ingrassate col sego e quasi silenziose, 1 ruota spaccata, 1 cassone sfondato; di Bastiano, ora tue) — alla TORRE MASCOLA",
    "peso": 0
   },
@@ -388,10 +384,6 @@
   {
    "nome": "Bottone d'ottone con filo rosso (segno di casa Di Biasio) — CONSEGNATO a NARSEO (nella sua cartellina per l'udienza)",
    "peso": 0
-  },
-  {
-   "nome": "1 uovo di Ildegonda in un fazzoletto (regalo) — nella borsetta alla cintura",
-   "peso": 0.05
   },
   {
    "nome": "Mantello corto di volpe bordato di pelliccia (era di un conte finito in galera; Mastro Tobia) — indossato sopra la cotta",
@@ -507,8 +499,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 179,
- "aggiornato": "2026-11-22T22:29",
+ "versione": 180,
+ "aggiornato": "2026-11-22T22:57",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
