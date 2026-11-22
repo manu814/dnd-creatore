@@ -258,8 +258,8 @@
    "peso": 1
   },
   {
-   "nome": "7× Ampolla d olio da lampada (0,5 l) — alla TORRE MASCOLA",
-   "peso": 4.5
+   "nome": "6× Ampolla d olio da lampada (0,5 l) — alla TORRE MASCOLA",
+   "peso": 4
   },
   {
    "nome": "1× Sacco di juta vuoto e bagnato — alla TORRE MASCOLA",
@@ -504,8 +504,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 165,
- "aggiornato": "2026-11-22T19:59",
+ "versione": 166,
+ "aggiornato": "2026-11-22T20:04",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
