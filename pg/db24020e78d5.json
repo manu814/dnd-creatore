@@ -394,8 +394,8 @@
    "peso": 0
   },
   {
-   "nome": "6 uova di Ildegonda in un fazzoletto (regalo) — in mano",
-   "peso": 0.3
+   "nome": "1 uovo di Ildegonda in un fazzoletto (regalo) — in tasca",
+   "peso": 0.05
   }
  ],
  "carichi": {
@@ -504,8 +504,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 171,
- "aggiornato": "2026-11-22T20:42",
+ "versione": 172,
+ "aggiornato": "2026-11-22T20:43",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
