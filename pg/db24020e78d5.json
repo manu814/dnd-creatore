@@ -250,7 +250,7 @@
    "peso": 0
   },
   {
-   "nome": "Chiave di ottone col nastro verde (portoncino sul retro dello studio di Narseo Anello) — in tasca",
+   "nome": "Chiave di ottone col nastro verde (portoncino sul retro dello studio di Narseo Anello) — nella borsetta alla cintura",
    "peso": 0
   },
   {
@@ -350,11 +350,11 @@
    "peso": 0
   },
   {
-   "nome": "RICEVUTA della Cancelleria del Magistrato (cassetta di Mascola depositata e sigillata; apertura G11 a mezzogiorno) — in tasca",
+   "nome": "RICEVUTA della Cancelleria del Magistrato (cassetta di Mascola depositata e sigillata; apertura G11 a mezzogiorno) — nella borsetta alla cintura",
    "peso": 0
   },
   {
-   "nome": "SENTENZA del magistrato Stella (G11): erede di Cecco Mascola; debito con la Banca ESTINTO; asta annullata; la Banca deve versare 918 mo in Cancelleria entro G14",
+   "nome": "SENTENZA del magistrato Stella (G11): erede di Cecco Mascola; debito con la Banca ESTINTO; asta annullata; la Banca deve versare 918 mo in Cancelleria entro G14 — nello zaino (scartoffie)",
    "peso": 0
   },
   {
@@ -374,23 +374,23 @@
    "peso": 0.75
   },
   {
-   "nome": "Mappa di pelle conciata delle gallerie dei coboldi (dono di Sgnic, G11) — in mano",
+   "nome": "Mappa di pelle conciata delle gallerie dei coboldi (dono di Sgnic, G11) — nello zaino",
    "peso": 0.2
   },
   {
-   "nome": "Lettera della Banca Natidoro di 41 anni fa a Mascola ('il rimborso del Suo prestito avverrà alla prossima stagione')",
+   "nome": "Lettera della Banca Natidoro di 41 anni fa a Mascola ('il rimborso del Suo prestito avverrà alla prossima stagione') — nello zaino (scartoffie)",
    "peso": 0
   },
   {
-   "nome": "Taccuino dei conti di Mascola ('6.000 mo a Natidoro. Ricevuta nella cassetta. Il resto lo sa Anello.')",
+   "nome": "Taccuino dei conti di Mascola ('6.000 mo a Natidoro. Ricevuta nella cassetta. Il resto lo sa Anello.') — nello zaino (scartoffie)",
    "peso": 0.2
   },
   {
-   "nome": "Bottone d'ottone con filo rosso, inciso con una ruota di formaggio crepata (segno di casa Di Biasio) — trovato sotto gli ulivi, nella borsetta",
+   "nome": "Bottone d'ottone con filo rosso (segno di casa Di Biasio) — CONSEGNATO a NARSEO (nella sua cartellina per l'udienza)",
    "peso": 0
   },
   {
-   "nome": "1 uovo di Ildegonda in un fazzoletto (regalo) — in tasca",
+   "nome": "1 uovo di Ildegonda in un fazzoletto (regalo) — nella borsetta alla cintura",
    "peso": 0.05
   },
   {
@@ -504,8 +504,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 174,
- "aggiornato": "2026-11-22T20:56",
+ "versione": 175,
+ "aggiornato": "2026-11-22T20:57",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
