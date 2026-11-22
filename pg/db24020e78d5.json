@@ -378,12 +378,20 @@
    "peso": 0
   },
   {
-   "nome": "DEPOSITO in Cancelleria (1 ma al mese): 496 mo antiche + 29 mo + 105 ma + 50 mr (= 536 mo di valore) + alambicco d'argento + 4 vasi — ricevuta in tasca",
+   "nome": "DEPOSITO in Cancelleria (1 ma al mese): 496 mo antiche + 29 mo + 105 ma + 50 mr (= 536 mo di valore) + 2 vasi FUOCO LIQUIDO + 1 vaso col teschio di gatto — ricevuta in tasca",
    "peso": 0
   },
   {
    "nome": "La TORRE MASCOLA (eredità, G11) — fuori dalla Porta del Mulino",
    "peso": 0
+  },
+  {
+   "nome": "Alambicco d'argento di Cecco Mascola (annerito, becco a testa d'airone) — nello zaino",
+   "peso": 2
+  },
+  {
+   "nome": "1× Vaso di terracotta senza etichetta, cera nera, teschio di gatto sul tappo — nello zaino",
+   "peso": 0.75
   }
  ],
  "carichi": {
@@ -492,8 +500,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 152,
- "aggiornato": "2026-11-22T16:07",
+ "versione": 153,
+ "aggiornato": "2026-11-22T16:10",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
