@@ -382,10 +382,6 @@
    "peso": 0.2
   },
   {
-   "nome": "Mantello buono di Cecco Mascola (lana blu notte, pelliccia, fibbia d'argento ad alambicco) — LASCITO per ILDEGONDA",
-   "peso": 2
-  },
-  {
    "nome": "Lettera della Banca Natidoro di 41 anni fa a Mascola ('il rimborso del Suo prestito avverrà alla prossima stagione')",
    "peso": 0
   },
@@ -504,8 +500,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 169,
- "aggiornato": "2026-11-22T20:38",
+ "versione": 170,
+ "aggiornato": "2026-11-22T20:41",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
