@@ -346,7 +346,7 @@
    "peso": 0
   },
   {
-   "nome": "DEPOSITO in Cancelleria (1 ma al mese): 296 mo antiche + 29 mo + 105 ma + 50 mr + 918 mo versate dalla banca G14 (= 1.254 mo di valore) + 2 vasi FUOCO LIQUIDO + 1 vaso col teschio di gatto — ricevuta RUBATA col borsello (G14)",
+   "nome": "DEPOSITO in Cancelleria (1 ma al mese): 296 mo antiche + 29 mo + 105 ma + 50 mr + 518 mo della banca (= 854 mo di valore) + 1 vaso FUOCO LIQUIDO + 1 vaso col teschio di gatto — ricevuta NUOVA (G14) nello zaino; la vecchia rubata e annullata",
    "peso": 0
   },
   {
@@ -413,6 +413,12 @@
   },
   {
    "nome": "RUBATO G14 sul Ponte Vecchio (borsaiolo, non visto): la BORSETTA con 55 mo 8 ma, acciarino nuovo, chiave di Narseo, chiave della stanza due, ricevute della Cancelleria — restano i lacci tagliati alla cintura"
+  },
+  {
+   "nome": "Vaso di terracotta 'FUOCO LIQUIDO – NON SCUOTERE, NON APRIRE VICINO ALLA FIAMMA' (fuoco dell'alchimista) — avvolto in uno straccio, nello zaino"
+  },
+  {
+   "nome": "Sacchetto di tela della Cancelleria con 400 mo — nello zaino"
   }
  ],
  "carichi": {
@@ -521,7 +527,7 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 218,
+ "versione": 219,
  "aggiornato": "2026-11-23T04:27",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
