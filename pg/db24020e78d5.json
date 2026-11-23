@@ -431,6 +431,14 @@
   {
    "nome": "ESCA: 6 mo nel FORZIERE (serratura sfondata) ai piedi del letto — TORRE MASCOLA, 3° piano",
    "peso": 0
+  },
+  {
+   "nome": "Balestra leggera (presa allo zoppo, G15) — arma semplice, competente; 1d8, crit 19-20/×2, incremento 24 m; caricare = azione di movimento",
+   "peso": 2
+  },
+  {
+   "nome": "8 dardi da balestra in faretra di cuoio consumato (dello zoppo)",
+   "peso": 0.5
   }
  ],
  "carichi": {
@@ -539,8 +547,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 229,
- "aggiornato": "2026-11-23T16:07",
+ "versione": 230,
+ "aggiornato": "2026-11-23T16:22",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
