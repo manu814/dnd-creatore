@@ -194,7 +194,7 @@
   "Percepire Intenzioni",
   "Professione"
  ],
- "punti_esperienza": 630,
+ "punti_esperienza": 705,
  "armatura": {
   "nome": "Cotta di maglia",
   "tipo": "media",
@@ -539,8 +539,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 227,
- "aggiornato": "2026-11-23T15:55",
+ "versione": 228,
+ "aggiornato": "2026-11-23T16:02",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
