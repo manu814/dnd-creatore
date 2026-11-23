@@ -418,7 +418,7 @@
    "nome": "Vaso di terracotta 'FUOCO LIQUIDO – NON SCUOTERE, NON APRIRE VICINO ALLA FIAMMA' (fuoco dell'alchimista) — nello straccio, sul DAVANZALE della finestra nord del 2° piano (TORRE)"
   },
   {
-   "nome": "Sacchetto di tela con 41 mo + 14 ma — appeso al collo con lo spago, sotto l'abito e la cotta"
+   "nome": "Sacchetto di tela con 41 mo + 13 ma — appeso al collo con lo spago, sotto l'abito e la cotta"
   },
   {
    "nome": "350 mo nascoste nel DOPPIO FONDO dell'armadio — TORRE MASCOLA, 3° piano (premere l'angolo dietro a sinistra)",
@@ -547,7 +547,7 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 234,
+ "versione": 235,
  "aggiornato": "2026-11-23T16:50",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
