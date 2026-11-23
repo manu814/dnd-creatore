@@ -250,10 +250,6 @@
    "peso": 0
   },
   {
-   "nome": "Chiave di ottone col nastro verde (portoncino sul retro dello studio di Narseo Anello) — nella borsetta alla cintura",
-   "peso": 0
-  },
-  {
    "nome": "Zaino — in spalla",
    "peso": 1
   },
@@ -346,15 +342,11 @@
    "peso": 0
   },
   {
-   "nome": "RICEVUTA della Cancelleria del Magistrato (cassetta di Mascola depositata e sigillata; apertura G11 a mezzogiorno) — nella borsetta alla cintura",
-   "peso": 0
-  },
-  {
    "nome": "SENTENZA del magistrato Stella (G11): erede di Cecco Mascola; debito con la Banca ESTINTO; asta annullata; la Banca deve versare 918 mo in Cancelleria entro G14 — nello zaino (scartoffie)",
    "peso": 0
   },
   {
-   "nome": "DEPOSITO in Cancelleria (1 ma al mese): 296 mo antiche + 29 mo + 105 ma + 50 mr + 918 mo versate dalla banca G14 (= 1.254 mo di valore) + 2 vasi FUOCO LIQUIDO + 1 vaso col teschio di gatto — ricevuta in tasca",
+   "nome": "DEPOSITO in Cancelleria (1 ma al mese): 296 mo antiche + 29 mo + 105 ma + 50 mr + 918 mo versate dalla banca G14 (= 1.254 mo di valore) + 2 vasi FUOCO LIQUIDO + 1 vaso col teschio di gatto — ricevuta RUBATA col borsello (G14)",
    "peso": 0
   },
   {
@@ -405,9 +397,6 @@
    "nome": "Sego: mezzo panetto + 1 mazzetto di stoppini + 1 sacchetto di esca di fungo — alla cascina di Berto"
   },
   {
-   "nome": "Acciarino e pietra focaia NUOVI — nella borsetta alla cintura"
-  },
-  {
    "nome": "1× Candelotto fumogeno alla pece n.3 (fatto da Berto, G13 sera; entra nel tubo grosso e nella buca) — alla cascina di Berto"
   },
   {
@@ -417,13 +406,13 @@
    "nome": "1× Avviso della taglia di scherno su 'Calogero Borra detto il Bello' (3 mr), firmato da te — la tua copia, nello zaino"
   },
   {
-   "nome": "Chiave di ferro della STANZA DUE dell'Agnello (sul davanti, Via delle Bilance; pagata 1 mo) — nella borsetta alla cintura"
-  },
-  {
    "nome": "200 mo in un sacchetto di cuoio legato — NASCOSTE sotto l'asse smossa della STANZA DUE dell'Agnello (sotto il letto, verso i piedi, 3ª asse dal muro)"
   },
   {
    "nome": "ESCA: 3 mo + 6 ma + 3 mr nella CASSAPANCA (senza serratura) della STANZA DUE dell'Agnello — diversivo per eventuali ladri"
+  },
+  {
+   "nome": "RUBATO G14 sul Ponte Vecchio (borsaiolo, non visto): la BORSETTA con 55 mo 8 ma, acciarino nuovo, chiave di Narseo, chiave della stanza due, ricevute della Cancelleria — restano i lacci tagliati alla cintura"
   }
  ],
  "carichi": {
@@ -532,7 +521,7 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 216,
+ "versione": 217,
  "aggiornato": "2026-11-23T04:19",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
