@@ -358,7 +358,7 @@
    "peso": 2
   },
   {
-   "nome": "1× Vaso di terracotta senza etichetta, cera nera, teschio di gatto sul tappo — nello zaino",
+   "nome": "1× Vaso di terracotta senza etichetta, cera nera, teschio di gatto sul tappo — nel FORZIERE ai piedi del letto (TORRE, 3° piano), con le 6 mo",
    "peso": 0.75
   },
   {
@@ -547,8 +547,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 230,
- "aggiornato": "2026-11-23T16:22",
+ "versione": 231,
+ "aggiornato": "2026-11-23T16:26",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
