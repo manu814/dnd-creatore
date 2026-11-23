@@ -419,6 +419,14 @@
   },
   {
    "nome": "Sacchetto di tela con 400 mo — appeso al collo con lo spago, sotto l'abito e la cotta"
+  },
+  {
+   "nome": "350 mo nascoste nel DOPPIO FONDO dell'armadio — TORRE MASCOLA, 3° piano (premere l'angolo dietro a sinistra)",
+   "peso": 0
+  },
+  {
+   "nome": "Chiavetta di ferro col sigillo dell'alambicco (era della cassetta del testamento) — in tasca",
+   "peso": 0
   }
  ],
  "carichi": {
@@ -527,7 +535,7 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 221,
+ "versione": 222,
  "aggiornato": "2026-11-23T13:42",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
