@@ -445,7 +445,11 @@
    "peso": 0
   },
   {
-   "nome": "RUBATO G15 al ballo dei facchini (cinghie tagliate a mezzaluna): la BORSA DEL GUARITORE con dentro la POZIONE DI CURA FERITE LEGGERE",
+   "nome": "Borsa del guaritore (Erminio, G15): +2 di circostanza alle prove di Guarire, 10 usi (10 rimasti) — RECUPERATA dal ricettatore; cinghie tagliate a mezzaluna (da riparare): nello zaino",
+   "peso": 0.5
+  },
+  {
+   "nome": "1× Pozione di cura ferite leggere (fialetta rossa, sigillo del Tempio; cura 1d8+1) — RECUPERATA, nel pugno/borsa",
    "peso": 0
   }
  ],
@@ -555,8 +559,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 249,
- "aggiornato": "2026-11-23T21:44",
+ "versione": 250,
+ "aggiornato": "2026-11-23T22:29",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
