@@ -393,7 +393,7 @@
    "nome": "Corda di canapa da sacchi (~8 m, sfilacciata; comprata da Tommaso del mulino, G12) — arrotolata alla cintura"
   },
   {
-   "nome": "Pece: 1 pane intero da 1 kg + mezzo chilo di schegge (= 1,5 kg; calafato del porto) — alla cascina di Berto"
+   "nome": "Pece: mezzo chilo di schegge (calafato del porto) — alla cascina di Berto"
   },
   {
    "nome": "3× Sacco di juta + 3× Fascio di paglia — alla cascina di Berto"
@@ -402,10 +402,13 @@
    "nome": "3× Ampolla d olio da lampada (0,5 l) — alla cascina di Berto"
   },
   {
-   "nome": "Sego: 1 panetto intero + mezzo panetto + 1 mazzetto di stoppini + 1 sacchetto di esca di fungo — alla cascina di Berto"
+   "nome": "Sego: mezzo panetto + 1 mazzetto di stoppini + 1 sacchetto di esca di fungo — alla cascina di Berto"
   },
   {
    "nome": "Acciarino e pietra focaia NUOVI — nella borsetta alla cintura"
+  },
+  {
+   "nome": "1× Candelotto fumogeno alla pece n.3 (fatto da Berto, G13 sera; entra nel tubo grosso e nella buca) — alla cascina di Berto"
   }
  ],
  "carichi": {
@@ -514,8 +517,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 192,
- "aggiornato": "2026-11-23T01:27",
+ "versione": 193,
+ "aggiornato": "2026-11-23T01:28",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
