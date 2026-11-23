@@ -346,7 +346,7 @@
    "peso": 0
   },
   {
-   "nome": "DEPOSITO in Cancelleria (1 ma al mese): 296 mo antiche + 29 mo + 105 ma + 50 mr + 518 mo della banca (= 854 mo di valore) + 1 vaso FUOCO LIQUIDO + 1 vaso col teschio di gatto — ricevuta NUOVA (G14) nello zaino; la vecchia rubata e annullata",
+   "nome": "DEPOSITO in Cancelleria (1 ma al mese): 296 mo antiche + 29 mo + 105 ma + 50 mr + 218 mo della banca (= 554 mo di valore) — ricevuta NUOVA (G15) nello zaino; vasi tutti ritirati",
    "peso": 0
   },
   {
@@ -418,7 +418,7 @@
    "nome": "Vaso di terracotta 'FUOCO LIQUIDO – NON SCUOTERE, NON APRIRE VICINO ALLA FIAMMA' (fuoco dell'alchimista) — nello straccio, sul DAVANZALE della finestra nord del 2° piano (TORRE)"
   },
   {
-   "nome": "Sacchetto di tela con 41 mo + 13 ma — appeso al collo con lo spago, sotto l'abito e la cotta"
+   "nome": "Sacchetto di tela con 341 mo + 13 ma — appeso al collo con lo spago, sotto l'abito e la cotta (pesante, ~3 kg)"
   },
   {
    "nome": "350 mo nascoste nel DOPPIO FONDO dell'armadio — TORRE MASCOLA, 3° piano (premere l'angolo dietro a sinistra)",
@@ -439,6 +439,14 @@
   {
    "nome": "8 dardi da balestra in faretra di cuoio consumato (dello zoppo)",
    "peso": 0.5
+  },
+  {
+   "nome": "Vaso di terracotta 'FUOCO LIQUIDO – NON SCUOTERE, NON APRIRE VICINO ALLA FIAMMA' (il secondo, ritirato G15) — avvolto in uno straccio, nello zaino",
+   "peso": 0.5
+  },
+  {
+   "nome": "2° Vaso di terracotta senza etichetta, cera nera, teschio di gatto sul tappo (ritirato G15) — nello zaino",
+   "peso": 0.75
   }
  ],
  "carichi": {
@@ -547,7 +555,7 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 236,
+ "versione": 237,
  "aggiornato": "2026-11-23T17:23",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
