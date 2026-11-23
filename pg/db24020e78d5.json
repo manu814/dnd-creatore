@@ -338,7 +338,7 @@
    "peso": 0
   },
   {
-   "nome": "Rampino di ferro a tre denti — alla TORRE MASCOLA (3° piano). Corda coi nodi (20 m): LEGA I PRIGIONIERI al 1° piano (~8 m avanzano)",
+   "nome": "Rampino di ferro a tre denti — alla TORRE MASCOLA (3° piano). Corda coi nodi (20 m) — recuperata, con SM",
    "peso": 0
   },
   {
@@ -431,14 +431,6 @@
   {
    "nome": "ESCA: 6 mo nel FORZIERE (serratura sfondata) ai piedi del letto — TORRE MASCOLA, 3° piano",
    "peso": 0
-  },
-  {
-   "nome": "Balestra leggera (presa allo zoppo, G15) — arma semplice, competente; 1d8, crit 19-20/×2, incremento 24 m; caricare = azione di movimento",
-   "peso": 2
-  },
-  {
-   "nome": "8 dardi da balestra in faretra di cuoio consumato (dello zoppo)",
-   "peso": 0.5
   },
   {
    "nome": "Vaso di terracotta 'FUOCO LIQUIDO – NON SCUOTERE, NON APRIRE VICINO ALLA FIAMMA' (il secondo, ritirato G15) — avvolto in uno straccio, nello zaino",
@@ -555,8 +547,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 237,
- "aggiornato": "2026-11-23T17:23",
+ "versione": 238,
+ "aggiornato": "2026-11-23T18:09",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
