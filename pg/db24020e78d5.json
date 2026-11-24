@@ -463,7 +463,7 @@
    "peso": 0
   },
   {
-   "nome": "Attrezzi per l'acido (Erminio G18): guanti di cuoio spessi, grembiule di cuoio, imbuto di coccio, mestolo di legno, 2 panetti di ceralacca (uno avanzato G18, uno mezzo consumato G19) — in cantina",
+   "nome": "Attrezzi per l'acido (Erminio G18): guanti di cuoio spessi, grembiule di cuoio, imbuto di coccio, mestolo di legno — in cantina",
    "peso": 0
   },
   {
@@ -484,6 +484,10 @@
   },
   {
    "nome": "Cassetta di ferro nero col sigillo dell'alambicco (vuota; lucchetto storto ma funziona con la chiavetta) — sul LEGGIO dello studio (4°)",
+   "peso": 0
+  },
+  {
+   "nome": "2 panetti di ceralacca (uno avanzato G18, uno mezzo consumato G19) — sul LEGGIO dello studio (4°), accanto alla cassetta",
    "peso": 0
   }
  ],
@@ -593,8 +597,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 336,
- "aggiornato": "2026-11-25T00:03",
+ "versione": 337,
+ "aggiornato": "2026-11-25T00:07",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
