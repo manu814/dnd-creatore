@@ -416,7 +416,7 @@
    "peso": 0
   },
   {
-   "nome": "Sacchetto di tela con 98 mo + 6 ma + 5 mr — appeso al collo con lo spago, sotto l'abito e la cotta"
+   "nome": "Sacchetto di tela con 122 mo + 2 ma + 5 mr (di cui 23 MO ANTICHE rese da Amabile) — appeso al collo con lo spago, sotto l'abito e la cotta"
   },
   {
    "nome": "350 mo nascoste nel DOPPIO FONDO dell'armadio — TORRE MASCOLA, 3° piano (premere l'angolo dietro a sinistra)",
@@ -569,8 +569,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 288,
- "aggiornato": "2026-11-24T12:05",
+ "versione": 289,
+ "aggiornato": "2026-11-24T12:06",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
