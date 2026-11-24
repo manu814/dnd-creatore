@@ -350,7 +350,7 @@
    "peso": 0
   },
   {
-   "nome": "Alambicco d'argento di Cecco Mascola (segno dell'orafo Bindo: airone in un cerchio) — RITIRATO da Erminio G18, nello zaino (offerta di mastro Gualtiero 210 mo rifiutata/sospesa)",
+   "nome": "Alambicco d'argento di Cecco Mascola (segno dell'orafo Bindo) — nel FORZIERE dello studio (4°), coi libri",
    "peso": 2
   },
   {
@@ -443,11 +443,11 @@
    "peso": 0
   },
   {
-   "nome": "Strumenti d'ottone e bilancine di Mascola (dalla cripta, G16; per Erminio roba comune consumata, ~10 mo) — nello zaino",
+   "nome": "Strumenti d'ottone e bilancine di Mascola (~10 mo) — nel FORZIERE dello studio (4°)",
    "peso": 4
   },
   {
-   "nome": "2 vasi di terracotta: ORTICA e VALERIANA (dalla cripta) — per Erminio POLVERE senza forza dopo 40 anni — nello zaino",
+   "nome": "2 vasi di terracotta VUOTI (erano ortica e valeriana; polvere buttata dalla finestra, scritte grattate via) — in CANTINA accanto alle botti dell'acido",
    "peso": 1.5
   },
   {
@@ -581,8 +581,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 298,
- "aggiornato": "2026-11-24T13:21",
+ "versione": 299,
+ "aggiornato": "2026-11-24T13:28",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
