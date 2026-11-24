@@ -402,7 +402,8 @@
    "nome": "1× Avviso della taglia di scherno su 'Calogero Borra detto il Bello' (3 mr), firmato da te — nel CASSETTO DEL COMODINO (camera, 3° piano)"
   },
   {
-   "nome": "200 mo in un sacchetto di cuoio legato — NASCOSTE sotto l'asse smossa della STANZA DUE dell'Agnello (sotto il letto, verso i piedi, 3ª asse dal muro)"
+   "nome": "RUBATE (scoperto G18): le 200 MO nascoste sotto l'asse della STANZA DUE all'Agnello. Al loro posto sabbia grigia e squame di pesce.",
+   "peso": 0
   },
   {
    "nome": "ESCA: 3 mo + 6 ma + 3 mr nella CASSAPANCA (senza serratura) della STANZA DUE dell'Agnello — diversivo per eventuali ladri"
@@ -568,8 +569,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 286,
- "aggiornato": "2026-11-24T11:53",
+ "versione": 287,
+ "aggiornato": "2026-11-24T12:04",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
