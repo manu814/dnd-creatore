@@ -1179,7 +1179,7 @@ ${p.attacchi.map(a => `<tr><td><b>${esc(a.nome)}</b><br><span class="soft">criti
       : `<div class="card" style="text-align:center"><p>🎲 Qui compaiono i tiri che ti chiede il DM.</p><p class="soft">${esc(statoCanale)}</p></div>`}
 ${ult ? `<div class="card" style="text-align:center"><div class="soft">Ultimo tiro · n.${ult.n} · ${esc(ult.cosa)}</div><div style="font-size:54px;font-weight:bold;color:var(--acc)">${ult.tot}</div>
 <div class="soft">${esc(ult.dett)}</div>${ult.nota ? `<p class="bad"><b>${esc(ult.nota)}</b></p>` : ''}</div>` : ''}
-<div class="card"><h3>Tiri fatti</h3><table class="t">${(TR.log || []).slice(0, 20).map(x => `<tr><td class="num">n.${x.n}</td><td>${esc(x.cosa)}<br><span class="soft">${esc(x.dett)}</span></td><td class="num gr">${x.tot}</td></tr>`).join('') || '<tr><td class="soft">ancora nessuno</td></tr>'}</table></div>`;
+<div class="card"><h3>Tiri fatti ${(TR.log || []).length ? '<button class="btn" id="pulisciTiri" style="float:right;font-size:13px;padding:4px 10px">🧹 Pulisci</button>' : ''}</h3><table class="t">${(TR.log || []).slice(0, 20).map(x => `<tr><td class="num">n.${x.n}</td><td>${esc(x.cosa)}<br><span class="soft">${esc(x.dett)}</span></td><td class="num gr">${x.tot}</td></tr>`).join('') || '<tr><td class="soft">ancora nessuno</td></tr>'}</table></div>`;
   }
   if (false) {
     const camp = (p.stato || {}).campagna, sc = SCENE[camp];
@@ -1226,6 +1226,7 @@ ${p.incantesimi.domini ? `<p class="soft">${esc(p.incantesimi.domini)}</p>` : ''
   document.querySelectorAll('[data-tab]').forEach(b => b.onclick = () => { tabScheda = b.dataset.tab; apriScheda(); scrollTo(0, 0); });
   const on = (id, f) => { const e = $('#' + id); if (e) e.onclick = f; };
   document.querySelectorAll('[data-esegui]').forEach(b => b.onclick = () => esegui(p, +b.dataset.esegui));
+  if ($('#pulisciTiri')) $('#pulisciTiri').onclick = () => { TR.log = []; TR.richieste = {}; salvaTR(); apriScheda(); };   // regista 24/11/26: pulire i tiri vecchi (TR.fatti resta: così non ricompaiono)
   on('sali', () => { iniziaSalita(p0); apriSalita(p0); });
   on('sync', () => { statoSync = 'controllo…'; apriScheda(); sincronizza('github').then(apriScheda); });
   const n = $('#note'); if (n) n.oninput = () => { TR.note = n.value; salvaTR(); mandaNote(p); };
