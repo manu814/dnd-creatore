@@ -354,7 +354,7 @@
    "peso": 0
   },
   {
-   "nome": "1× Vaso di terracotta senza etichetta, cera nera, teschio di gatto sul tappo — nel FORZIERE, ora al 4° piano (studio)",
+   "nome": "2× Vaso di terracotta senza etichetta, cera nera, teschio di gatto sul tappo — nel FORZIERE (4° piano, studio)",
    "peso": 0.75
   },
   {
@@ -415,7 +415,7 @@
    "peso": 0
   },
   {
-   "nome": "Sacchetto di tela con 97 mo + 2 ma — appeso al collo con lo spago, sotto l'abito e la cotta"
+   "nome": "Sacchetto di tela con 103 mo + 2 ma — appeso al collo con lo spago, sotto l'abito e la cotta"
   },
   {
    "nome": "350 mo nascoste nel DOPPIO FONDO dell'armadio — TORRE MASCOLA, 3° piano (premere l'angolo dietro a sinistra)",
@@ -426,16 +426,8 @@
    "peso": 0
   },
   {
-   "nome": "ESCA: 6 mo nel FORZIERE — spostato al 4° PIANO (studio), contro il muro OVEST accanto alla vestaglia; anelli impiombati nella pietra G17, serratura G18",
-   "peso": 0
-  },
-  {
    "nome": "Vaso di terracotta 'FUOCO LIQUIDO – NON SCUOTERE, NON APRIRE VICINO ALLA FIAMMA' (fuoco dell'alchimista) — nello straccio, RITTO nell'ARMADIO della camera (3° piano), fra le vestaglie (NON nel doppio fondo: troppo basso)",
    "peso": 0
-  },
-  {
-   "nome": "2° Vaso di terracotta senza etichetta, cera nera, teschio di gatto sul tappo (ritirato G15) — nello zaino",
-   "peso": 0.75
   },
   {
    "nome": "Foglio di deposito per la vendita dell'alambicco (Narseo; firmato SM ed Erminio; minimo 150 mo, 1 su 10 a Erminio) — nello zaino (scartoffie)",
@@ -466,8 +458,8 @@
    "peso": 0
   },
   {
-   "nome": "RICETTARIO DI MASCOLA (cuoio, intatto, sigillo dell'alambicco; prima pagina: 'A chi viene dopo di me: la torre ascolta.'; ricette in scrittura fitta e sigle da alchimista, illeggibili per SM) — nello zaino",
-   "peso": 1
+   "nome": "LIBRI nel FORZIERE (4° piano): RICETTARIO DI MASCOLA (cuoio, sigillo; 'A chi viene dopo di me: la torre ascolta.'), ERBARIO a metà leggibile, LIBRO DEI CONTI della torre (40 anni fa), LIBRO SACRO DELLA BILANCIA senza copertina",
+   "peso": 0
   }
  ],
  "carichi": {
@@ -576,7 +568,7 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 263,
+ "versione": 264,
  "aggiornato": "2026-11-24T02:59",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
