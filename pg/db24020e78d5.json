@@ -378,7 +378,7 @@
    "peso": 1.5
   },
   {
-   "nome": "Corda di canapa da sacchi (~8 m, sfilacciata; comprata da Tommaso del mulino, G12) — arrotolata alla cintura"
+   "nome": "Corda di canapa da sacchi (~8 m, sfilacciata; comprata da Tommaso del mulino, G12) — nell ATRIO della torre (lasciata G19)"
   },
   {
    "nome": "Pece: qualche scheggia (~0,3 kg; calafato del porto) — alla cascina di Berto"
@@ -593,8 +593,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 331,
- "aggiornato": "2026-11-24T23:21",
+ "versione": 332,
+ "aggiornato": "2026-11-24T23:29",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
