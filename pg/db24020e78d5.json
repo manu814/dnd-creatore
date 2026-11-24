@@ -234,15 +234,15 @@
    "peso": 1
   },
   {
-   "nome": "Copia del contratto con la Banca Natidoro — nello zaino (scartoffie)",
+   "nome": "Copia del contratto con la Banca Natidoro — nel CASSETTO DEL COMODINO (camera, 3° piano)",
    "peso": 0
   },
   {
-   "nome": "Lettera di convocazione della Banca Natidoro (sigillo d oro rotto) — nello zaino (scartoffie)",
+   "nome": "Lettera di convocazione della Banca Natidoro (sigillo d oro rotto) — nel CASSETTO DEL COMODINO (camera, 3° piano)",
    "peso": 0
   },
   {
-   "nome": "Avviso d asta di Castel Raineri (strappato) — nello zaino (scartoffie)",
+   "nome": "Avviso d asta di Castel Raineri (strappato) — nel CASSETTO DEL COMODINO (camera, 3° piano)",
    "peso": 0
   },
   {
@@ -314,7 +314,7 @@
    "peso": 0.5
   },
   {
-   "nome": "Copia dell'opposizione alla cambiale Grasselli (sigillo verde della Cancelleria) — nello zaino (scartoffie)",
+   "nome": "Copia dell'opposizione alla cambiale Grasselli (sigillo verde della Cancelleria) — nel CASSETTO DEL COMODINO (camera, 3° piano)",
    "peso": 0
   },
   {
@@ -358,15 +358,15 @@
    "peso": 0.75
   },
   {
-   "nome": "Mappa di pelle conciata delle gallerie dei coboldi (dono di Sgnic, G11) — nello zaino",
+   "nome": "Mappa di pelle conciata delle gallerie dei coboldi (dono di Sgnic, G11) — nel CASSETTO DEL COMODINO (camera, 3° piano)",
    "peso": 0.2
   },
   {
-   "nome": "Lettera della Banca Natidoro di 41 anni fa a Mascola ('il rimborso del Suo prestito avverrà alla prossima stagione') — nello zaino (scartoffie)",
+   "nome": "Lettera della Banca Natidoro di 41 anni fa a Mascola ('il rimborso del Suo prestito avverrà alla prossima stagione') — nel CASSETTO DEL COMODINO (camera, 3° piano)",
    "peso": 0
   },
   {
-   "nome": "Taccuino dei conti di Mascola ('6.000 mo a Natidoro. Ricevuta nella cassetta. Il resto lo sa Anello.') — nello zaino (scartoffie)",
+   "nome": "Taccuino dei conti di Mascola ('6.000 mo a Natidoro. Ricevuta nella cassetta. Il resto lo sa Anello.') — nel CASSETTO DEL COMODINO (camera, 3° piano)",
    "peso": 0.2
   },
   {
@@ -399,7 +399,7 @@
    "nome": "1× Palla fumogena (metodo Amabile, G13 sera, venuta benissimo: stretta e compatta) — alla cascina di Berto"
   },
   {
-   "nome": "1× Avviso della taglia di scherno su 'Calogero Borra detto il Bello' (3 mr), firmato da te — la tua copia, nello zaino"
+   "nome": "1× Avviso della taglia di scherno su 'Calogero Borra detto il Bello' (3 mr), firmato da te — nel CASSETTO DEL COMODINO (camera, 3° piano)"
   },
   {
    "nome": "200 mo in un sacchetto di cuoio legato — NASCOSTE sotto l'asse smossa della STANZA DUE dell'Agnello (sotto il letto, verso i piedi, 3ª asse dal muro)"
@@ -568,8 +568,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 266,
- "aggiornato": "2026-11-24T03:22",
+ "versione": 267,
+ "aggiornato": "2026-11-24T03:23",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
