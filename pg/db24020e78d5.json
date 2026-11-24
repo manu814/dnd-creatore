@@ -416,7 +416,7 @@
    "peso": 0
   },
   {
-   "nome": "Sacchetto di tela con 100 mo (della banca, ritirate G18) — appeso al collo con lo spago, con le 4 chiavi"
+   "nome": "Sacchetto di tela con 99 mo + 9 ma + 4 mr — appeso al collo con lo spago, con le 4 chiavi"
   },
   {
    "nome": "Chiavetta di ferro col sigillo dell'alambicco (era della cassetta del testamento) — in tasca",
@@ -577,8 +577,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 304,
- "aggiornato": "2026-11-24T15:19",
+ "versione": 305,
+ "aggiornato": "2026-11-24T15:20",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
