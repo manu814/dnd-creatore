@@ -334,7 +334,7 @@
    "peso": 0
   },
   {
-   "nome": "Rampino di ferro a tre denti (con SM, appeso allo zaino) + Corda coi nodi (20 m) a tracolla",
+   "nome": "Rampino di ferro a tre denti — DENTRO lo zaino, avvolto in uno straccio (non tintinna) + Corda coi nodi (20 m) a tracolla",
    "peso": 4
   },
   {
@@ -577,8 +577,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 300,
- "aggiornato": "2026-11-24T13:33",
+ "versione": 301,
+ "aggiornato": "2026-11-24T13:34",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
