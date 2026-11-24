@@ -473,6 +473,10 @@
   {
    "nome": "CREDITO: PIETRO dell'Agnello deve 5 MO a SM (valore delle scarpe, ordine di Stella G18), entro un mese dalla sua paga",
    "peso": 0
+  },
+  {
+   "nome": "25 VASI di coccio sottile (vuoti, da doppia dose: per l'acido; Erminio li riempie G19) — nell'atrio della torre",
+   "peso": 0
   }
  ],
  "carichi": {
@@ -581,8 +585,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 306,
- "aggiornato": "2026-11-24T17:27",
+ "versione": 307,
+ "aggiornato": "2026-11-24T17:30",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
