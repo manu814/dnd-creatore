@@ -467,7 +467,7 @@
    "peso": 0
   },
   {
-   "nome": "10 AMPOLLE di vetro sottile d'ACQUA FORTE STANCA (1d3 a colpo diretto, niente schizzi), tappi di ceralacca — in una CASSETTA con la paglia, in CANTINA accanto alle botti (da spostare)",
+   "nome": "10 AMPOLLE di vetro sottile d'ACQUA FORTE STANCA (1d3 a colpo diretto, niente schizzi), tappi di ceralacca — CASSETTA con la paglia nello STUDIO (4° piano, pavimento di pietra), accanto al forziere",
    "peso": 0
   },
   {
@@ -581,8 +581,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 294,
- "aggiornato": "2026-11-24T13:07",
+ "versione": 295,
+ "aggiornato": "2026-11-24T13:13",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
