@@ -461,6 +461,10 @@
   {
    "nome": "LIBRI nel FORZIERE (4° piano): RICETTARIO DI MASCOLA (cuoio, sigillo; 'A chi viene dopo di me: la torre ascolta.'), ERBARIO a metà leggibile, LIBRO DEI CONTI della torre (40 anni fa), LIBRO SACRO DELLA BILANCIA senza copertina",
    "peso": 0
+  },
+  {
+   "nome": "4 CHIAVI nuove di Bortolo (G18): 2 del FORZIERE dello studio, 2 della porta della CAMERA (3°) — appese al collo col sacchetto",
+   "peso": 0
   }
  ],
  "carichi": {
@@ -569,8 +573,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 289,
- "aggiornato": "2026-11-24T12:06",
+ "versione": 290,
+ "aggiornato": "2026-11-24T12:48",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
