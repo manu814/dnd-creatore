@@ -416,7 +416,7 @@
    "peso": 0
   },
   {
-   "nome": "Sacchetto di tela con 122 mo + 2 ma + 5 mr (di cui 23 MO ANTICHE rese da Amabile) — appeso al collo con lo spago, sotto l'abito e la cotta"
+   "nome": "Sacchetto di tela con 119 mo + 7 ma + 4 mr (dentro molte MO antiche) — appeso al collo con lo spago, sotto l'abito e la cotta"
   },
   {
    "nome": "350 mo nascoste nel DOPPIO FONDO dell'armadio — TORRE MASCOLA, 3° piano (premere l'angolo dietro a sinistra)",
@@ -464,6 +464,14 @@
   },
   {
    "nome": "4 CHIAVI nuove di Bortolo (G18): 2 del FORZIERE dello studio, 2 della porta della CAMERA (3°) — appese al collo col sacchetto",
+   "peso": 0
+  },
+  {
+   "nome": "10 AMPOLLE di vetro sottile d'ACQUA FORTE STANCA (1d3 a colpo diretto, niente schizzi), tappi di ceralacca — in una CASSETTA con la paglia, in CANTINA accanto alle botti (da spostare)",
+   "peso": 0
+  },
+  {
+   "nome": "Attrezzi per l'acido (Erminio G18): guanti di cuoio spessi, grembiule di cuoio, imbuto di coccio, mestolo di legno, panetto di ceralacca (avanzato) — in cantina",
    "peso": 0
   }
  ],
@@ -573,7 +581,7 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 291,
+ "versione": 292,
  "aggiornato": "2026-11-24T13:03",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
