@@ -342,7 +342,7 @@
    "peso": 0
   },
   {
-   "nome": "DEPOSITO in Cancelleria (1 ma al mese): 296 mo antiche + 29 mo + 105 ma + 50 mr + 218 mo della banca (= 554 mo di valore) — ricevuta NUOVA (G15) nello zaino; vasi tutti ritirati",
+   "nome": "DEPOSITO in Cancelleria (1 ma al mese): 296 mo antiche + 29 mo + 105 ma + 50 mr + 118 mo della banca (= 454 mo di valore) — conta il REGISTRO con la firma di SM; ricevuta nuova G18 nello zaino",
    "peso": 0
   },
   {
@@ -416,7 +416,7 @@
    "peso": 0
   },
   {
-   "nome": "Sacchetto di tela VUOTO — appeso al collo con lo spago (con le 4 chiavi nuove)"
+   "nome": "Sacchetto di tela con 100 mo (della banca, ritirate G18) — appeso al collo con lo spago, con le 4 chiavi"
   },
   {
    "nome": "Chiavetta di ferro col sigillo dell'alambicco (era della cassetta del testamento) — in tasca",
@@ -577,7 +577,7 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 302,
+ "versione": 303,
  "aggiornato": "2026-11-24T15:17",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
