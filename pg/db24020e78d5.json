@@ -463,6 +463,10 @@
   {
    "nome": "2 vasi di terracotta sigillati a cera: ORTICA e VALERIANA (dalla cripta, G16) — nello zaino",
    "peso": 1.5
+  },
+  {
+   "nome": "ANELLO-SIGILLO d'argento di Cecco Mascola (sigillo dell'alambicco; preso dal sarcofago G16) — in tasca, da tenere SOTTO CHIAVE (Narseo: chi ha il sigillo di un morto può fargli dire ciò che vuole)",
+   "peso": 0
   }
  ],
  "carichi": {
@@ -571,8 +575,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 256,
- "aggiornato": "2026-11-24T01:17",
+ "versione": 257,
+ "aggiornato": "2026-11-24T01:32",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
