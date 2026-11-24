@@ -419,7 +419,7 @@
    "nome": "Sacchetto di tela con 8 mo + 13 ma + 5 mr — appeso al collo con lo spago, con le 2 chiavi (forziere + camera)"
   },
   {
-   "nome": "Chiavetta di ferro col sigillo dell'alambicco (era della cassetta del testamento) — in tasca",
+   "nome": "Chiavetta di ferro col sigillo dell'alambicco — INFILATA nel lucchetto della cassetta sul LEGGIO (studio, 4°)",
    "peso": 0
   },
   {
@@ -593,8 +593,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 332,
- "aggiornato": "2026-11-24T23:29",
+ "versione": 333,
+ "aggiornato": "2026-11-24T23:32",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
