@@ -475,7 +475,7 @@
    "peso": 0
   },
   {
-   "nome": "25 VASI di coccio sottile (vuoti, da doppia dose: per l'acido; Erminio li riempie G19) — nell'atrio della torre",
+   "nome": "23 VASI DOPPI d'ACQUA FORTE STANCA (coccio sottile, sughero + ceralacca; Erminio G19) sul TAVOLO DI QUERCIA in CANTINA + 2 vasi vuoti; botti dell'acido VUOTE",
    "peso": 0
   },
   {
@@ -593,8 +593,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 333,
- "aggiornato": "2026-11-24T23:32",
+ "versione": 334,
+ "aggiornato": "2026-11-24T23:37",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
