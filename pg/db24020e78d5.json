@@ -415,7 +415,8 @@
    "nome": "RUBATO G14 sul Ponte Vecchio (borsaiolo, non visto): la BORSETTA con 55 mo 8 ma, acciarino nuovo, chiave di Narseo, chiave della stanza due, ricevute della Cancelleria — restano i lacci tagliati alla cintura"
   },
   {
-   "nome": "Vaso di terracotta 'FUOCO LIQUIDO – NON SCUOTERE, NON APRIRE VICINO ALLA FIAMMA' (fuoco dell'alchimista) — nello straccio, sul DAVANZALE della finestra nord del 2° piano (TORRE)"
+   "nome": "Vaso di terracotta 'FUOCO LIQUIDO – NON SCUOTERE, NON APRIRE VICINO ALLA FIAMMA' (fuoco dell'alchimista) — nello straccio, RITTO nell'ARMADIO della camera (3° piano), fra le vestaglie (NON nel doppio fondo: troppo basso)",
+   "peso": 0
   },
   {
    "nome": "Sacchetto di tela con 97 mo + 2 ma — appeso al collo con lo spago, sotto l'abito e la cotta"
@@ -433,8 +434,8 @@
    "peso": 0
   },
   {
-   "nome": "Vaso di terracotta 'FUOCO LIQUIDO – NON SCUOTERE, NON APRIRE VICINO ALLA FIAMMA' (il secondo, ritirato G15) — avvolto in uno straccio, nello zaino",
-   "peso": 0.5
+   "nome": "Vaso di terracotta 'FUOCO LIQUIDO – NON SCUOTERE, NON APRIRE VICINO ALLA FIAMMA' (fuoco dell'alchimista) — nello straccio, RITTO nell'ARMADIO della camera (3° piano), fra le vestaglie (NON nel doppio fondo: troppo basso)",
+   "peso": 0
   },
   {
    "nome": "2° Vaso di terracotta senza etichetta, cera nera, teschio di gatto sul tappo (ritirato G15) — nello zaino",
@@ -575,8 +576,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 259,
- "aggiornato": "2026-11-24T02:38",
+ "versione": 260,
+ "aggiornato": "2026-11-24T02:47",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
