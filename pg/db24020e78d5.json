@@ -468,6 +468,10 @@
   {
    "nome": "ANELLO-SIGILLO d'argento di Cecco Mascola (sigillo dell'alambicco; preso dal sarcofago G16) — in tasca, da tenere SOTTO CHIAVE (Narseo: chi ha il sigillo di un morto può fargli dire ciò che vuole)",
    "peso": 0
+  },
+  {
+   "nome": "RICETTARIO DI MASCOLA (cuoio, intatto, sigillo dell'alambicco; prima pagina: 'A chi viene dopo di me: la torre ascolta.'; ricette in scrittura fitta e sigle da alchimista, illeggibili per SM) — nello zaino",
+   "peso": 1
   }
  ],
  "carichi": {
@@ -576,8 +580,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 260,
- "aggiornato": "2026-11-24T02:47",
+ "versione": 261,
+ "aggiornato": "2026-11-24T02:51",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
