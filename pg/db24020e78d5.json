@@ -416,7 +416,7 @@
    "peso": 0
   },
   {
-   "nome": "Sacchetto di tela con 119 mo + 7 ma + 4 mr (dentro molte MO antiche) — appeso al collo con lo spago, sotto l'abito e la cotta"
+   "nome": "Sacchetto di tela con 118 mo + 7 ma + 4 mr (dentro molte MO antiche) — appeso al collo con lo spago, sotto l'abito e la cotta"
   },
   {
    "nome": "350 mo nascoste nel DOPPIO FONDO dell'armadio — TORRE MASCOLA, 3° piano (premere l'angolo dietro a sinistra)",
@@ -447,11 +447,11 @@
    "peso": 0
   },
   {
-   "nome": "Strumenti d'ottone e bilancine di Mascola (dalla cripta, G16) — nello zaino",
+   "nome": "Strumenti d'ottone e bilancine di Mascola (dalla cripta, G16; per Erminio roba comune consumata, ~10 mo) — nello zaino",
    "peso": 4
   },
   {
-   "nome": "2 vasi di terracotta sigillati a cera: ORTICA e VALERIANA (dalla cripta, G16) — nello zaino",
+   "nome": "2 vasi di terracotta: ORTICA e VALERIANA (dalla cripta) — per Erminio POLVERE senza forza dopo 40 anni — nello zaino",
    "peso": 1.5
   },
   {
@@ -581,7 +581,7 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 293,
+ "versione": 294,
  "aggiornato": "2026-11-24T13:07",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
