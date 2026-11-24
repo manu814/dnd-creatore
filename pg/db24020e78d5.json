@@ -226,11 +226,11 @@
    "peso": 0.5
   },
   {
-   "nome": "Acciarino e pietra focaia — alla TORRE MASCOLA",
+   "nome": "Acciarino e pietra focaia — nello zaino (G19)",
    "peso": 0
   },
   {
-   "nome": "2× Torcia (1 ora di luce ciascuna) — alla TORRE MASCOLA",
+   "nome": "2× Torcia (1 ora di luce ciascuna) — nello zaino (G19)",
    "peso": 1
   },
   {
@@ -589,8 +589,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 317,
- "aggiornato": "2026-11-24T20:30",
+ "versione": 318,
+ "aggiornato": "2026-11-24T20:42",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
