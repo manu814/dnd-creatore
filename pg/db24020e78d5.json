@@ -354,7 +354,7 @@
    "peso": 2
   },
   {
-   "nome": "2× Vaso di terracotta senza etichetta, cera nera, teschio di gatto sul tappo — STUDIO (4°), angolo NORD-OVEST coi vasi del fuoco",
+   "nome": "2× Vaso di terracotta senza etichetta, cera nera, teschio di gatto sul tappo — nel FORZIERE INCATENATO (studio), in mezzo",
    "peso": 0.75
   },
   {
@@ -412,7 +412,7 @@
    "nome": "RUBATO G14 sul Ponte Vecchio (borsaiolo, non visto): la BORSETTA con 55 mo 8 ma, acciarino nuovo, chiave di Narseo, chiave della stanza due, ricevute della Cancelleria — restano i lacci tagliati alla cintura"
   },
   {
-   "nome": "Vaso di terracotta 'FUOCO LIQUIDO – NON SCUOTERE…' (fuoco dell'alchimista, 20 mo) — STUDIO (4°), per terra nell'angolo NORD-OVEST accanto alla scala, nella paglia",
+   "nome": "Vaso di terracotta 'FUOCO LIQUIDO – NON SCUOTERE…' (fuoco dell'alchimista, 20 mo) — nel FORZIERE INCATENATO (studio), angolo DESTRO nella paglia",
    "peso": 0
   },
   {
@@ -423,7 +423,7 @@
    "peso": 0
   },
   {
-   "nome": "Vaso di terracotta 'FUOCO LIQUIDO – NON SCUOTERE…' (fuoco dell'alchimista, 20 mo) — STUDIO (4°), per terra nell'angolo NORD-OVEST accanto alla scala, nella paglia",
+   "nome": "Vaso di terracotta 'FUOCO LIQUIDO – NON SCUOTERE…' (fuoco dell'alchimista, 20 mo) — nel FORZIERE INCATENATO (studio), angolo DESTRO nella paglia",
    "peso": 0
   },
   {
@@ -459,7 +459,7 @@
    "peso": 0
   },
   {
-   "nome": "10 AMPOLLE d'ACQUA FORTE STANCA (1d3, niente schizzi) — CASSETTA con paglia nello STUDIO (4°), angolo SUD-EST sotto la finestra, lontano dal fuoco",
+   "nome": "10 AMPOLLE d'ACQUA FORTE STANCA (1d3, niente schizzi) — cassetta con paglia nel FORZIERE INCATENATO (studio), angolo SINISTRO, lontano dal fuoco",
    "peso": 0
   },
   {
@@ -585,8 +585,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 311,
- "aggiornato": "2026-11-24T18:47",
+ "versione": 312,
+ "aggiornato": "2026-11-24T18:49",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
