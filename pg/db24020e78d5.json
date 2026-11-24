@@ -454,7 +454,7 @@
    "peso": 1.5
   },
   {
-   "nome": "ANELLO-SIGILLO d'argento di Cecco Mascola (sigillo dell'alambicco; preso dal sarcofago G16) — in tasca, da tenere SOTTO CHIAVE (Narseo: chi ha il sigillo di un morto può fargli dire ciò che vuole)",
+   "nome": "ANELLO-SIGILLO d'argento di Cecco Mascola (sigillo dell'alambicco; dal sarcofago G16) — INDOSSATO all'anulare destro (Narseo: chi ha il sigillo di un morto può fargli dire ciò che vuole: attenzione ai borsaioli)",
    "peso": 0
   },
   {
@@ -568,8 +568,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 264,
- "aggiornato": "2026-11-24T02:59",
+ "versione": 265,
+ "aggiornato": "2026-11-24T03:15",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
