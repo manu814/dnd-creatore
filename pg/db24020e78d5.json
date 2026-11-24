@@ -416,7 +416,7 @@
    "peso": 0
   },
   {
-   "nome": "Sacchetto di tela con 8 mo + 1 ma + 4 mr — appeso al collo con lo spago, con le 2 chiavi (forziere + camera); + SACCHETTO DI CUOIO con 200 mo (147 normali + 53 antiche) dalla Cancelleria G19"
+   "nome": "Sacchetto di tela con 8 mo + 6 ma + 1 mr — appeso al collo con lo spago, con le 2 chiavi (forziere + camera)"
   },
   {
    "nome": "Chiavetta di ferro col sigillo dell'alambicco (era della cassetta del testamento) — in tasca",
@@ -467,7 +467,7 @@
    "peso": 0
   },
   {
-   "nome": "MONETE nel FORZIERE INCATENATO dello studio (4°; serratura media + catena ribattuta): 555 mo 7 ma 4 mr (G19). Doppio fondo dell'armadio VUOTO",
+   "nome": "MONETE nel FORZIERE INCATENATO dello studio (4°; serratura media + catena ribattuta): 755 mo 7 ma 4 mr (G19; le ultime 200 nel sacchetto di cuoio a SINISTRA, accanto alle ampolle). Doppio fondo dell armadio VUOTO",
    "peso": 0
   },
   {
@@ -483,8 +483,8 @@
    "peso": 0
   },
   {
-   "nome": "Cassetta di ferro nero col sigillo dell'alambicco (vuota, lucchetto segnato dallo scalpello; ~4 kg) — sottobraccio",
-   "peso": 9
+   "nome": "Cassetta di ferro nero col sigillo dell'alambicco (vuota; lucchetto storto ma funziona con la chiavetta) — sul LEGGIO dello studio (4°)",
+   "peso": 0
   }
  ],
  "carichi": {
@@ -593,7 +593,7 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 328,
+ "versione": 329,
  "aggiornato": "2026-11-24T23:07",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
