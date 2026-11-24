@@ -453,7 +453,7 @@
    "peso": 0
   },
   {
-   "nome": "Contratto dei LAVORI DELLA TORRE (Narseo, G16): 320 mo tutto compreso; PAGATI 160 (metà), restano 160 a lavori finiti (~G23); + SCARICO DI RESPONSABILITÀ firmato da Gerolamo, Bortolo, falegname, garzone — nello zaino (scartoffie)",
+   "nome": "Contratto dei LAVORI DELLA TORRE (Narseo, G16): 320 mo + CAMPANA da cappella 3,5 mo (aggiunta) = 323,5 mo; PAGATI 160, restano 163,5 a lavori finiti (~G23); + SCARICO DI RESPONSABILITÀ firmato — nello zaino (scartoffie)",
    "peso": 0
   },
   {
@@ -575,8 +575,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 257,
- "aggiornato": "2026-11-24T01:32",
+ "versione": 258,
+ "aggiornato": "2026-11-24T01:55",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
