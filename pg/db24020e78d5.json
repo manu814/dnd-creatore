@@ -481,6 +481,10 @@
   {
    "nome": "ORDINE BAULI (G19): 5 semplici d'abete (2° N, camera E, camera O, studio S, atrio) + 1 di quercia con serratura (camera) = 35 MO alla consegna ~G22 (15 falegname, 20 Bortolo)",
    "peso": 0
+  },
+  {
+   "nome": "Cassetta di ferro nero col sigillo dell'alambicco (vuota, lucchetto segnato dallo scalpello; ~4 kg) — sottobraccio",
+   "peso": 9
   }
  ],
  "carichi": {
@@ -589,7 +593,7 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 323,
+ "versione": 324,
  "aggiornato": "2026-11-24T22:54",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
