@@ -489,6 +489,10 @@
   {
    "nome": "2 panetti di ceralacca (uno avanzato G18, uno mezzo consumato G19) — sul LEGGIO dello studio (4°), accanto alla cassetta",
    "peso": 0
+  },
+  {
+   "nome": "⚠️ COTTA DI MAGLIA TOLTA (G19 ~20:05, porto) — arrotolata NELLO ZAINO: ora CA 13 (10 + Des 2 + scudo 1); carico MEDIO (~36 kg: −3 alle prove, Des max +3, 6 m). Per rimetterla: 4 minuti (in fretta 1, con −1)",
+   "peso": 0
   }
  ],
  "carichi": {
@@ -597,8 +601,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 337,
- "aggiornato": "2026-11-25T00:07",
+ "versione": 338,
+ "aggiornato": "2026-11-25T00:17",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
