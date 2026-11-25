@@ -491,7 +491,7 @@
    "peso": 0
   },
   {
-   "nome": "MATERASSO DI PIUME D OCA (Mastra Tecla, 10 mo, G20) — in consegna alla torre G20 pomeriggio (Martino col mulo, 2 ma pagati)",
+   "nome": "MATERASSO DI PIUME D'OCA (Mastra Tecla, 10 mo, G20) — CONSEGNATO G20, sul BALDACCHINO della camera (3°); il vecchio tarmato portato via da Martino",
    "peso": 0
   }
  ],
@@ -601,8 +601,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 361,
- "aggiornato": "2026-11-25T12:51",
+ "versione": 362,
+ "aggiornato": "2026-11-25T22:07",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
