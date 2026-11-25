@@ -354,7 +354,7 @@
    "peso": 2
   },
   {
-   "nome": "2× Vaso di terracotta senza etichetta, cera nera, teschio di gatto sul tappo — nel FORZIERE INCATENATO (studio), in mezzo",
+   "nome": "2× Vaso col TESCHIO DI GATTO (pozione che ingigantisce un animale piccolo; n.1 aperto e ricerato, ~10 cucchiai) — STUDIO (4°), angolo NORD vicino alla scala (G20)",
    "peso": 0.75
   },
   {
@@ -412,18 +412,18 @@
    "nome": "RUBATO G14 sul Ponte Vecchio (borsaiolo, non visto): la BORSETTA con 55 mo 8 ma, acciarino nuovo, chiave di Narseo, chiave della stanza due, ricevute della Cancelleria — restano i lacci tagliati alla cintura"
   },
   {
-   "nome": "Vaso di terracotta 'FUOCO LIQUIDO – NON SCUOTERE…' (fuoco dell'alchimista, 20 mo) — nel FORZIERE INCATENATO (studio), angolo DESTRO nella paglia",
+   "nome": "Vaso di terracotta 'FUOCO LIQUIDO – NON SCUOTERE…' (fuoco dell'alchimista, 20 mo) — STUDIO (4°), angolo EST sotto l'arazzo, nella paglia (fuori dal forziere, G20)",
    "peso": 0
   },
   {
-   "nome": "Sacchetto di tela al collo con 24 mo ANTICHE + 2 ma + 1 mr e le 2 chiavi; + 2 SACCHETTI della Cancelleria (G20): 243 mo ANTICHE + 104 ma + 50 mr — TOTALE addosso 267 mo (TUTTE antiche) 106 ma 51 mr, ~4 kg"
+   "nome": "Sacchetto di tela al collo, VUOTO, con le 2 chiavi (forziere + camera)"
   },
   {
    "nome": "Chiavetta di ferro col sigillo dell'alambicco — INFILATA nel lucchetto della cassetta sul LEGGIO (studio, 4°)",
    "peso": 0
   },
   {
-   "nome": "Vaso di terracotta 'FUOCO LIQUIDO – NON SCUOTERE…' (fuoco dell'alchimista, 20 mo) — nel FORZIERE INCATENATO (studio), angolo DESTRO nella paglia",
+   "nome": "Vaso di terracotta 'FUOCO LIQUIDO – NON SCUOTERE…' (fuoco dell'alchimista, 20 mo) — STUDIO (4°), angolo EST sotto l'arazzo, nella paglia (fuori dal forziere, G20)",
    "peso": 0
   },
   {
@@ -459,7 +459,7 @@
    "peso": 0
   },
   {
-   "nome": "10 AMPOLLE d'ACQUA FORTE STANCA (1d3, niente schizzi) — cassetta con paglia nel FORZIERE INCATENATO (studio), angolo SINISTRO, lontano dal fuoco",
+   "nome": "10 AMPOLLE d'ACQUA FORTE STANCA (1d3, niente schizzi) — cassetta con paglia, STUDIO (4°), angolo OVEST sotto la vestaglia (G20)",
    "peso": 0
   },
   {
@@ -467,7 +467,7 @@
    "peso": 0
   },
   {
-   "nome": "MONETE nel FORZIERE INCATENATO dello studio (4°; serratura media + catena ribattuta): 755 mo (solo oro) (G19; le ultime 200 nel sacchetto di cuoio a SINISTRA, accanto alle ampolle). Doppio fondo dell armadio VUOTO",
+   "nome": "MONETE nel FORZIERE INCATENATO dello studio (4°): 1022 mo (di cui 267+ ANTICHE) + 106 ma + 51 mr (G20)",
    "peso": 0
   },
   {
@@ -601,7 +601,7 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 358,
+ "versione": 359,
  "aggiornato": "2026-11-25T02:50",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
