@@ -416,7 +416,7 @@
    "peso": 0
   },
   {
-   "nome": "Sacchetto di tela con 6 mo + 13 ma + 5 mr — appeso al collo con lo spago, con le 2 chiavi (forziere + camera)"
+   "nome": "Sacchetto di tela con 6 mo + 10 ma + 5 mr — appeso al collo con lo spago, con le 2 chiavi (forziere + camera)"
   },
   {
    "nome": "Chiavetta di ferro col sigillo dell'alambicco — INFILATA nel lucchetto della cassetta sul LEGGIO (studio, 4°)",
@@ -491,7 +491,7 @@
    "peso": 0
   },
   {
-   "nome": "⚠️ COTTA DI MAGLIA TOLTA (G19 ~20:05) — arrotolata NELLO ZAINO; lo ZAINO è A TERRA dietro la barca grande a metà molo (G20 00:00). Senza zaino: CA 13, carico leggero. Rimettere la cotta: 4 min (in fretta 1, con −1)",
+   "nome": "⚠️ COTTA DI MAGLIA ancora NELLO ZAINO (tolta G19 ~20:05 al porto); zaino e scudo ripresi. Senza cotta CA 13. Rimetterla: 4 min (in fretta 1, con −1)",
    "peso": 0
   }
  ],
@@ -601,7 +601,7 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 340,
+ "versione": 341,
  "aggiornato": "2026-11-25T01:01",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
