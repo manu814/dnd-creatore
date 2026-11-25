@@ -435,7 +435,7 @@
    "peso": 0
   },
   {
-   "nome": "Contratto dei LAVORI DELLA TORRE (Narseo, G16): 320 + campana 3,5 + serratura botola studio MEDIA +20 + 2 grate con anta alle finestrelle del 3° +5 (G19) = 348,5 mo; PAGATI 160, restano 188,5 a lavori finiti (~G23); + SCARICO DI RESPONSABILITÀ + GIURAMENTO DI BORTOLO: nessuna copia delle chiavi (corporazione) — nello zaino",
+   "nome": "Contratto dei LAVORI DELLA TORRE (Narseo, G16): 320 + campana 3,5 + serratura botola studio MEDIA +20 + 2 grate con anta alle finestrelle del 3° +5 (G19) + assi soglia 1° +1 (G20) = 349,5 mo; PAGATI 160, restano 189,5 a lavori finiti (~G23); + SCARICO DI RESPONSABILITÀ + GIURAMENTO DI BORTOLO: nessuna copia delle chiavi (corporazione) — nello zaino",
    "peso": 0
   },
   {
@@ -601,8 +601,8 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 359,
- "aggiornato": "2026-11-25T02:50",
+ "versione": 360,
+ "aggiornato": "2026-11-25T02:58",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
 }
