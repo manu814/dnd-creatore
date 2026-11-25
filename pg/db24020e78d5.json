@@ -342,7 +342,7 @@
    "peso": 0
   },
   {
-   "nome": "DEPOSITO in Cancelleria (1 ma al mese): 243 mo antiche + 105 ma + 50 mr (= 254 mo di valore) + 2 CHIAVI DI SCORTA sigillate (forziere + camera) — conta il REGISTRO con la firma di SM",
+   "nome": "DEPOSITO in Cancelleria: SOLO le 2 CHIAVI DI SCORTA sigillate (forziere + camera); monete tutte ritirate G20 (pagato 1 ma per il mese)",
    "peso": 0
   },
   {
@@ -416,7 +416,7 @@
    "peso": 0
   },
   {
-   "nome": "Sacchetto di tela con 24 mo TUTTE ANTICHE (24) + 2 ma + 1 mr — appeso al collo con lo spago, con le 2 chiavi (forziere + camera)"
+   "nome": "Sacchetto di tela al collo con 24 mo ANTICHE + 2 ma + 1 mr e le 2 chiavi; + 2 SACCHETTI della Cancelleria (G20): 243 mo ANTICHE + 104 ma + 50 mr — TOTALE addosso 267 mo (TUTTE antiche) 106 ma 51 mr, ~4 kg"
   },
   {
    "nome": "Chiavetta di ferro col sigillo dell'alambicco — INFILATA nel lucchetto della cassetta sul LEGGIO (studio, 4°)",
@@ -601,7 +601,7 @@
   "danni_caratteristiche": {}
  },
  "pe": 0,
- "versione": 356,
+ "versione": 357,
  "aggiornato": "2026-11-25T02:43",
  "ritratto_cifrato": "ritratti/db24020e78d5.bin",
  "note_dm": "Pagate 9 vedette (9 ma)"
